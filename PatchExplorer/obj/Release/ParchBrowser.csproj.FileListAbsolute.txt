@@ -1,0 +1,10 @@
+C:\Users\mario.vardarov\source\repos\ParchBrowser\ParchBrowser\obj\Release\PatchBrowser.Properties.Resources.resources
+C:\Users\mario.vardarov\source\repos\ParchBrowser\ParchBrowser\obj\Release\ParchBrowser.csproj.GenerateResource.cache
+C:\Users\mario.vardarov\source\repos\ParchBrowser\ParchBrowser\obj\Release\ParchBrowser.csproj.CoreCompileInputs.cache
+C:\Users\mario.vardarov\source\repos\ParchBrowser\ParchBrowser\bin\Release\PatchBrowser.exe.config
+C:\Users\mario.vardarov\source\repos\ParchBrowser\ParchBrowser\bin\Release\PatchBrowser.exe
+C:\Users\mario.vardarov\source\repos\ParchBrowser\ParchBrowser\bin\Release\PatchBrowser.pdb
+C:\Users\mario.vardarov\source\repos\ParchBrowser\ParchBrowser\obj\Release\PatchBrowser.Form1.resources
+C:\Users\mario.vardarov\source\repos\ParchBrowser\ParchBrowser\obj\Release\PatchBrowser.exe
+C:\Users\mario.vardarov\source\repos\ParchBrowser\ParchBrowser\obj\Release\PatchBrowser.pdb
+C:\Users\mario.vardarov\source\repos\ParchBrowser\ParchBrowser\obj\Release\ParchBrowser.csprojAssemblyReference.cache

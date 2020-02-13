@@ -1,0 +1,10 @@
+C:\Users\mario.vardarov\source\repos\ParchBrowser\ParchBrowser\obj\Debug\ParchBrowser.csprojAssemblyReference.cache
+C:\Users\mario.vardarov\source\repos\ParchBrowser\ParchBrowser\obj\Debug\ParchBrowser.csproj.GenerateResource.cache
+C:\Users\mario.vardarov\source\repos\ParchBrowser\ParchBrowser\obj\Debug\ParchBrowser.csproj.CoreCompileInputs.cache
+C:\Users\mario.vardarov\source\repos\ParchBrowser\ParchBrowser\bin\Debug\PatchBrowser.exe.config
+C:\Users\mario.vardarov\source\repos\ParchBrowser\ParchBrowser\bin\Debug\PatchBrowser.exe
+C:\Users\mario.vardarov\source\repos\ParchBrowser\ParchBrowser\bin\Debug\PatchBrowser.pdb
+C:\Users\mario.vardarov\source\repos\ParchBrowser\ParchBrowser\obj\Debug\PatchBrowser.Form1.resources
+C:\Users\mario.vardarov\source\repos\ParchBrowser\ParchBrowser\obj\Debug\PatchBrowser.Properties.Resources.resources
+C:\Users\mario.vardarov\source\repos\ParchBrowser\ParchBrowser\obj\Debug\PatchBrowser.exe
+C:\Users\mario.vardarov\source\repos\ParchBrowser\ParchBrowser\obj\Debug\PatchBrowser.pdb
