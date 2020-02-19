@@ -1,10 +1,14 @@
 C:\Users\mario.vardarov\source\repos\PatchExplorer\PatchExplorer\bin\Debug\PatchExplorer.exe.config
 C:\Users\mario.vardarov\source\repos\PatchExplorer\PatchExplorer\bin\Debug\PatchExplorer.exe
 C:\Users\mario.vardarov\source\repos\PatchExplorer\PatchExplorer\bin\Debug\PatchExplorer.pdb
-C:\Users\mario.vardarov\source\repos\PatchExplorer\PatchExplorer\obj\Debug\PatchExplorer.csprojAssemblyReference.cache
 C:\Users\mario.vardarov\source\repos\PatchExplorer\PatchExplorer\obj\Debug\PatchExplorer.Form1.resources
 C:\Users\mario.vardarov\source\repos\PatchExplorer\PatchExplorer\obj\Debug\PatchExplorer.Properties.Resources.resources
 C:\Users\mario.vardarov\source\repos\PatchExplorer\PatchExplorer\obj\Debug\PatchExplorer.csproj.GenerateResource.cache
 C:\Users\mario.vardarov\source\repos\PatchExplorer\PatchExplorer\obj\Debug\PatchExplorer.csproj.CoreCompileInputs.cache
 C:\Users\mario.vardarov\source\repos\PatchExplorer\PatchExplorer\obj\Debug\PatchExplorer.exe
 C:\Users\mario.vardarov\source\repos\PatchExplorer\PatchExplorer\obj\Debug\PatchExplorer.pdb
+C:\Users\mario.vardarov\source\repos\PatchExplorer\PatchExplorer\bin\Debug\Renci.SshNet.dll
+C:\Users\mario.vardarov\source\repos\PatchExplorer\PatchExplorer\bin\Debug\Renci.SshNet.xml
+C:\Users\mario.vardarov\source\repos\PatchExplorer\PatchExplorer\obj\Debug\PatchExplorer.csproj.CopyComplete
+C:\Users\mario.vardarov\source\repos\PatchExplorer\PatchExplorer\obj\Debug\PatchExplorer.csprojAssemblyReference.cache
+C:\Users\mario.vardarov\source\repos\PatchExplorer\PatchExplorer\obj\Debug\PatchExplorer.SHHBrowse.resources
