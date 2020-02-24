@@ -6,14 +6,18 @@ using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using System.Xml.Linq;
 
 namespace PatchExplorer
 {
     public partial class Form1 : Form
     {
-        public static List<string> LiveBrandVersions = new List<string>();
+        public static List<string> LiveBrandVersions = new List<string>();//Global so it can be used across the app...
         string PubPathName = "";
+        int ToTalFileToUploadCount = 0;
         public Form1()
         {
             InitializeComponent();
@@ -23,15 +27,25 @@ namespace PatchExplorer
             Process process = new Process();
             if (Convert.ToInt32(UnitTextBox.Text) > 100 && Convert.ToInt32(UnitTextBox.Text) < 30000) process.StartInfo.FileName = @"C:\path\putUser.exe";
             else if (Convert.ToInt32(UnitTextBox.Text) >= 30000) process.StartInfo.FileName = @"K:\Tools\NewPutUser\putuser.exe";
-            if (TypeUPL == "ADV") process.StartInfo.Arguments = Convert.ToInt32(UnitTextBox.Text) + " /pnamebmw-pt /pversionv" + ExeToUpload.Replace("_", ".") + " " + ExeToUpload + ".exe";
-            else if (TypeUPL == "PRO") process.StartInfo.Arguments = Convert.ToInt32(UnitTextBox.Text) + " /pnamebmw /pversionv" + ExeToUpload.Replace("_", ".") + " " + ExeToUpload + ".exe";
+            if (TypeUPL == "ADV") process.StartInfo.Arguments = Convert.ToInt32(UnitTextBox.Text) + $" /pname{ConvertBrandToFixes(GetCurrentBrand(),2)}-pt /pversionv" + GetVersionFromEXE(ExeToUpload) + " " + ExeToUpload + ".exe";
+            else if (TypeUPL == "PRO") process.StartInfo.Arguments = Convert.ToInt32(UnitTextBox.Text) + $" /pname{ConvertBrandToFixes(GetCurrentBrand(), 2)} /pversionv" + GetVersionFromEXE(ExeToUpload) + " " + ExeToUpload + ".exe";
             else if (TypeUPL == "DP") process.StartInfo.Arguments = Convert.ToInt32(UnitTextBox.Text) + " " + ExeToUpload + ".exe";
             MessageBox.Show(process.StartInfo.Arguments);//Debug
             process.StartInfo.WorkingDirectory = PubPathName;
             process.Start();
             process.WaitForExit();
             //if closed then assume successful
-
+            DateTime DateNow = DateTime.Now;
+            string writeString = $"Send By:{Environment.UserName} | Send Time:{DateNow.ToString(@"yyyy-MM-dd-h\:mm")} | Patch Name:{ExeToUpload} | Location:{PubPathName}"+ Environment.NewLine;
+            using (StreamWriter file = new StreamWriter(@"W:\Technical_Services\CaseTimes\PatchExplorer.txt", true))
+            {
+                file.Write(writeString);
+            }
+            string patchText = $"\tUploadedBy\t: {Environment.UserName}{Environment.NewLine}\tUnit\t\t:{UnitTextBox.Text}{Environment.NewLine}\tDate\t\t: {DateNow.ToString(@"yyyy-MM-dd-h\:mm")}{Environment.NewLine}";
+            using (System.IO.StreamWriter file = new System.IO.StreamWriter(PubPathName + @"\Readme.txt", true))
+            {
+                file.Write(patchText);
+            }
         }
 
         private void LoadFixes(string SearchSTR = "")
@@ -39,7 +53,7 @@ namespace PatchExplorer
             List<string> logListContent = new List<string>();
             logListContent = Directory.GetDirectories(@"K:\Autologic\OneOffFixes\" + ConvertBrandToFixes(GetCurrentBrand())).ToList();
             logListContent = logListContent.OrderByDescending(x => x).ToList();
-            listView1.Items.Clear();
+            MainlistView1.Items.Clear();
             int counter = 0;
             //
             for (int count = 0; count < logListContent.Count(); count++)//clear out the names
@@ -47,7 +61,7 @@ namespace PatchExplorer
                 string[] words = logListContent[count].Split('\\');
                 if (words[words.Count() - 1].ToLower().Contains(SearchSTR.ToLower()) == true)
                 {
-                    listView1.Items.Add(words[words.Count() - 1]);
+                    MainlistView1.Items.Add(words[words.Count() - 1]);
                     counter++;
                 }
             }
@@ -60,7 +74,7 @@ namespace PatchExplorer
             logListContent = logListContent.OrderByDescending(d => new FileInfo(d).CreationTime).ToList();
 
 
-            listView1.Items.Clear();
+            MainlistView1.Items.Clear();
             int counter = 0;
             //
             for (int count = 0; count < logListContent.Count(); count++)//clear out the names
@@ -68,7 +82,7 @@ namespace PatchExplorer
                 string[] words = logListContent[count].Split('\\');
                 if (words[words.Count() - 1].ToLower().Contains(SearchSTR.ToLower()) == true)
                 {
-                    listView1.Items.Add(words[words.Count() - 1]);
+                    MainlistView1.Items.Add(words[words.Count() - 1]);
                     counter++;
                 }
             }
@@ -76,32 +90,13 @@ namespace PatchExplorer
         }
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (listView1.SelectedItems.Count > 0)
+            if (MainlistView1.SelectedItems.Count > 0)
             {
-                if (tabControl1.SelectedTab.Name == "tabPage1")//dealign with OneOFFixes
+                if (tabControl1.SelectedTab.Name == tabPage1.Name)//dealign with OneOFFixes
                 {
-                    listView2.Items.Clear();
-                    List<string> logListContent = new List<string>();
-                    PubPathName = @"K:\Autologic\OneOffFixes\" + ConvertBrandToFixes(GetCurrentBrand()) + @"\" + listView1.SelectedItems[0].Text;//set the current patch folder
-                    logListContent = Directory.GetFiles(PubPathName, "*.exe").ToList();
-                    logListContent = logListContent.OrderByDescending(x => x).ToList();
-                    for (int count = 0; count < logListContent.Count(); count++)//clear out the names
-                    {
-                        string[] words = logListContent[count].Split('\\');
-                        if (words[words.Count() - 1].Contains("initdwnl.exe")| words[words.Count() - 1].Contains("download.exe")) continue;//ignore these
-                        listView2.Items.Add(words[words.Count() - 1], 0);
-                    }
-                    CheckExeCompatibility();//check Patch exe compatebility with unit
-                    if (File.Exists(PubPathName + @"\Readme.txt"))
-                    {
-                        string lines = System.IO.File.ReadAllText(PubPathName + @"\Readme.txt");
-                        DescriptionTextBox.Text = lines;
-                    }
-                    else DescriptionTextBox.Text = "No Readme file foud!";
-                    //show controls
-                    pictureBox4.Visible = true;
+                    GetPatchInfo();
                 }
-                else if (tabControl1.SelectedTab.Name == "tabPage2")//dealign with Builds
+                else if (tabControl1.SelectedTab.Name == tabPage2.Name)//dealign with Builds
                 {
 
                 }
@@ -109,11 +104,50 @@ namespace PatchExplorer
                 
             }
         }
-
+        private void GetPatchInfo()
+        {
+            listView2.Items.Clear();
+            List<string> logListContent = new List<string>();
+            PubPathName = @"K:\Autologic\OneOffFixes\" + ConvertBrandToFixes(GetCurrentBrand()) + @"\" + MainlistView1.SelectedItems[0].Text;//set the current patch folder
+            logListContent = Directory.GetFiles(PubPathName, "*.exe").ToList();
+            logListContent = logListContent.OrderByDescending(x => x).ToList();
+            for (int count = 0; count < logListContent.Count(); count++)//clear out the names
+            {
+                string[] words = logListContent[count].Split('\\');
+                if (words[words.Count() - 1].Contains("initdwnl.exe") | words[words.Count() - 1].Contains("download.exe")) continue;//ignore these
+                listView2.Items.Add(words[words.Count() - 1], 0);
+            }
+            CheckExeCompatibility();//check Patch exe compatebility with unit
+            if (File.Exists(PubPathName + @"\Readme.txt"))
+            {
+                string lines = System.IO.File.ReadAllText(PubPathName + @"\Readme.txt");
+                DescriptionTextBox.Text = lines;
+            }
+            else DescriptionTextBox.Text = "No Readme file foud!";
+            //show controls
+            pictureBox4.Visible = true;
+        }
         private void RefreshChanges()
         {
-            if (tabControl1.SelectedTab.Name == tabPage1.Name) LoadFixes();//called when a Radiao button check is changed
-            else if (tabControl1.SelectedTab.Name == tabPage2.Name) LoadBuilds();
+            
+            if (tabControl1.SelectedTab.Name == tabPage1.Name) LoadFixes(MainSearchTextBox.Text);//called when a Radiao button check is changed
+            if (tabControl1.SelectedTab.Name == tabPage2.Name) LoadBuilds();
+            if (tabControl1.SelectedTab.Name == tabPage3.Name)//Open Eazy patch
+            {
+                if(Properties.Settings.Default.EazyPatchUNLC == true)
+                {
+                    panel5.Enabled = true;
+                }
+                else { PasswordPanel.Visible = true; }
+                
+                tabControl1.Height = 260;
+                splitContainer1.Enabled = false;
+            }
+            else{
+                if (PasswordPanel.Visible == true) PasswordPanel.Visible = false;
+                tabControl1.Height = 18;
+                splitContainer1.Enabled = true;
+            }
         }
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -136,6 +170,14 @@ namespace PatchExplorer
                 }
             }
         }
+        private string GetVersionFromEXE(string Exe)
+        {
+            string[] doubleArray = System.Text.RegularExpressions.Regex.Split(Exe, @"[^0-9\.]+");
+            if (doubleArray.Length < 3) { MessageBox.Show("No Version!"); return ""; }//Need to get version from Legion
+            if (doubleArray[0]=="" | doubleArray[0] == "-1") doubleArray[0] = "3";
+
+            return doubleArray[0] + "." + doubleArray[1] + "." + doubleArray[2].Replace(".", ""); ;
+        }
 
         private string GetCurrentBrand()
         {
@@ -144,10 +186,11 @@ namespace PatchExplorer
             if (radioButton3.Checked == true) return "mercedes";
             if (radioButton4.Checked == true) return "bmw";
             if (radioButton5.Checked == true) return "vag";
-            if (radioButton6.Checked == true) return "renault";
+            if (radioButton6.Checked == true) return "psa";
             if (radioButton7.Checked == true) return "ford";
             if (radioButton8.Checked == true) return "volvo";
             if (radioButton9.Checked == true) return "porsche";
+            if (radioButton10.Checked == true) return "renault";
             return "";
         }
 
@@ -157,16 +200,19 @@ namespace PatchExplorer
             //SecondType==1 For Builds Fodler Path name
             if (brand == "landrover" && SecondType == 0) return "LR";///LADNROVER
             if (brand == "landrover" && SecondType == 1) return "LandRover";
+            if (brand == "landrover" && SecondType == 2) return "lr";
             if (brand == "jaguar" && SecondType == 0) return "JAG";///JAGUAR
             if (brand == "jaguar" && SecondType == 1) return "Jaguar";
             if (brand == "mercedes" & SecondType == 0) return "Mercedes";///MERCEDES
             if (brand == "mercedes" & SecondType == 1) return "Mercedes";
+            if (brand == "mercedes" & SecondType == 2) return "Merc";
             if (brand == "bmw") return brand.ToUpper();
             if (brand == "vag") return brand.ToUpper();///VAG
             if (brand == "Renault") return "Renault";///Renault
             if (brand == "ford") return "Ford";///Ford
             if (brand == "volvo") return "Volvo";///Bolvo
             if (brand == "porsche") return "Porsche";///Porche
+            if (brand == "porsche" & SecondType == 2) return "porsch";///Porche
             if (brand == "PSA") return "PSA";///Ford
             if (brand == "PSA" & SecondType == 2) return "PSA";//PSA
             return brand;
@@ -174,8 +220,8 @@ namespace PatchExplorer
         private string GetPatchState(string PatchName)
         {
             if (new string[] { "_PRO_DP_", "_GT_DP_", "_DP_ADV_", "_DP_PRO_", "DRIVEPRO_ADV" }.Any(s => PatchName.Contains(s))) return "DP";
-            if (new string[] { "_A+_ADV","BLUEBOX_ADV", "ASSISTPLUS_ADV","_GT_"}.Any(s => PatchName.Contains(s))) return "ADV";
-            if (new string[] { "_BB_PRO_" ,"A+_PRO" ,"_PLUS_" ,"_ProPlus_" ,"_PRO_"}.Any(s => PatchName.Contains(s))) return "PRO";
+            if (new string[] { "_A+_ADV","BLUEBOX_ADV", "ASSISTPLUS_ADV","_GT_","_GT."}.Any(s => PatchName.Contains(s))) return "ADV";
+            if (new string[] { "_BB_PRO_" ,"A+_PRO" ,"_PLUS_" ,"_ProPlus_" ,"_PRO_","_PRO."}.Any(s => PatchName.Contains(s))) return "PRO";
             
             return "";
         }
@@ -189,7 +235,7 @@ namespace PatchExplorer
             if (UnitTextBox.Text != "")//makesure theres something in the Txtbox
             {
                 if(Convert.ToInt32(UnitTextBox.Text) >= 100)
-                { 
+                {
                     for (int items = 0; items < listView2.Items.Count; items++)
                     {
                         if (listView2.Items[items].Text.Contains("_PRO_DP_") == true | listView2.Items[items].Text.Contains("_DP_ADV_") == true |
@@ -222,23 +268,23 @@ namespace PatchExplorer
         }
         private void largeIconViewToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            listView1.View = View.LargeIcon;
+            MainlistView1.View = View.LargeIcon;
         }
 
         private void tileToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            listView1.View = View.Tile;
+            MainlistView1.View = View.Tile;
         }
 
         private void listToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            listView1.View = View.List;
+            MainlistView1.View = View.List;
         }
 
         
         private void button1_Click(object sender, EventArgs e)
         {
-            LoadFixes(textBox2.Text);
+            LoadFixes(MainSearchTextBox.Text);
         }
 
         private void textBox2_KeyDown(object sender, KeyEventArgs e)
@@ -318,8 +364,6 @@ namespace PatchExplorer
                 {
                     client.Connect();
                     var files = client.ListDirectory("/home/parsly/packages/diag");//get Brand Patches
-                    
-
                     decimal BMWDecimal = 0.0m,BMWDecimalPT = 0.0m, CIR = 0.0m;
                     decimal CIRpt = 0.0m , CIP =0.0m , FORDpt=0.0m, JAG = 0.0m, JAGpt = 0.0m;
                     decimal LR = 0.0m, LRpt = 0.0m, MERC=0.0m, MERCpt=0.0m, PORCH = 0.0m, PORCHpt = 0.0m;
@@ -329,7 +373,7 @@ namespace PatchExplorer
                     {
                         if (ExtractNumber(file.Name) == "" ) continue;
                         current = decimal.Parse(ExtractNumber(file.Name), NumberStyles.AllowThousands | NumberStyles.AllowDecimalPoint);
-                        //MessageBox.Show(file.Name);
+                        //MessageBox.Show(file.Name);//For Debugging
                         if (file.Name.Contains("bmw-v") & current > BMWDecimal) BMWDecimal = current;
                         if (file.Name.Contains("bmw-pt-") & current > BMWDecimalPT) BMWDecimalPT = current;
                         if (file.Name.Contains("cir-v") & current > CIR) CIR = current;
@@ -385,7 +429,7 @@ namespace PatchExplorer
             string[] SplitDec = result.Substring(2).Split('.');
             if (SplitDec.Length < 2) return"";
             decimal DecString = decimal.Parse(SplitDec[1], NumberStyles.AllowThousands | NumberStyles.AllowDecimalPoint);
-            return SplitDec[0] + "."  + DecString.ToString("000");
+            return SplitDec[0] + "."  + DecString.ToString("000");//formatting for last decimal as it cant be calculated correctly otherwise
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -409,12 +453,242 @@ namespace PatchExplorer
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            BackroundLoadVersion.RunWorkerAsync();
+            //BackroundLoadVersion.RunWorkerAsync();//Load Live Versions
         }
 
         private void BackroundLoadVersion_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
             GetLiveVersions();
+        }
+
+        private async void button3_ClickAsync(object sender, EventArgs e)
+        {
+            DailyBuildsBrowser OpenForm = new DailyBuildsBrowser();
+            OpenForm.Left = this.Bounds.Left + 877;
+            OpenForm.Top = this.Bounds.Top + 106;
+            OpenForm.Show();
+        }
+        /// <summary>
+        /// /// //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// ////////////////////////////////////////////////////////////EAZYY-PATCH///////////////////////////////////////////////////////////
+        /// /// /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// </summary>
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            CFGListBox.Enabled = EazyPatchCheckBx1.Checked;
+            DLLListBox.Enabled = EazyPatchCheckBx2.Checked;
+            EazyPatchRefresh.PerformClick();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            if (EazyPatchCheckBx1.Checked == true) GetCFGModifiedFiles();
+            if (EazyPatchCheckBx2.Checked == true) GetDLLModifiedFiles();
+            ToTalFileToUploadCount = 0;
+            ProgressText.Text = "Total Files Selected For Uploading:" + ToTalFileToUploadCount;
+            UploadStat.Visible = false;
+            PubPathName = "";
+            if (button1.Text == "UPLOAD PATCH TO UNIT")//Reset everything
+            {
+                EazyPatchBtn1.Text = "Create Patch For Selected Items";
+                EazyProgBar.Value = 0;
+            }
+            EazyPatchRefresh.Text = "Refresh";
+        }
+
+        private void GetCFGModifiedFiles()
+        {
+            CFGListBox.Items.Clear();
+            var files = Directory.GetFiles(@"X:\source\" + GetCurrentBrand() + @"\cfg\", "*.cfg", SearchOption.AllDirectories).Where(i => Directory.GetLastWriteTime(i) > DateTime.Today).ToArray();
+            foreach (var item in files)
+            {
+                CFGListBox.Items.Add(item);
+            }
+
+        }
+        private void GetDLLModifiedFiles()
+        {
+            DLLListBox.Items.Clear();
+            var files = Directory.GetFiles(@"X:\source\" + GetCurrentBrand() + @"\dll\", "*.dll", SearchOption.AllDirectories).Where(i => Directory.GetLastWriteTime(i) > DateTime.Today).ToArray();
+            foreach (var item in files) DLLListBox.Items.Add(item);
+            var filesBAS = Directory.GetFiles(@"X:\source\" + GetCurrentBrand() + @"\dll\", "*.bas", SearchOption.AllDirectories).Where(i => Directory.GetLastWriteTime(i) > DateTime.Today).ToArray();
+            foreach (var item in filesBAS) DLLListBox.Items.Add(item);
+
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            if (EazyPatchBtn1.Text == "UPLOAD PATCH TO UNIT")
+            {
+                MainSearchTextBox.Text = EazyPatchName.Text;
+                tabControl1.SelectedIndex =0;//Switching tabs will automatically search/update
+               // RefreshChanges();
+                if (MainlistView1.Items.Count > 0)//make sure it exists
+                {
+                    MainlistView1.Items[0].Selected = true;
+                    MainlistView1.Select();
+                }
+            }
+            else
+            {
+                string Path = @"K:\Autologic\OneOffFixes\" + ConvertBrandToFixes(GetCurrentBrand()) + @"\" + EazyPatchName.Text;
+                EazyProgBar.Value = 0;
+                if (Directory.Exists(Path) == true)
+                {
+                    DialogResult dialogResult = MessageBox.Show("Patch Folder Name Allready Exists" + Environment.NewLine + "Use Same Patch Folder, Everything Will Be Overwritten ?", "Name Allready Exists", MessageBoxButtons.YesNo);
+                    if (dialogResult == DialogResult.No)
+                    {
+                        return;
+                    }
+                    else if (dialogResult == DialogResult.Yes)//
+                    {
+                        Directory.Delete(Path, true);
+                        EazyPatchBtn1.PerformClick();
+                    }
+                }
+                else
+                {
+                    System.IO.Directory.CreateDirectory(Path);
+                    SetUpTemplateForNewPatch(GetCurrentBrand(), Path);
+                    //EDIT UP3 files to match
+                    string[] files = Directory.GetFiles(Path + @"\", "*.UP3", SearchOption.TopDirectoryOnly);
+                    EazyProgBar.Maximum = files.Length + 2;
+                    foreach (string FullFilePath in files)//loop All .UP3 Files
+                    {
+                        string text = File.ReadAllText(FullFilePath);
+                        string FInalString = "", CfgsToAdd = "", DLLsToAdd = "";
+                        if (EazyPatchCheckBx1.Checked == true)//adding/updating CFG's
+                        {
+                            for (int i = 0; i < CFGListBox.Items.Count; i++)
+                            {
+                                string[] getnamefile = CFGListBox.Items[i].ToString().Split('\\');
+                                if (CFGListBox.GetItemChecked(i) == true)
+                                {
+                                    CfgsToAdd += "72," + getnamefile[getnamefile.Length - 1] + @",C:\diagnos\" + ConvertBrandToFixes(GetCurrentBrand(), 2).ToLower() + @"\" + Environment.NewLine;
+                                    //Add The files
+                                    File.Copy(CFGListBox.Items[i].ToString(), Path + @"\" + getnamefile[getnamefile.Length - 1], true);
+                                }
+                            }
+
+                            //text = text.Replace(@"72," + ConvertBrandToFixes(GetCurrentBrand(), 1).ToLower()+ @".cfg,C:\diagnos\"+ ConvertBrandToFixes(GetCurrentBrand(),1).ToLower() + @"\", CfgsToAdd);
+                        }
+                        if (EazyPatchCheckBx2.Checked == true)//adding/updating DLL's
+                        {
+                            for (int i = 0; i < DLLListBox.Items.Count; i++)
+                            {
+                                string[] getnamefile = DLLListBox.Items[i].ToString().Split('\\');
+                                if (DLLListBox.GetItemChecked(i) == true)
+                                {
+                                    DLLsToAdd += "0," + getnamefile[getnamefile.Length - 1] + @",C:\diagnos\" + ConvertBrandToFixes(GetCurrentBrand(), 2).ToLower() + @"\" + Environment.NewLine;
+                                    //Add The files
+                                    File.Copy(DLLListBox.Items[i].ToString(), Path + @"\" + getnamefile[getnamefile.Length - 1], true);
+                                }
+                            }
+                            //text = text.Replace(@"'0," + ConvertBrandToFixes(GetCurrentBrand(), 1).ToLower() + @".dll,C:\diagnos\" + ConvertBrandToFixes(GetCurrentBrand(), 1).ToLower() + @"\", DLLsToAdd);
+                        }
+                        string line;
+                        System.IO.StreamReader file = new System.IO.StreamReader(FullFilePath);
+                        while ((line = file.ReadLine()) != null)
+                        {
+                            if (line.Contains("72,") == true) { FInalString += line.Replace(line, CfgsToAdd); }
+                            else if (line.Contains("0,") == true) { FInalString += line.Replace(line, DLLsToAdd); }
+                            else FInalString += line + Environment.NewLine;
+                        }
+                        file.Close();
+                        File.WriteAllText(FullFilePath, FInalString);//Write/Update UP3 File
+                        //Start BUILD
+                        if (ADVCheck.Checked == false & FullFilePath.Contains("A+_ADV") == true) continue;//skip this UP3 for BUILD
+                        if (PROCheck.Checked == false & FullFilePath.Contains("BB_PRO") == true) continue;//skip this UP3 for BUILD
+                        if (DPCheck.Checked == false & FullFilePath.Contains("DP_PRO") == true) continue;//skip this UP3 for BUILD
+                        //RUN ALL BUILDS
+                        Process process = new Process();
+                        process.StartInfo.FileName = "mkupd3";
+                        process.StartInfo.Arguments = FullFilePath;
+                        process.StartInfo.WorkingDirectory = Path + @"\";
+                        process.Start();
+                        process.WaitForExit();//
+                        EazyProgBar.Value++;
+                    }
+                    //check if exe was created
+                    string[] ExeFiles = Directory.GetFiles(Path + @"\", "*.exe", SearchOption.TopDirectoryOnly);
+                    bool ADVCreated = false, PROCreated = false, DPCreated = false;
+                    foreach (string s in ExeFiles)
+                    {
+                        if (ADVCheck.Checked == true & s.Contains(GetCurrentBrand().ToUpper() + "_GT_3_") == true) ADVCreated = true;
+                        if (PROCheck.Checked == true & s.Contains(GetCurrentBrand().ToUpper() + "_PRO_3_") == true) PROCreated = true;
+                        if (DPCheck.Checked == true & s.Contains(GetCurrentBrand().ToUpper() + "_PRO_DP_3_") == true) DPCreated = true;
+                    }
+                    ProgressText.Text = "Advanced: " + GetCreatedStat(ADVCreated) + " || PRO: " + GetCreatedStat(PROCreated) + " || DP: " + GetCreatedStat(DPCreated);
+                    //if (ADVCreated == true | PROCreated == true | DPCreated == true) { SetBuildTypeAccordingToUnit(); button1.Text = "UPLOAD PATCH TO UNIT"; PubPathName = Path + @"\"; }
+                    //SetBuildTypeAccordingToUnit();
+                    EazyPatchBtn1.Text = "UPLOAD PATCH TO UNIT";
+                    EazyPatchRefresh.Text = "Finish";
+                    PubPathName = Path + @"\";
+                }
+            }
+        }
+        private string GetCreatedStat(bool Value)
+        {
+            if (Value == true) return "Created";
+            return "Not Created";
+        }
+        private void SetUpTemplateForNewPatch(string brand, string NewPatchPath)
+        {
+            EazyProgBar.Value = 1;
+            //AutoGenerate UP3 Files
+            string[] files = Directory.GetFiles(@"K:\Autologic\OneOffFixes\Template\" + ConvertBrandToFixes(brand, 1) + @"\", "*.UP3", SearchOption.TopDirectoryOnly);
+            int TotalUP3s = 0;
+            foreach (string s in files)
+            {
+                string[] JustFileName = s.Split('\\');
+                File.Copy(s, NewPatchPath + @"\" + JustFileName[JustFileName.Length - 1], true);
+                TotalUP3s++;
+            }
+            DateTime DateNow = DateTime.Now;
+            string patchText = $"CreatedBy\t: {Environment.UserName}{Environment.NewLine}Date\t\t: {DateNow.ToString(@"yyyy-MM-dd-h\:mm")}{Environment.NewLine}Description\t: {EazyDescription.Text}{Environment.NewLine}" +
+                $"Total UP3's\t: {TotalUP3s}{Environment.NewLine}-------------------{Environment.NewLine}"; 
+            System.IO.File.WriteAllText(NewPatchPath + @"\Readme.txt", patchText);
+            ProgressText.Text = "Total UP3's Created: " + TotalUP3s;
+        }
+
+        private void UnitTextBox_TextChanged(object sender, EventArgs e)
+        {
+            if (UnitTextBox.Text.Length == 0) { UnitTypeLabel.Visible = false; return; }
+            else UnitTypeLabel.Visible = true;
+            if (Convert.ToInt32(UnitTextBox.Text) >= 5000 & Convert.ToInt32(UnitTextBox.Text) < 20000) UnitTypeLabel.Text = "BB";
+            else if (Convert.ToInt32(UnitTextBox.Text) >= 20000 & Convert.ToInt32(UnitTextBox.Text) < 30000) UnitTypeLabel.Text = "A+";
+            else if (Convert.ToInt32(UnitTextBox.Text) >= 30000 & Convert.ToInt32(UnitTextBox.Text) < 40000) UnitTypeLabel.Text = "DP";
+            else UnitTypeLabel.Text = "..";
+        }
+
+        private void UnitTypeLabel_TextChanged(object sender, EventArgs e)
+        {
+            if (UnitTypeLabel.Text == "BB" | UnitTypeLabel.Text == "A+" | UnitTypeLabel.Text == "DP") CheckExeCompatibility();
+        }
+
+        private void button4_Click_1(object sender, EventArgs e)
+        {
+            if (textBox2.Text == "Yess")
+            {
+                Properties.Settings.Default.EazyPatchUNLC = true;
+                Properties.Settings.Default.Save();
+                PasswordPanel.Visible = false;
+                panel5.Enabled = true;
+                panel5.Visible = true;
+            }
+        }
+
+        private void CFGListBox_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            if (e.NewValue == CheckState.Checked) ToTalFileToUploadCount++;
+            else if (e.NewValue == CheckState.Unchecked) ToTalFileToUploadCount--;
+            ProgressText.Text = "Total Files Selected For Uploading: " + ToTalFileToUploadCount;
+            EazyProgBar.Maximum = ToTalFileToUploadCount + 3;
+            //more checks
+            if (e.NewValue == CheckState.Checked & DLLListBox.Items.Count > 0)
+                if (DLLListBox.Items[e.Index].ToString().Substring(DLLListBox.Items[e.Index].ToString().Length - 5).Contains(".bas") == true)
+                    MessageBox.Show("Selecting Bas File! will automatically compile the DLL and build it!" + Environment.NewLine +
+                    Environment.NewLine + "If you do not want to re-compile the DLL then select the .dll to be uploaded");
         }
     }
 }

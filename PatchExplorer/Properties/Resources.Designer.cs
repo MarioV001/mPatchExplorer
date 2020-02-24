@@ -93,6 +93,16 @@ namespace PatchExplorer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap down_arrow {
+            get {
+                object obj = ResourceManager.GetObject("down-arrow", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap iconfinder_122_CloudUpload_183248 {
             get {
                 object obj = ResourceManager.GetObject("iconfinder_122_CloudUpload_183248", resourceCulture);
@@ -116,6 +126,16 @@ namespace PatchExplorer.Properties {
         internal static System.Drawing.Bitmap iconfinder_ic_view_list_48px_352204 {
             get {
                 object obj = ResourceManager.GetObject("iconfinder_ic_view_list_48px_352204", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap OPenFold {
+            get {
+                object obj = ResourceManager.GetObject("OPenFold", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

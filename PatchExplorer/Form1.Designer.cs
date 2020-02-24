@@ -31,15 +31,17 @@
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.ImageList imageList1;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            System.Windows.Forms.ListViewGroup listViewGroup5 = new System.Windows.Forms.ListViewGroup("ListViewGroup", System.Windows.Forms.HorizontalAlignment.Left);
-            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem("gterghserh");
-            System.Windows.Forms.ListViewItem listViewItem7 = new System.Windows.Forms.ListViewItem("BMW_GT_3_187_1046.exe", 0);
-            System.Windows.Forms.ListViewItem listViewItem9 = new System.Windows.Forms.ListViewItem("BMW_PRO_DP_3_187_1050.exe", 0);
+            System.Windows.Forms.ListViewGroup listViewGroup2 = new System.Windows.Forms.ListViewGroup("ListViewGroup", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem("gterghserh");
+            System.Windows.Forms.ListViewItem listViewItem5 = new System.Windows.Forms.ListViewItem("BMW_GT_3_187_1046.exe", 0);
+            System.Windows.Forms.ListViewItem listViewItem6 = new System.Windows.Forms.ListViewItem("BMW_PRO_DP_3_187_1050.exe", 0);
             this.panel1 = new System.Windows.Forms.Panel();
+            this.radioButton10 = new System.Windows.Forms.RadioButton();
+            this.UnitTypeLabel = new System.Windows.Forms.Label();
+            this.UnitTextBox = new System.Windows.Forms.TextBox();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.DisplayText = new System.Windows.Forms.Label();
-            this.UnitTextBox = new System.Windows.Forms.TextBox();
             this.radioButton9 = new System.Windows.Forms.RadioButton();
             this.radioButton8 = new System.Windows.Forms.RadioButton();
             this.radioButton7 = new System.Windows.Forms.RadioButton();
@@ -51,8 +53,9 @@
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.listView1 = new System.Windows.Forms.ListView();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.button3 = new System.Windows.Forms.Button();
+            this.MainlistView1 = new System.Windows.Forms.ListView();
+            this.MainSearchTextBox = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.SearchBTN = new System.Windows.Forms.Button();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -61,20 +64,48 @@
             this.listToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.DescriptionTextBox = new System.Windows.Forms.TextBox();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.listView2 = new System.Windows.Forms.ListView();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.label2 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.pictureBox4 = new System.Windows.Forms.PictureBox();
+            this.listView2 = new System.Windows.Forms.ListView();
+            this.panel3 = new System.Windows.Forms.Panel();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.label2 = new System.Windows.Forms.Label();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.EazyDescription = new System.Windows.Forms.TextBox();
+            this.EazyPatchCheckBx2 = new System.Windows.Forms.CheckBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.EazyPatchCheckBx1 = new System.Windows.Forms.CheckBox();
+            this.UploadStat = new System.Windows.Forms.Label();
+            this.pictureBox5 = new System.Windows.Forms.PictureBox();
+            this.pictureBox6 = new System.Windows.Forms.PictureBox();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.DPCheck = new System.Windows.Forms.CheckBox();
+            this.PROCheck = new System.Windows.Forms.CheckBox();
+            this.ADVCheck = new System.Windows.Forms.CheckBox();
+            this.EazyPatchName = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.EazyPatchRefresh = new System.Windows.Forms.Button();
+            this.EazyPatchBtn1 = new System.Windows.Forms.Button();
+            this.EazyProgBar = new System.Windows.Forms.ProgressBar();
+            this.ProgressText = new System.Windows.Forms.Label();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.DLLListBox = new System.Windows.Forms.CheckedListBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.CFGListBox = new System.Windows.Forms.CheckedListBox();
             this.BackroundLoadVersion = new System.ComponentModel.BackgroundWorker();
+            this.PasswordPanel = new System.Windows.Forms.Panel();
+            this.label7 = new System.Windows.Forms.Label();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.button4 = new System.Windows.Forms.Button();
             imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.panel1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
@@ -82,13 +113,21 @@
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
-            this.tabControl1.SuspendLayout();
-            this.panel2.SuspendLayout();
-            this.contextMenuStrip2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
+            this.contextMenuStrip2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.panel2.SuspendLayout();
+            this.tabControl1.SuspendLayout();
+            this.tabPage3.SuspendLayout();
+            this.panel5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
+            this.panel4.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            this.PasswordPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // imageList1
@@ -104,6 +143,8 @@
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(114)))), ((int)(((byte)(180)))));
+            this.panel1.Controls.Add(this.radioButton10);
+            this.panel1.Controls.Add(this.UnitTypeLabel);
             this.panel1.Controls.Add(this.UnitTextBox);
             this.panel1.Controls.Add(this.button2);
             this.panel1.Controls.Add(this.button1);
@@ -119,10 +160,51 @@
             this.panel1.Controls.Add(this.radioButton1);
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.label1);
+            this.panel1.Controls.Add(this.button3);
             this.panel1.Location = new System.Drawing.Point(-2, 0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1386, 74);
             this.panel1.TabIndex = 1;
+            // 
+            // radioButton10
+            // 
+            this.radioButton10.AutoSize = true;
+            this.radioButton10.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.radioButton10.Font = new System.Drawing.Font("Cascadia Code", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.radioButton10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
+            this.radioButton10.Location = new System.Drawing.Point(994, 7);
+            this.radioButton10.Name = "radioButton10";
+            this.radioButton10.Size = new System.Drawing.Size(96, 22);
+            this.radioButton10.TabIndex = 28;
+            this.radioButton10.TabStop = true;
+            this.radioButton10.Text = "RENAULT";
+            this.radioButton10.TextAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.radioButton10.UseVisualStyleBackColor = true;
+            // 
+            // UnitTypeLabel
+            // 
+            this.UnitTypeLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.UnitTypeLabel.AutoSize = true;
+            this.UnitTypeLabel.Font = new System.Drawing.Font("Calibri", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.UnitTypeLabel.Location = new System.Drawing.Point(1331, 1);
+            this.UnitTypeLabel.Name = "UnitTypeLabel";
+            this.UnitTypeLabel.Size = new System.Drawing.Size(50, 42);
+            this.UnitTypeLabel.TabIndex = 27;
+            this.UnitTypeLabel.Text = "??";
+            this.UnitTypeLabel.Visible = false;
+            this.UnitTypeLabel.TextChanged += new System.EventHandler(this.UnitTypeLabel_TextChanged);
+            // 
+            // UnitTextBox
+            // 
+            this.UnitTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.UnitTextBox.Font = new System.Drawing.Font("Calibri", 13F);
+            this.UnitTextBox.Location = new System.Drawing.Point(1280, 44);
+            this.UnitTextBox.MaxLength = 8;
+            this.UnitTextBox.Name = "UnitTextBox";
+            this.UnitTextBox.Size = new System.Drawing.Size(105, 29);
+            this.UnitTextBox.TabIndex = 13;
+            this.UnitTextBox.WordWrap = false;
+            this.UnitTextBox.TextChanged += new System.EventHandler(this.UnitTextBox_TextChanged);
             // 
             // button2
             // 
@@ -157,26 +239,15 @@
             this.DisplayText.TabIndex = 23;
             this.DisplayText.Text = "___";
             // 
-            // UnitTextBox
-            // 
-            this.UnitTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.UnitTextBox.Font = new System.Drawing.Font("Calibri", 13F);
-            this.UnitTextBox.Location = new System.Drawing.Point(1280, 44);
-            this.UnitTextBox.MaxLength = 8;
-            this.UnitTextBox.Name = "UnitTextBox";
-            this.UnitTextBox.Size = new System.Drawing.Size(105, 29);
-            this.UnitTextBox.TabIndex = 13;
-            this.UnitTextBox.WordWrap = false;
-            // 
             // radioButton9
             // 
             this.radioButton9.AutoSize = true;
             this.radioButton9.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.radioButton9.Font = new System.Drawing.Font("Cooper Black", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radioButton9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(221)))), ((int)(((byte)(221)))), ((int)(((byte)(221)))));
-            this.radioButton9.Location = new System.Drawing.Point(899, 7);
+            this.radioButton9.Font = new System.Drawing.Font("Cascadia Code", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.radioButton9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
+            this.radioButton9.Location = new System.Drawing.Point(889, 7);
             this.radioButton9.Name = "radioButton9";
-            this.radioButton9.Size = new System.Drawing.Size(93, 21);
+            this.radioButton9.Size = new System.Drawing.Size(86, 22);
             this.radioButton9.TabIndex = 8;
             this.radioButton9.TabStop = true;
             this.radioButton9.Text = "PORCHE";
@@ -188,11 +259,11 @@
             // 
             this.radioButton8.AutoSize = true;
             this.radioButton8.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.radioButton8.Font = new System.Drawing.Font("Cooper Black", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radioButton8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(221)))), ((int)(((byte)(221)))), ((int)(((byte)(221)))));
-            this.radioButton8.Location = new System.Drawing.Point(807, 7);
+            this.radioButton8.Font = new System.Drawing.Font("Cascadia Code", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.radioButton8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
+            this.radioButton8.Location = new System.Drawing.Point(790, 7);
             this.radioButton8.Name = "radioButton8";
-            this.radioButton8.Size = new System.Drawing.Size(84, 21);
+            this.radioButton8.Size = new System.Drawing.Size(76, 22);
             this.radioButton8.TabIndex = 7;
             this.radioButton8.TabStop = true;
             this.radioButton8.Text = "VOLVO";
@@ -204,11 +275,11 @@
             // 
             this.radioButton7.AutoSize = true;
             this.radioButton7.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.radioButton7.Font = new System.Drawing.Font("Cooper Black", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radioButton7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(221)))), ((int)(((byte)(221)))), ((int)(((byte)(221)))));
-            this.radioButton7.Location = new System.Drawing.Point(716, 7);
+            this.radioButton7.Font = new System.Drawing.Font("Cascadia Code", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.radioButton7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
+            this.radioButton7.Location = new System.Drawing.Point(699, 7);
             this.radioButton7.Name = "radioButton7";
-            this.radioButton7.Size = new System.Drawing.Size(72, 21);
+            this.radioButton7.Size = new System.Drawing.Size(66, 22);
             this.radioButton7.TabIndex = 6;
             this.radioButton7.TabStop = true;
             this.radioButton7.Text = "FORD";
@@ -220,11 +291,11 @@
             // 
             this.radioButton6.AutoSize = true;
             this.radioButton6.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.radioButton6.Font = new System.Drawing.Font("Cooper Black", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radioButton6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(221)))), ((int)(((byte)(221)))), ((int)(((byte)(221)))));
-            this.radioButton6.Location = new System.Drawing.Point(632, 7);
+            this.radioButton6.Font = new System.Drawing.Font("Cascadia Code", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.radioButton6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
+            this.radioButton6.Location = new System.Drawing.Point(615, 7);
             this.radioButton6.Name = "radioButton6";
-            this.radioButton6.Size = new System.Drawing.Size(58, 21);
+            this.radioButton6.Size = new System.Drawing.Size(56, 22);
             this.radioButton6.TabIndex = 5;
             this.radioButton6.TabStop = true;
             this.radioButton6.Text = "PSA";
@@ -236,11 +307,11 @@
             // 
             this.radioButton5.AutoSize = true;
             this.radioButton5.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.radioButton5.Font = new System.Drawing.Font("Cooper Black", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radioButton5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(221)))), ((int)(((byte)(221)))), ((int)(((byte)(221)))));
-            this.radioButton5.Location = new System.Drawing.Point(549, 7);
+            this.radioButton5.Font = new System.Drawing.Font("Cascadia Code", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.radioButton5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
+            this.radioButton5.Location = new System.Drawing.Point(532, 7);
             this.radioButton5.Name = "radioButton5";
-            this.radioButton5.Size = new System.Drawing.Size(62, 21);
+            this.radioButton5.Size = new System.Drawing.Size(56, 22);
             this.radioButton5.TabIndex = 4;
             this.radioButton5.TabStop = true;
             this.radioButton5.Text = "VAG";
@@ -252,11 +323,11 @@
             // 
             this.radioButton4.AutoSize = true;
             this.radioButton4.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.radioButton4.Font = new System.Drawing.Font("Cooper Black", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radioButton4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(221)))), ((int)(((byte)(221)))), ((int)(((byte)(221)))));
+            this.radioButton4.Font = new System.Drawing.Font("Cascadia Code", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.radioButton4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
             this.radioButton4.Location = new System.Drawing.Point(450, 7);
             this.radioButton4.Name = "radioButton4";
-            this.radioButton4.Size = new System.Drawing.Size(66, 21);
+            this.radioButton4.Size = new System.Drawing.Size(56, 22);
             this.radioButton4.TabIndex = 3;
             this.radioButton4.TabStop = true;
             this.radioButton4.Text = "BMW";
@@ -268,11 +339,11 @@
             // 
             this.radioButton3.AutoSize = true;
             this.radioButton3.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.radioButton3.Font = new System.Drawing.Font("Cooper Black", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radioButton3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(221)))), ((int)(((byte)(221)))), ((int)(((byte)(221)))));
+            this.radioButton3.Font = new System.Drawing.Font("Cascadia Code", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.radioButton3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
             this.radioButton3.Location = new System.Drawing.Point(323, 8);
             this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(114, 21);
+            this.radioButton3.Size = new System.Drawing.Size(106, 22);
             this.radioButton3.TabIndex = 2;
             this.radioButton3.TabStop = true;
             this.radioButton3.Text = "MERCEDES";
@@ -284,11 +355,11 @@
             // 
             this.radioButton2.AutoSize = true;
             this.radioButton2.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.radioButton2.Font = new System.Drawing.Font("Cooper Black", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radioButton2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(221)))), ((int)(((byte)(221)))), ((int)(((byte)(221)))));
+            this.radioButton2.Font = new System.Drawing.Font("Cascadia Code", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.radioButton2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
             this.radioButton2.Location = new System.Drawing.Point(218, 7);
             this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(95, 21);
+            this.radioButton2.Size = new System.Drawing.Size(86, 22);
             this.radioButton2.TabIndex = 1;
             this.radioButton2.TabStop = true;
             this.radioButton2.Text = "JAGUAR";
@@ -301,11 +372,11 @@
             this.radioButton1.AutoSize = true;
             this.radioButton1.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.radioButton1.Checked = true;
-            this.radioButton1.Font = new System.Drawing.Font("Cooper Black", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radioButton1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(221)))), ((int)(((byte)(221)))), ((int)(((byte)(221)))));
+            this.radioButton1.Font = new System.Drawing.Font("Cascadia Code", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.radioButton1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
             this.radioButton1.Location = new System.Drawing.Point(153, 7);
             this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(48, 21);
+            this.radioButton1.Size = new System.Drawing.Size(46, 22);
             this.radioButton1.TabIndex = 0;
             this.radioButton1.TabStop = true;
             this.radioButton1.Text = "LR";
@@ -334,43 +405,53 @@
             this.label1.TabIndex = 10;
             this.label1.Text = "Working On Brand:";
             // 
-            // listView1
+            // button3
             // 
-            this.listView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.button3.Location = new System.Drawing.Point(752, 54);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(112, 23);
+            this.button3.TabIndex = 26;
+            this.button3.Text = "Daily Build Test";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_ClickAsync);
+            // 
+            // MainlistView1
+            // 
+            this.MainlistView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.listView1.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.listView1.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            listViewGroup5.Header = "ListViewGroup";
-            listViewGroup5.Name = "listViewGroup1";
-            this.listView1.Groups.AddRange(new System.Windows.Forms.ListViewGroup[] {
-            listViewGroup5});
-            this.listView1.HideSelection = false;
-            this.listView1.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem3});
-            this.listView1.Location = new System.Drawing.Point(0, 21);
-            this.listView1.MultiSelect = false;
-            this.listView1.Name = "listView1";
-            this.listView1.ShowItemToolTips = true;
-            this.listView1.Size = new System.Drawing.Size(884, 635);
-            this.listView1.Sorting = System.Windows.Forms.SortOrder.Ascending;
-            this.listView1.TabIndex = 2;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.View = System.Windows.Forms.View.Tile;
-            this.listView1.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
+            this.MainlistView1.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.MainlistView1.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            listViewGroup2.Header = "ListViewGroup";
+            listViewGroup2.Name = "listViewGroup1";
+            this.MainlistView1.Groups.AddRange(new System.Windows.Forms.ListViewGroup[] {
+            listViewGroup2});
+            this.MainlistView1.HideSelection = false;
+            this.MainlistView1.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
+            listViewItem4});
+            this.MainlistView1.Location = new System.Drawing.Point(0, 21);
+            this.MainlistView1.MultiSelect = false;
+            this.MainlistView1.Name = "MainlistView1";
+            this.MainlistView1.ShowItemToolTips = true;
+            this.MainlistView1.Size = new System.Drawing.Size(884, 635);
+            this.MainlistView1.Sorting = System.Windows.Forms.SortOrder.Ascending;
+            this.MainlistView1.TabIndex = 2;
+            this.MainlistView1.UseCompatibleStateImageBehavior = false;
+            this.MainlistView1.View = System.Windows.Forms.View.Tile;
+            this.MainlistView1.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
             // 
-            // textBox2
+            // MainSearchTextBox
             // 
-            this.textBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.MainSearchTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox2.Location = new System.Drawing.Point(3, 77);
-            this.textBox2.MaxLength = 8;
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(1305, 26);
-            this.textBox2.TabIndex = 14;
-            this.textBox2.WordWrap = false;
-            this.textBox2.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox2_KeyDown);
+            this.MainSearchTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.MainSearchTextBox.Location = new System.Drawing.Point(3, 77);
+            this.MainSearchTextBox.MaxLength = 8;
+            this.MainSearchTextBox.Name = "MainSearchTextBox";
+            this.MainSearchTextBox.Size = new System.Drawing.Size(1305, 26);
+            this.MainSearchTextBox.TabIndex = 14;
+            this.MainSearchTextBox.WordWrap = false;
+            this.MainSearchTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox2_KeyDown);
             // 
             // label4
             // 
@@ -451,8 +532,8 @@
             // 
             // splitContainer1.Panel1
             // 
-            this.splitContainer1.Panel1.Controls.Add(this.listView1);
-            this.splitContainer1.Panel1.Controls.Add(this.tabControl1);
+            this.splitContainer1.Panel1.Controls.Add(this.textBox1);
+            this.splitContainer1.Panel1.Controls.Add(this.MainlistView1);
             // 
             // splitContainer1.Panel2
             // 
@@ -469,36 +550,44 @@
             this.splitContainer1.SplitterDistance = 886;
             this.splitContainer1.TabIndex = 20;
             // 
-            // tabControl1
+            // textBox1
             // 
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Location = new System.Drawing.Point(3, 2);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(839, 20);
-            this.tabControl1.TabIndex = 3;
-            this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
+            this.textBox1.Location = new System.Drawing.Point(9, 126);
+            this.textBox1.Multiline = true;
+            this.textBox1.Name = "textBox1";
+            this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.textBox1.Size = new System.Drawing.Size(795, 417);
+            this.textBox1.TabIndex = 4;
+            this.textBox1.Visible = false;
             // 
-            // tabPage1
+            // pictureBox4
             // 
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(831, 0);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "One Off Fixes";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            this.pictureBox4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.pictureBox4.ContextMenuStrip = this.contextMenuStrip2;
+            this.pictureBox4.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBox4.Image = global::PatchExplorer.Properties.Resources.iconfinder_8_2135932;
+            this.pictureBox4.Location = new System.Drawing.Point(50, 622);
+            this.pictureBox4.Name = "pictureBox4";
+            this.pictureBox4.Size = new System.Drawing.Size(35, 30);
+            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox4.TabIndex = 24;
+            this.pictureBox4.TabStop = false;
+            this.pictureBox4.Visible = false;
+            this.pictureBox4.Click += new System.EventHandler(this.pictureBox4_Click);
             // 
-            // tabPage2
+            // contextMenuStrip2
             // 
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(831, 0);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Build Archive";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            this.contextMenuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem1});
+            this.contextMenuStrip2.Name = "contextMenuStrip1";
+            this.contextMenuStrip2.Size = new System.Drawing.Size(185, 26);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(184, 22);
+            this.toolStripMenuItem1.Text = "Copy Full Patch Path";
+            this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
             // 
             // listView2
             // 
@@ -509,8 +598,8 @@
             this.listView2.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F);
             this.listView2.HideSelection = false;
             this.listView2.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem7,
-            listViewItem9});
+            listViewItem5,
+            listViewItem6});
             this.listView2.LargeImageList = imageList1;
             this.listView2.Location = new System.Drawing.Point(9, 505);
             this.listView2.Name = "listView2";
@@ -534,57 +623,6 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(3, 646);
             this.panel3.TabIndex = 21;
-            // 
-            // panel2
-            // 
-            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel2.Controls.Add(this.label2);
-            this.panel2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.panel2.Location = new System.Drawing.Point(378, 625);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(83, 24);
-            this.panel2.TabIndex = 22;
-            this.panel2.Click += new System.EventHandler(this.pictureBox3_Click);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(10, 3);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(55, 19);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "Upload";
-            this.label2.Click += new System.EventHandler(this.pictureBox3_Click);
-            // 
-            // contextMenuStrip2
-            // 
-            this.contextMenuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem1});
-            this.contextMenuStrip2.Name = "contextMenuStrip1";
-            this.contextMenuStrip2.Size = new System.Drawing.Size(185, 26);
-            // 
-            // toolStripMenuItem1
-            // 
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(184, 22);
-            this.toolStripMenuItem1.Text = "Copy Full Patch Path";
-            this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
-            // 
-            // pictureBox4
-            // 
-            this.pictureBox4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.pictureBox4.ContextMenuStrip = this.contextMenuStrip2;
-            this.pictureBox4.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBox4.Image = global::PatchExplorer.Properties.Resources.iconfinder_8_2135932;
-            this.pictureBox4.Location = new System.Drawing.Point(50, 622);
-            this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(35, 30);
-            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox4.TabIndex = 24;
-            this.pictureBox4.TabStop = false;
-            this.pictureBox4.Visible = false;
-            this.pictureBox4.Click += new System.EventHandler(this.pictureBox4_Click);
             // 
             // pictureBox3
             // 
@@ -623,9 +661,381 @@
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
+            // panel2
+            // 
+            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel2.Controls.Add(this.label2);
+            this.panel2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.panel2.Location = new System.Drawing.Point(378, 625);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(83, 24);
+            this.panel2.TabIndex = 22;
+            this.panel2.Click += new System.EventHandler(this.pictureBox3_Click);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(10, 3);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(55, 19);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "Upload";
+            this.label2.Click += new System.EventHandler(this.pictureBox3_Click);
+            // 
+            // tabControl1
+            // 
+            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabPage3);
+            this.tabControl1.Location = new System.Drawing.Point(2, 107);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(832, 18);
+            this.tabControl1.TabIndex = 3;
+            this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(824, 0);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "One Off Fixes";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(824, 0);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Build Archive";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.panel5);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(824, 0);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "EazyPatch Creator";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // panel5
+            // 
+            this.panel5.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel5.Controls.Add(this.EazyDescription);
+            this.panel5.Controls.Add(this.EazyPatchCheckBx2);
+            this.panel5.Controls.Add(this.label6);
+            this.panel5.Controls.Add(this.EazyPatchCheckBx1);
+            this.panel5.Controls.Add(this.UploadStat);
+            this.panel5.Controls.Add(this.pictureBox5);
+            this.panel5.Controls.Add(this.pictureBox6);
+            this.panel5.Controls.Add(this.panel4);
+            this.panel5.Controls.Add(this.EazyPatchName);
+            this.panel5.Controls.Add(this.label5);
+            this.panel5.Controls.Add(this.EazyPatchRefresh);
+            this.panel5.Controls.Add(this.EazyPatchBtn1);
+            this.panel5.Controls.Add(this.EazyProgBar);
+            this.panel5.Controls.Add(this.ProgressText);
+            this.panel5.Controls.Add(this.groupBox2);
+            this.panel5.Controls.Add(this.groupBox1);
+            this.panel5.Enabled = false;
+            this.panel5.Location = new System.Drawing.Point(3, 5);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(819, 0);
+            this.panel5.TabIndex = 36;
+            // 
+            // EazyDescription
+            // 
+            this.EazyDescription.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.EazyDescription.Location = new System.Drawing.Point(536, 59);
+            this.EazyDescription.Multiline = true;
+            this.EazyDescription.Name = "EazyDescription";
+            this.EazyDescription.Size = new System.Drawing.Size(271, 73);
+            this.EazyDescription.TabIndex = 35;
+            this.EazyDescription.Text = "Description";
+            // 
+            // EazyPatchCheckBx2
+            // 
+            this.EazyPatchCheckBx2.AutoSize = true;
+            this.EazyPatchCheckBx2.Location = new System.Drawing.Point(199, 4);
+            this.EazyPatchCheckBx2.Name = "EazyPatchCheckBx2";
+            this.EazyPatchCheckBx2.Size = new System.Drawing.Size(49, 17);
+            this.EazyPatchCheckBx2.TabIndex = 34;
+            this.EazyPatchCheckBx2.Text = ".DLL";
+            this.EazyPatchCheckBx2.UseVisualStyleBackColor = true;
+            this.EazyPatchCheckBx2.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(4, 2);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(127, 15);
+            this.label6.TabIndex = 33;
+            this.label6.Text = "File/s Type Uploading:";
+            // 
+            // EazyPatchCheckBx1
+            // 
+            this.EazyPatchCheckBx1.AutoSize = true;
+            this.EazyPatchCheckBx1.Location = new System.Drawing.Point(137, 4);
+            this.EazyPatchCheckBx1.Name = "EazyPatchCheckBx1";
+            this.EazyPatchCheckBx1.Size = new System.Drawing.Size(50, 17);
+            this.EazyPatchCheckBx1.TabIndex = 32;
+            this.EazyPatchCheckBx1.Text = ".CFG";
+            this.EazyPatchCheckBx1.UseVisualStyleBackColor = true;
+            this.EazyPatchCheckBx1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            // 
+            // UploadStat
+            // 
+            this.UploadStat.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.UploadStat.AutoSize = true;
+            this.UploadStat.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.UploadStat.Location = new System.Drawing.Point(545, 14);
+            this.UploadStat.Name = "UploadStat";
+            this.UploadStat.Size = new System.Drawing.Size(94, 15);
+            this.UploadStat.TabIndex = 31;
+            this.UploadStat.Text = "Patch Uploaded";
+            this.UploadStat.Visible = false;
+            // 
+            // pictureBox5
+            // 
+            this.pictureBox5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox5.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBox5.Image = global::PatchExplorer.Properties.Resources.OPenFold;
+            this.pictureBox5.Location = new System.Drawing.Point(780, 134);
+            this.pictureBox5.Name = "pictureBox5";
+            this.pictureBox5.Size = new System.Drawing.Size(25, 25);
+            this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox5.TabIndex = 30;
+            this.pictureBox5.TabStop = false;
+            // 
+            // pictureBox6
+            // 
+            this.pictureBox6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox6.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBox6.Image = global::PatchExplorer.Properties.Resources.down_arrow;
+            this.pictureBox6.Location = new System.Drawing.Point(785, 8);
+            this.pictureBox6.Name = "pictureBox6";
+            this.pictureBox6.Size = new System.Drawing.Size(24, 24);
+            this.pictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pictureBox6.TabIndex = 29;
+            this.pictureBox6.TabStop = false;
+            // 
+            // panel4
+            // 
+            this.panel4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel4.BackColor = System.Drawing.Color.Gainsboro;
+            this.panel4.Controls.Add(this.DPCheck);
+            this.panel4.Controls.Add(this.PROCheck);
+            this.panel4.Controls.Add(this.ADVCheck);
+            this.panel4.Location = new System.Drawing.Point(537, 32);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(270, 23);
+            this.panel4.TabIndex = 28;
+            // 
+            // DPCheck
+            // 
+            this.DPCheck.AutoSize = true;
+            this.DPCheck.Checked = true;
+            this.DPCheck.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.DPCheck.Font = new System.Drawing.Font("Calibri", 8F);
+            this.DPCheck.Location = new System.Drawing.Point(182, 4);
+            this.DPCheck.Name = "DPCheck";
+            this.DPCheck.Size = new System.Drawing.Size(65, 17);
+            this.DPCheck.TabIndex = 2;
+            this.DPCheck.Text = "DP Build";
+            this.DPCheck.UseVisualStyleBackColor = true;
+            // 
+            // PROCheck
+            // 
+            this.PROCheck.AutoSize = true;
+            this.PROCheck.Checked = true;
+            this.PROCheck.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.PROCheck.Font = new System.Drawing.Font("Calibri", 8F);
+            this.PROCheck.Location = new System.Drawing.Point(108, 4);
+            this.PROCheck.Name = "PROCheck";
+            this.PROCheck.Size = new System.Drawing.Size(68, 17);
+            this.PROCheck.TabIndex = 1;
+            this.PROCheck.Text = "Pro Build";
+            this.PROCheck.UseVisualStyleBackColor = true;
+            // 
+            // ADVCheck
+            // 
+            this.ADVCheck.AutoSize = true;
+            this.ADVCheck.Checked = true;
+            this.ADVCheck.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.ADVCheck.Font = new System.Drawing.Font("Calibri", 8F);
+            this.ADVCheck.Location = new System.Drawing.Point(4, 4);
+            this.ADVCheck.Name = "ADVCheck";
+            this.ADVCheck.Size = new System.Drawing.Size(98, 17);
+            this.ADVCheck.TabIndex = 0;
+            this.ADVCheck.Text = "Advanced Build";
+            this.ADVCheck.UseVisualStyleBackColor = true;
+            // 
+            // EazyPatchName
+            // 
+            this.EazyPatchName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.EazyPatchName.Location = new System.Drawing.Point(600, 136);
+            this.EazyPatchName.MaxLength = 40;
+            this.EazyPatchName.Name = "EazyPatchName";
+            this.EazyPatchName.Size = new System.Drawing.Size(177, 20);
+            this.EazyPatchName.TabIndex = 26;
+            this.EazyPatchName.WordWrap = false;
+            // 
+            // label5
+            // 
+            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(518, 138);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(77, 15);
+            this.label5.TabIndex = 27;
+            this.label5.Text = "Patch Name:";
+            // 
+            // EazyPatchRefresh
+            // 
+            this.EazyPatchRefresh.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.EazyPatchRefresh.Location = new System.Drawing.Point(521, 203);
+            this.EazyPatchRefresh.Name = "EazyPatchRefresh";
+            this.EazyPatchRefresh.Size = new System.Drawing.Size(96, 23);
+            this.EazyPatchRefresh.TabIndex = 25;
+            this.EazyPatchRefresh.Text = "Refresh";
+            this.EazyPatchRefresh.UseVisualStyleBackColor = true;
+            this.EazyPatchRefresh.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // EazyPatchBtn1
+            // 
+            this.EazyPatchBtn1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.EazyPatchBtn1.Location = new System.Drawing.Point(615, 203);
+            this.EazyPatchBtn1.Name = "EazyPatchBtn1";
+            this.EazyPatchBtn1.Size = new System.Drawing.Size(194, 23);
+            this.EazyPatchBtn1.TabIndex = 24;
+            this.EazyPatchBtn1.Text = "Create Patch For Selected Items";
+            this.EazyPatchBtn1.UseVisualStyleBackColor = true;
+            this.EazyPatchBtn1.Click += new System.EventHandler(this.button5_Click);
+            // 
+            // EazyProgBar
+            // 
+            this.EazyProgBar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.EazyProgBar.Location = new System.Drawing.Point(521, 178);
+            this.EazyProgBar.Name = "EazyProgBar";
+            this.EazyProgBar.Size = new System.Drawing.Size(288, 23);
+            this.EazyProgBar.TabIndex = 23;
+            // 
+            // ProgressText
+            // 
+            this.ProgressText.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.ProgressText.AutoSize = true;
+            this.ProgressText.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ProgressText.Location = new System.Drawing.Point(518, 160);
+            this.ProgressText.Name = "ProgressText";
+            this.ProgressText.Size = new System.Drawing.Size(202, 15);
+            this.ProgressText.TabIndex = 22;
+            this.ProgressText.Text = "Total Files Selected For Uploading: 0";
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.DLLListBox);
+            this.groupBox2.Location = new System.Drawing.Point(262, 24);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(255, 200);
+            this.groupBox2.TabIndex = 21;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Last DLL Files";
+            // 
+            // DLLListBox
+            // 
+            this.DLLListBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.DLLListBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(84)))), ((int)(((byte)(125)))), ((int)(((byte)(150)))));
+            this.DLLListBox.FormattingEnabled = true;
+            this.DLLListBox.Location = new System.Drawing.Point(0, 17);
+            this.DLLListBox.Name = "DLLListBox";
+            this.DLLListBox.Size = new System.Drawing.Size(255, 184);
+            this.DLLListBox.TabIndex = 1;
+            this.DLLListBox.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.CFGListBox_ItemCheck);
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.CFGListBox);
+            this.groupBox1.Location = new System.Drawing.Point(4, 23);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(255, 200);
+            this.groupBox1.TabIndex = 20;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Last CFG Files";
+            // 
+            // CFGListBox
+            // 
+            this.CFGListBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.CFGListBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(84)))), ((int)(((byte)(125)))), ((int)(((byte)(150)))));
+            this.CFGListBox.FormattingEnabled = true;
+            this.CFGListBox.Location = new System.Drawing.Point(0, 17);
+            this.CFGListBox.Name = "CFGListBox";
+            this.CFGListBox.Size = new System.Drawing.Size(255, 184);
+            this.CFGListBox.TabIndex = 1;
+            this.CFGListBox.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.CFGListBox_ItemCheck);
+            // 
             // BackroundLoadVersion
             // 
             this.BackroundLoadVersion.DoWork += new System.ComponentModel.DoWorkEventHandler(this.BackroundLoadVersion_DoWork);
+            // 
+            // PasswordPanel
+            // 
+            this.PasswordPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(217)))), ((int)(((byte)(124)))), ((int)(((byte)(89)))));
+            this.PasswordPanel.Controls.Add(this.label7);
+            this.PasswordPanel.Controls.Add(this.textBox2);
+            this.PasswordPanel.Controls.Add(this.button4);
+            this.PasswordPanel.Location = new System.Drawing.Point(298, 103);
+            this.PasswordPanel.Name = "PasswordPanel";
+            this.PasswordPanel.Size = new System.Drawing.Size(409, 25);
+            this.PasswordPanel.TabIndex = 36;
+            this.PasswordPanel.Visible = false;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(3, 6);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(127, 16);
+            this.label7.TabIndex = 2;
+            this.label7.Text = "Password Required";
+            // 
+            // textBox2
+            // 
+            this.textBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.textBox2.Location = new System.Drawing.Point(132, 1);
+            this.textBox2.MaxLength = 30;
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(194, 24);
+            this.textBox2.TabIndex = 1;
+            this.textBox2.UseSystemPasswordChar = true;
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(332, 0);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(77, 26);
+            this.button4.TabIndex = 0;
+            this.button4.Text = "Unlock";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click_1);
             // 
             // Form1
             // 
@@ -633,10 +1043,12 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1384, 761);
+            this.Controls.Add(this.PasswordPanel);
+            this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.SearchBTN);
-            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.MainSearchTextBox);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "Form1";
@@ -645,18 +1057,30 @@
             this.panel1.PerformLayout();
             this.contextMenuStrip1.ResumeLayout(false);
             this.splitContainer1.Panel1.ResumeLayout(false);
+            this.splitContainer1.Panel1.PerformLayout();
             this.splitContainer1.Panel2.ResumeLayout(false);
             this.splitContainer1.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
-            this.tabControl1.ResumeLayout(false);
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
-            this.contextMenuStrip2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
+            this.contextMenuStrip2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
+            this.tabControl1.ResumeLayout(false);
+            this.tabPage3.ResumeLayout(false);
+            this.panel5.ResumeLayout(false);
+            this.panel5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
+            this.panel4.ResumeLayout(false);
+            this.panel4.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            this.PasswordPanel.ResumeLayout(false);
+            this.PasswordPanel.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -677,8 +1101,8 @@
         private System.Windows.Forms.RadioButton radioButton2;
         private System.Windows.Forms.RadioButton radioButton1;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ListView listView1;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.ListView MainlistView1;
+        private System.Windows.Forms.TextBox MainSearchTextBox;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button SearchBTN;
         private System.Windows.Forms.PictureBox pictureBox1;
@@ -704,6 +1128,37 @@
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip2;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
         private System.ComponentModel.BackgroundWorker BackroundLoadVersion;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.Label UploadStat;
+        private System.Windows.Forms.PictureBox pictureBox5;
+        private System.Windows.Forms.PictureBox pictureBox6;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.CheckBox DPCheck;
+        private System.Windows.Forms.CheckBox PROCheck;
+        private System.Windows.Forms.CheckBox ADVCheck;
+        private System.Windows.Forms.TextBox EazyPatchName;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Button EazyPatchRefresh;
+        private System.Windows.Forms.Button EazyPatchBtn1;
+        private System.Windows.Forms.ProgressBar EazyProgBar;
+        private System.Windows.Forms.Label ProgressText;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.CheckedListBox DLLListBox;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.CheckedListBox CFGListBox;
+        private System.Windows.Forms.CheckBox EazyPatchCheckBx2;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.CheckBox EazyPatchCheckBx1;
+        private System.Windows.Forms.TextBox EazyDescription;
+        private System.Windows.Forms.Label UnitTypeLabel;
+        private System.Windows.Forms.Panel PasswordPanel;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Panel panel5;
+        private System.Windows.Forms.RadioButton radioButton10;
     }
 }
 
