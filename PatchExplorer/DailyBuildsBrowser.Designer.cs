@@ -28,10 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem11 = new System.Windows.Forms.ListViewItem(new string[] {
             "BMW",
             "200.2"}, -1);
-            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("LR");
+            System.Windows.Forms.ListViewItem listViewItem12 = new System.Windows.Forms.ListViewItem("LR");
             this.label1 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
@@ -39,13 +39,14 @@
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.StatusComboBox = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.BrandComboBox = new System.Windows.Forms.ComboBox();
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.label5 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -53,12 +54,14 @@
             // 
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
+            this.label1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(438, 1);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(27, 25);
             this.label1.TabIndex = 4;
             this.label1.Text = "X";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // panel1
             // 
@@ -100,13 +103,13 @@
             this.listView1.FullRowSelect = true;
             this.listView1.HideSelection = false;
             this.listView1.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1,
-            listViewItem2});
-            this.listView1.Location = new System.Drawing.Point(-1, 121);
+            listViewItem11,
+            listViewItem12});
+            this.listView1.Location = new System.Drawing.Point(-1, 98);
             this.listView1.MultiSelect = false;
             this.listView1.Name = "listView1";
             this.listView1.ShowGroups = false;
-            this.listView1.Size = new System.Drawing.Size(465, 394);
+            this.listView1.Size = new System.Drawing.Size(465, 417);
             this.listView1.TabIndex = 28;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
@@ -120,22 +123,30 @@
             // 
             this.columnHeader2.Text = "Edition";
             this.columnHeader2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.columnHeader2.Width = 109;
+            this.columnHeader2.Width = 134;
             // 
             // columnHeader3
             // 
             this.columnHeader3.Text = "Version";
             this.columnHeader3.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.columnHeader3.Width = 87;
+            this.columnHeader3.Width = 105;
             // 
-            // comboBox1
+            // StatusComboBox
             // 
-            this.comboBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(340, 35);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 21);
-            this.comboBox1.TabIndex = 29;
+            this.StatusComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.StatusComboBox.FormattingEnabled = true;
+            this.StatusComboBox.Items.AddRange(new object[] {
+            "All",
+            "Archived",
+            "Daily",
+            "Live",
+            "Pending",
+            "Rejected",
+            "UAT"});
+            this.StatusComboBox.Location = new System.Drawing.Point(340, 35);
+            this.StatusComboBox.Name = "StatusComboBox";
+            this.StatusComboBox.Size = new System.Drawing.Size(121, 21);
+            this.StatusComboBox.TabIndex = 29;
             // 
             // label2
             // 
@@ -152,9 +163,9 @@
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.button1.Font = new System.Drawing.Font("Calibri", 11F);
-            this.button1.Location = new System.Drawing.Point(279, 92);
+            this.button1.Location = new System.Drawing.Point(250, 70);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(96, 25);
+            this.button1.Size = new System.Drawing.Size(107, 25);
             this.button1.TabIndex = 31;
             this.button1.Text = "Apply Filter";
             this.button1.UseVisualStyleBackColor = true;
@@ -164,12 +175,13 @@
             // 
             this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.button2.Font = new System.Drawing.Font("Calibri", 11F);
-            this.button2.Location = new System.Drawing.Point(373, 92);
+            this.button2.Location = new System.Drawing.Point(355, 70);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(88, 25);
+            this.button2.Size = new System.Drawing.Size(106, 25);
             this.button2.TabIndex = 32;
             this.button2.Text = "Remove Filter";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // label4
             // 
@@ -181,35 +193,75 @@
             this.label4.TabIndex = 34;
             this.label4.Text = "Brand";
             // 
-            // comboBox2
+            // BrandComboBox
             // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(55, 35);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(132, 21);
-            this.comboBox2.TabIndex = 33;
+            this.BrandComboBox.FormattingEnabled = true;
+            this.BrandComboBox.Items.AddRange(new object[] {
+            "All",
+            "BMW",
+            "Camera",
+            "CIP",
+            "Dictionary",
+            "Drive Browser",
+            "Ford",
+            "Jaguar",
+            "Land Rover",
+            "Main",
+            "Mercedes",
+            "OBD",
+            "Porsche",
+            "PSAR",
+            "Rolls Royce",
+            "VAG",
+            "Volvo",
+            "Drive PRO Domestic and Asian",
+            "Drive QUICK",
+            "Drive TECH",
+            "OSS",
+            "OSS Dictionary",
+            "Shinobi",
+            "Universal DLL"});
+            this.BrandComboBox.Location = new System.Drawing.Point(55, 35);
+            this.BrandComboBox.Name = "BrandComboBox";
+            this.BrandComboBox.Size = new System.Drawing.Size(132, 21);
+            this.BrandComboBox.TabIndex = 33;
             // 
             // columnHeader4
             // 
             this.columnHeader4.Text = "Status";
+            this.columnHeader4.Width = 91;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Calibri", 10F);
+            this.label5.Location = new System.Drawing.Point(2, 75);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(40, 17);
+            this.label5.TabIndex = 35;
+            this.label5.Text = "Total:";
             // 
             // DailyBuildsBrowser
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(466, 515);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.comboBox2);
+            this.Controls.Add(this.BrandComboBox);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.StatusComboBox);
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.panel1);
+            this.Controls.Add(this.label5);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "DailyBuildsBrowser";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "DailyBuildsBrowser";
+            this.Deactivate += new System.EventHandler(this.DailyBuildsBrowser_Deactivate);
+            this.Load += new System.EventHandler(this.DailyBuildsBrowser_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);
@@ -226,12 +278,13 @@
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.ColumnHeader columnHeader3;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox StatusComboBox;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.ComboBox BrandComboBox;
         private System.Windows.Forms.ColumnHeader columnHeader4;
+        private System.Windows.Forms.Label label5;
     }
 }

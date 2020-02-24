@@ -145,9 +145,12 @@ namespace PatchExplorer
             }
             else{
                 if (PasswordPanel.Visible == true) PasswordPanel.Visible = false;
-                tabControl1.Height = 18;
+                tabControl1.Height = 20;
                 splitContainer1.Enabled = true;
             }
+            //image Update
+            if (Properties.Settings.Default.EazyPatchUNLC == false) tabPage3.ImageIndex = 0;
+            if (Properties.Settings.Default.EazyPatchUNLC == true) tabPage3.ImageIndex = 1;
         }
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -454,6 +457,8 @@ namespace PatchExplorer
         private void Form1_Load(object sender, EventArgs e)
         {
             //BackroundLoadVersion.RunWorkerAsync();//Load Live Versions
+            if (Properties.Settings.Default.EazyPatchUNLC == false) tabPage3.ImageIndex = 0;
+            if (Properties.Settings.Default.EazyPatchUNLC == true) tabPage3.ImageIndex = 1;
         }
 
         private void BackroundLoadVersion_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
@@ -461,10 +466,10 @@ namespace PatchExplorer
             GetLiveVersions();
         }
 
-        private async void button3_ClickAsync(object sender, EventArgs e)
+        private void button3_ClickAsync(object sender, EventArgs e)
         {
             DailyBuildsBrowser OpenForm = new DailyBuildsBrowser();
-            OpenForm.Left = this.Bounds.Left + 877;
+            OpenForm.Left = this.Bounds.Left + 460;
             OpenForm.Top = this.Bounds.Top + 106;
             OpenForm.Show();
         }
