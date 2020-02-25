@@ -38,7 +38,7 @@ namespace PatchExplorer
             foreach (string Name in Form1.LiveBrandVersions)
             {
                 string[] SplitID = Name.Split('|');
-                ListViewItem item1 = new ListViewItem(SplitID[0], 0);
+                ListViewItem item1 = new ListViewItem(SplitID[0], 0);//Brand
                 item1.SubItems.Add(SplitID[1]);//Version
                 item1.SubItems.Add(SplitID[2]);//Version-PT
                 listView1.Items.Add(item1);

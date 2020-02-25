@@ -28,10 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.ListViewItem listViewItem7 = new System.Windows.Forms.ListViewItem(new string[] {
-            "BMW",
-            "200.2"}, -1);
-            System.Windows.Forms.ListViewItem listViewItem8 = new System.Windows.Forms.ListViewItem("LR");
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
@@ -91,9 +87,7 @@
             this.listView1.Font = new System.Drawing.Font("Calibri", 12F);
             this.listView1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.listView1.FullRowSelect = true;
-            this.listView1.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem7,
-            listViewItem8});
+            this.listView1.HideSelection = false;
             this.listView1.Location = new System.Drawing.Point(1, 30);
             this.listView1.MultiSelect = false;
             this.listView1.Name = "listView1";

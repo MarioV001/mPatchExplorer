@@ -34,5 +34,17 @@ namespace PatchExplorer.Properties {
                 this["EazyPatchUNLC"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string LastBrandBrowse {
+            get {
+                return ((string)(this["LastBrandBrowse"]));
+            }
+            set {
+                this["LastBrandBrowse"] = value;
+            }
+        }
     }
 }

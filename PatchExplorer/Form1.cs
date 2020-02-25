@@ -6,10 +6,7 @@ using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Net.Http;
-using System.Text.RegularExpressions;
 using System.Windows.Forms;
-using System.Xml.Linq;
 
 namespace PatchExplorer
 {
@@ -41,7 +38,7 @@ namespace PatchExplorer
             {
                 file.Write(writeString);
             }
-            string patchText = $"\tUploadedBy\t: {Environment.UserName}{Environment.NewLine}\tUnit\t\t:{UnitTextBox.Text}{Environment.NewLine}\tDate\t\t: {DateNow.ToString(@"yyyy-MM-dd-h\:mm")}{Environment.NewLine}";
+            string patchText = $"{Environment.NewLine}\tUploadedBy\t: {Environment.UserName}{Environment.NewLine}\tUnit\t\t:{UnitTextBox.Text}{Environment.NewLine}\tDate\t\t: {DateNow.ToString(@"yyyy-MM-dd-h\:mm")}";
             using (System.IO.StreamWriter file = new System.IO.StreamWriter(PubPathName + @"\Readme.txt", true))
             {
                 file.Write(patchText);
@@ -106,7 +103,7 @@ namespace PatchExplorer
         }
         private void GetPatchInfo()
         {
-            listView2.Items.Clear();
+            PatcheslistView.Items.Clear();
             List<string> logListContent = new List<string>();
             PubPathName = @"K:\Autologic\OneOffFixes\" + ConvertBrandToFixes(GetCurrentBrand()) + @"\" + MainlistView1.SelectedItems[0].Text;//set the current patch folder
             logListContent = Directory.GetFiles(PubPathName, "*.exe").ToList();
@@ -115,7 +112,7 @@ namespace PatchExplorer
             {
                 string[] words = logListContent[count].Split('\\');
                 if (words[words.Count() - 1].Contains("initdwnl.exe") | words[words.Count() - 1].Contains("download.exe")) continue;//ignore these
-                listView2.Items.Add(words[words.Count() - 1], 0);
+                PatcheslistView.Items.Add(words[words.Count() - 1], 0);
             }
             CheckExeCompatibility();//check Patch exe compatebility with unit
             if (File.Exists(PubPathName + @"\Readme.txt"))
@@ -163,15 +160,19 @@ namespace PatchExplorer
 
         private void pictureBox3_Click(object sender, EventArgs e)//Upload Buttons
         {
-            if (Convert.ToInt32(UnitTextBox.Text) <= 500) { MessageBox.Show("Invalid Unit ID"); return;}
-            if (listView2.SelectedItems.Count > 0)
+            if (UnitTypeLabel.Visible == false | UnitTypeLabel.Text =="..") { MessageBox.Show("A Valid Unit ID is required!", "Invalid Unit ID"); return; }
+            if (PatcheslistView.SelectedItems.Count > 0)
             {
-                for (int items = 0; items < listView2.SelectedItems.Count; items++)
+                for (int items = 0; items < PatcheslistView.SelectedItems.Count; items++)
                 {
-                    if (listView2.SelectedItems[items].ImageIndex == 1){ MessageBox.Show("Patch: '" + listView2.SelectedItems[items].Text.Replace(".exe", "") + "' Is not For this Unit!");return;}
-                    StartPatchUpload(GetPatchState(listView2.SelectedItems[items].Text), listView2.SelectedItems[items].Text.Replace(".exe", ""));
+                    if (PatcheslistView.SelectedItems[items].ImageIndex == 1) {
+                        DialogResult result = MessageBox.Show("Patch: '" + PatcheslistView.SelectedItems[items].Text.Replace(".exe", "") + "' Is Not Valid For This Unit!" + Environment.NewLine + 
+                            Environment.NewLine + "Do you still wish to proceed? ","Invalid patch for unit",MessageBoxButtons.YesNo,MessageBoxIcon.Warning);
+                        if(result==DialogResult.No) return;//if presses then abort
+                    }
+                    StartPatchUpload(GetPatchState(PatcheslistView.SelectedItems[items].Text), PatcheslistView.SelectedItems[items].Text.Replace(".exe", ""));
                 }
-            }
+            }else MessageBox.Show("No patches have been selected!","Select a patch");
         }
         private string GetVersionFromEXE(string Exe)
         {
@@ -185,15 +186,15 @@ namespace PatchExplorer
         private string GetCurrentBrand()
         {
             if (radioButton1.Checked == true) return "landrover";
-            if (radioButton2.Checked == true) return "jaguar";
-            if (radioButton3.Checked == true) return "mercedes";
-            if (radioButton4.Checked == true) return "bmw";
-            if (radioButton5.Checked == true) return "vag";
-            if (radioButton6.Checked == true) return "psa";
-            if (radioButton7.Checked == true) return "ford";
-            if (radioButton8.Checked == true) return "volvo";
-            if (radioButton9.Checked == true) return "porsche";
-            if (radioButton10.Checked == true) return "renault";
+            if (radioButton2.Checked == true) return "jaguar";   
+            if (radioButton3.Checked == true) return "mercedes"; 
+            if (radioButton4.Checked == true) return "bmw";      
+            if (radioButton5.Checked == true) return "vag";      
+            if (radioButton6.Checked == true) return "psa";      
+            if (radioButton7.Checked == true) return "ford";     
+            if (radioButton8.Checked == true) return "volvo";    
+            if (radioButton9.Checked == true)  return "porsche"; 
+            if (radioButton10.Checked == true) return "renault"; 
             return "";
         }
 
@@ -239,32 +240,32 @@ namespace PatchExplorer
             {
                 if(Convert.ToInt32(UnitTextBox.Text) >= 100)
                 {
-                    for (int items = 0; items < listView2.Items.Count; items++)
+                    for (int items = 0; items < PatcheslistView.Items.Count; items++)
                     {
-                        if (listView2.Items[items].Text.Contains("_PRO_DP_") == true | listView2.Items[items].Text.Contains("_DP_ADV_") == true |
-                            listView2.Items[items].Text.Contains("_GT_ADV_") == true | listView2.Items[items].Text.Contains("_DP_PRO_") == true |
-                            listView2.Items[items].Text.Contains("_GT_DP_") == true)//For DRivePro Formats
+                        if (PatcheslistView.Items[items].Text.Contains("_PRO_DP_") == true | PatcheslistView.Items[items].Text.Contains("_DP_ADV_") == true |
+                            PatcheslistView.Items[items].Text.Contains("_GT_ADV_") == true | PatcheslistView.Items[items].Text.Contains("_DP_PRO_") == true |
+                            PatcheslistView.Items[items].Text.Contains("_GT_DP_") == true)//For DRivePro Formats
                         {
-                            if (Convert.ToInt32(UnitTextBox.Text) >= 30000 & Convert.ToInt32(UnitTextBox.Text) >= 30000) listView2.Items[items].ImageIndex = 2;//Index (2) will show green
-                            else listView2.Items[items].ImageIndex = 1;//Index (1) will show Red
+                            if (Convert.ToInt32(UnitTextBox.Text) >= 30000 & Convert.ToInt32(UnitTextBox.Text) >= 30000) PatcheslistView.Items[items].ImageIndex = 2;//Index (2) will show green
+                            else PatcheslistView.Items[items].ImageIndex = 1;//Index (1) will show Red
                         }
-                        else if (listView2.Items[items].Text.Contains("_A+_") == true | listView2.Items[items].Text.Contains("_PLUS_") == true)//For AssistPLus Formats
+                        else if (PatcheslistView.Items[items].Text.Contains("_A+_") == true | PatcheslistView.Items[items].Text.Contains("_PLUS_") == true)//For AssistPLus Formats
                         {
-                            if (Convert.ToInt32(UnitTextBox.Text) >= 20000 & Convert.ToInt32(UnitTextBox.Text) < 30000) listView2.Items[items].ImageIndex = 2;
-                            else listView2.Items[items].ImageIndex = 1;
+                            if (Convert.ToInt32(UnitTextBox.Text) >= 20000 & Convert.ToInt32(UnitTextBox.Text) < 30000) PatcheslistView.Items[items].ImageIndex = 2;
+                            else PatcheslistView.Items[items].ImageIndex = 1;
                         }
-                        else if (listView2.Items[items].Text.Contains("_BB_") == true)//For BlueBox Formats
+                        else if (PatcheslistView.Items[items].Text.Contains("_BB_") == true)//For BlueBox Formats
                         {
-                            if (Convert.ToInt32(UnitTextBox.Text) >= 500 & Convert.ToInt32(UnitTextBox.Text) < 20000) listView2.Items[items].ImageIndex = 2;
-                            else listView2.Items[items].ImageIndex = 1;
+                            if (Convert.ToInt32(UnitTextBox.Text) >= 500 & Convert.ToInt32(UnitTextBox.Text) < 20000) PatcheslistView.Items[items].ImageIndex = 2;
+                            else PatcheslistView.Items[items].ImageIndex = 1;
                         }
-                        else if (listView2.Items[items].Text.Contains("_GT_") == true | listView2.Items[items].Text.Contains("_PRO_") == true |
-                            listView2.Items[items].Text.Contains("_GT.") == true | listView2.Items[items].Text.Contains("_PRO.") == true)//For Advaced/GT Formats
+                        else if (PatcheslistView.Items[items].Text.Contains("_GT_") == true | PatcheslistView.Items[items].Text.Contains("_PRO_") == true |
+                            PatcheslistView.Items[items].Text.Contains("_GT.") == true | PatcheslistView.Items[items].Text.Contains("_PRO.") == true)//For Advaced/GT Formats
                         {
-                            if (Convert.ToInt32(UnitTextBox.Text) >= 500 & Convert.ToInt32(UnitTextBox.Text) < 30000) listView2.Items[items].ImageIndex = 0;
-                            else listView2.Items[items].ImageIndex = 1;
+                            if (Convert.ToInt32(UnitTextBox.Text) >= 500 & Convert.ToInt32(UnitTextBox.Text) < 30000) PatcheslistView.Items[items].ImageIndex = 0;
+                            else PatcheslistView.Items[items].ImageIndex = 1;
                         }
-                        else listView2.Items[items].ImageIndex = 0;//Index (0) will show default/white
+                        else PatcheslistView.Items[items].ImageIndex = 0;//Index (0) will show default/white
                     }
                 }
             }
@@ -354,8 +355,16 @@ namespace PatchExplorer
                     
                 }
             }
-
-            
+        }
+        public static string GetLiveVersionsForBrand(string Brand,bool UpdateDB=false)//Get Single Brand Version From List
+        {
+            if(UpdateDB==true) GetLiveVersions();
+            foreach (string Name in Form1.LiveBrandVersions)
+            {
+                string[] SplitID = Name.Split('|');
+                if (SplitID[0].Contains(Brand)) return SplitID[1];
+            }
+            return "";
         }
         public static void GetLiveVersions()//it will load all live version into the Global List
         {
@@ -435,6 +444,32 @@ namespace PatchExplorer
             return SplitDec[0] + "."  + DecString.ToString("000");//formatting for last decimal as it cant be calculated correctly otherwise
         }
 
+        public static List<string> GetAPPtchesOnUnit(string UnitNum)
+        {
+                var authMethod = new PrivateKeyAuthenticationMethod("autologic", new PrivateKeyFile("id_rsa_be"));
+                var info = new ConnectionInfo("legion.autologic.com", "autologic", authMethod);
+                List<string> addresses = new List<string>();
+                using (var client = new Renci.SshNet.SftpClient(info))//SFTP
+                {
+                    if (client.IsConnected == false)
+                    {
+                        client.Connect();
+                        if(client.Exists("/home/parsly/packages/A0" + UnitNum) == true)
+                        {
+                            var files = client.ListDirectory("/home/parsly/packages/A0" + UnitNum);//get Brand Patches
+                            foreach (var file in files)
+                            {
+                                if (file.Name.Contains(".db") | file.Name == ".." | file.Name == ".") continue;
+                                addresses.Add(file.Name.Replace(".tar.gz",""));//add all patches to dataset
+                            }
+                        }
+                        else addresses.Add("No Patches Found For Unit");
+                        client.Disconnect();
+                   
+                    }
+                }
+            return addresses;
+        }
         private void button2_Click(object sender, EventArgs e)
         {
             SHHBrowse OpenForm = new SHHBrowse();
@@ -457,6 +492,8 @@ namespace PatchExplorer
         private void Form1_Load(object sender, EventArgs e)
         {
             //BackroundLoadVersion.RunWorkerAsync();//Load Live Versions
+            
+            PatcheslistView.Items.Clear();
             if (Properties.Settings.Default.EazyPatchUNLC == false) tabPage3.ImageIndex = 0;
             if (Properties.Settings.Default.EazyPatchUNLC == true) tabPage3.ImageIndex = 1;
         }
@@ -651,7 +688,7 @@ namespace PatchExplorer
             }
             DateTime DateNow = DateTime.Now;
             string patchText = $"CreatedBy\t: {Environment.UserName}{Environment.NewLine}Date\t\t: {DateNow.ToString(@"yyyy-MM-dd-h\:mm")}{Environment.NewLine}Description\t: {EazyDescription.Text}{Environment.NewLine}" +
-                $"Total UP3's\t: {TotalUP3s}{Environment.NewLine}-------------------{Environment.NewLine}"; 
+                $"Total UP3's\t: {TotalUP3s}{Environment.NewLine}-------------------"; 
             System.IO.File.WriteAllText(NewPatchPath + @"\Readme.txt", patchText);
             ProgressText.Text = "Total UP3's Created: " + TotalUP3s;
         }
@@ -669,6 +706,8 @@ namespace PatchExplorer
         private void UnitTypeLabel_TextChanged(object sender, EventArgs e)
         {
             if (UnitTypeLabel.Text == "BB" | UnitTypeLabel.Text == "A+" | UnitTypeLabel.Text == "DP") CheckExeCompatibility();
+            if (UnitTypeLabel.Text == "A+") { pictureBox7.Image = Properties.Resources.compare; pictureBox7.Enabled = true; }
+            else{ pictureBox7.Image = Properties.Resources.compare_G; pictureBox7.Enabled = false;}
         }
 
         private void button4_Click_1(object sender, EventArgs e)
@@ -680,6 +719,7 @@ namespace PatchExplorer
                 PasswordPanel.Visible = false;
                 panel5.Enabled = true;
                 panel5.Visible = true;
+                tabPage3.ImageIndex = 1;
             }
         }
 
@@ -694,6 +734,29 @@ namespace PatchExplorer
                 if (DLLListBox.Items[e.Index].ToString().Substring(DLLListBox.Items[e.Index].ToString().Length - 5).Contains(".bas") == true)
                     MessageBox.Show("Selecting Bas File! will automatically compile the DLL and build it!" + Environment.NewLine +
                     Environment.NewLine + "If you do not want to re-compile the DLL then select the .dll to be uploaded");
+        }
+
+        private void pictureBox7_Click(object sender, EventArgs e)
+        {
+            AP_Patches OpenForm = new AP_Patches(UnitTextBox.Text);
+            OpenForm.Left = this.Bounds.Right - 370;
+            OpenForm.Top = this.Bounds.Top + 106;
+            OpenForm.Show();
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (radioButton1.Checked == true) Properties.Settings.Default.LastBrandBrowse = radioButton1.Name;
+            if (radioButton2.Checked == true) Properties.Settings.Default.LastBrandBrowse = radioButton2.Name;
+            if (radioButton3.Checked == true) Properties.Settings.Default.LastBrandBrowse = radioButton3.Name;
+            if (radioButton4.Checked == true) Properties.Settings.Default.LastBrandBrowse = radioButton4.Name;
+            if (radioButton5.Checked == true) Properties.Settings.Default.LastBrandBrowse = radioButton5.Name;
+            if (radioButton6.Checked == true) Properties.Settings.Default.LastBrandBrowse = radioButton6.Name;
+            if (radioButton7.Checked == true) Properties.Settings.Default.LastBrandBrowse = radioButton7.Name;
+            if (radioButton8.Checked == true) Properties.Settings.Default.LastBrandBrowse = radioButton8.Name;
+            if (radioButton9.Checked == true) Properties.Settings.Default.LastBrandBrowse = radioButton9.Name;
+            if (radioButton10.Checked == true) Properties.Settings.Default.LastBrandBrowse = radioButton10.Name;
+            Properties.Settings.Default.Save();
         }
     }
 }
