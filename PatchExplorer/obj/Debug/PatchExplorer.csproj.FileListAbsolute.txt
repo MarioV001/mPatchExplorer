@@ -13,3 +13,9 @@ C:\Users\mario.vardarov\source\repos\PatchExplorer\PatchExplorer\obj\Debug\Patch
 C:\Users\mario.vardarov\source\repos\PatchExplorer\PatchExplorer\obj\Debug\PatchExplorer.csprojAssemblyReference.cache
 C:\Users\mario.vardarov\source\repos\PatchExplorer\PatchExplorer\obj\Debug\PatchExplorer.SHHBrowse.resources
 C:\Users\mario.vardarov\source\repos\PatchExplorer\PatchExplorer\obj\Debug\PatchExplorer.DailyBuildsBrowser.resources
+C:\Users\mario.vardarov\source\repos\PatchExplorer\PatchExplorer\bin\Debug\id_rsa_be
+C:\Users\mario.vardarov\source\repos\PatchExplorer\PatchExplorer\bin\Debug\PatchExplorer.exe.manifest
+C:\Users\mario.vardarov\source\repos\PatchExplorer\PatchExplorer\bin\Debug\PatchExplorer.application
+C:\Users\mario.vardarov\source\repos\PatchExplorer\PatchExplorer\obj\Debug\PatchExplorer.AP_Patches.resources
+C:\Users\mario.vardarov\source\repos\PatchExplorer\PatchExplorer\obj\Debug\PatchExplorer.exe.manifest
+C:\Users\mario.vardarov\source\repos\PatchExplorer\PatchExplorer\obj\Debug\PatchExplorer.application

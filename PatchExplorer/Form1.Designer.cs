@@ -32,8 +32,8 @@
             System.Windows.Forms.ImageList imageList1;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             System.Windows.Forms.ImageList imageList2;
-            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("BMW_GT_3_187_1046.exe", 0);
-            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("BMW_PRO_DP_3_187_1050.exe", 0);
+            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem("BMW_GT_3_187_1046.exe", 0);
+            System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem("BMW_PRO_DP_3_187_1050.exe", 0);
             this.panel1 = new System.Windows.Forms.Panel();
             this.radioButton10 = new System.Windows.Forms.RadioButton();
             this.UnitTypeLabel = new System.Windows.Forms.Label();
@@ -64,6 +64,12 @@
             this.listToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.DescriptionTextBox = new System.Windows.Forms.TextBox();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.panel6 = new System.Windows.Forms.Panel();
+            this.label9 = new System.Windows.Forms.Label();
+            this.DatetextBox = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.CreateBytextBox = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -105,12 +111,11 @@
             this.label7 = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.button4 = new System.Windows.Forms.Button();
-            this.panel6 = new System.Windows.Forms.Panel();
-            this.label8 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.listView1 = new System.Windows.Forms.ListView();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.panel7 = new System.Windows.Forms.Panel();
             imageList1 = new System.Windows.Forms.ImageList(this.components);
             imageList2 = new System.Windows.Forms.ImageList(this.components);
             this.panel1.SuspendLayout();
@@ -120,6 +125,7 @@
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
+            this.panel6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             this.contextMenuStrip2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -135,7 +141,6 @@
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.PasswordPanel.SuspendLayout();
-            this.panel6.SuspendLayout();
             this.SuspendLayout();
             // 
             // imageList1
@@ -174,9 +179,9 @@
             this.panel1.Controls.Add(this.radioButton2);
             this.panel1.Controls.Add(this.radioButton1);
             this.panel1.Controls.Add(this.label1);
-            this.panel1.Controls.Add(this.button3);
             this.panel1.Controls.Add(this.pictureBox7);
             this.panel1.Controls.Add(this.label3);
+            this.panel1.Controls.Add(this.button3);
             this.panel1.Location = new System.Drawing.Point(-2, 0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1386, 74);
@@ -226,7 +231,7 @@
             // 
             this.button2.BackColor = System.Drawing.Color.Transparent;
             this.button2.Font = new System.Drawing.Font("Calibri", 11F);
-            this.button2.Location = new System.Drawing.Point(951, 51);
+            this.button2.Location = new System.Drawing.Point(953, 51);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(239, 26);
             this.button2.TabIndex = 25;
@@ -236,12 +241,11 @@
             // 
             // button1
             // 
-            this.button1.Enabled = false;
-            this.button1.Location = new System.Drawing.Point(870, 53);
+            this.button1.Location = new System.Drawing.Point(796, 53);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.Size = new System.Drawing.Size(151, 23);
             this.button1.TabIndex = 24;
-            this.button1.Text = "SSH Test";
+            this.button1.Text = "BLUEBOX LIVE VERSIONS";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
@@ -413,7 +417,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(710, 54);
+            this.button3.Location = new System.Drawing.Point(636, 54);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(154, 23);
             this.button3.TabIndex = 26;
@@ -531,8 +535,7 @@
             // 
             // DescriptionTextBox
             // 
-            this.DescriptionTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.DescriptionTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.DescriptionTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.DescriptionTextBox.Enabled = false;
@@ -542,10 +545,8 @@
             this.DescriptionTextBox.Multiline = true;
             this.DescriptionTextBox.Name = "DescriptionTextBox";
             this.DescriptionTextBox.ReadOnly = true;
-            this.DescriptionTextBox.Size = new System.Drawing.Size(464, 142);
+            this.DescriptionTextBox.Size = new System.Drawing.Size(478, 146);
             this.DescriptionTextBox.TabIndex = 19;
-            this.DescriptionTextBox.Text = "description";
-            this.DescriptionTextBox.WordWrap = false;
             // 
             // splitContainer1
             // 
@@ -573,6 +574,87 @@
             this.splitContainer1.Size = new System.Drawing.Size(1378, 652);
             this.splitContainer1.SplitterDistance = 886;
             this.splitContainer1.TabIndex = 20;
+            // 
+            // panel6
+            // 
+            this.panel6.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(252)))), ((int)(((byte)(252)))));
+            this.panel6.Controls.Add(this.DescriptionTextBox);
+            this.panel6.Controls.Add(this.panel7);
+            this.panel6.Controls.Add(this.listView1);
+            this.panel6.Controls.Add(this.label9);
+            this.panel6.Controls.Add(this.DatetextBox);
+            this.panel6.Controls.Add(this.label10);
+            this.panel6.Controls.Add(this.CreateBytextBox);
+            this.panel6.Controls.Add(this.label8);
+            this.panel6.Location = new System.Drawing.Point(3, 36);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(485, 463);
+            this.panel6.TabIndex = 25;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Location = new System.Drawing.Point(3, 68);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(102, 19);
+            this.label9.TabIndex = 25;
+            this.label9.Text = "Date Created:";
+            // 
+            // DatetextBox
+            // 
+            this.DatetextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.DatetextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.DatetextBox.Enabled = false;
+            this.DatetextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DatetextBox.Location = new System.Drawing.Point(0, 90);
+            this.DatetextBox.MaxLength = 8;
+            this.DatetextBox.Multiline = true;
+            this.DatetextBox.Name = "DatetextBox";
+            this.DatetextBox.ReadOnly = true;
+            this.DatetextBox.Size = new System.Drawing.Size(482, 22);
+            this.DatetextBox.TabIndex = 24;
+            this.DatetextBox.WordWrap = false;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Location = new System.Drawing.Point(3, 12);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(87, 19);
+            this.label10.TabIndex = 23;
+            this.label10.Text = "Created By:";
+            // 
+            // CreateBytextBox
+            // 
+            this.CreateBytextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.CreateBytextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.CreateBytextBox.Enabled = false;
+            this.CreateBytextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CreateBytextBox.Location = new System.Drawing.Point(0, 34);
+            this.CreateBytextBox.MaxLength = 8;
+            this.CreateBytextBox.Multiline = true;
+            this.CreateBytextBox.Name = "CreateBytextBox";
+            this.CreateBytextBox.ReadOnly = true;
+            this.CreateBytextBox.Size = new System.Drawing.Size(482, 22);
+            this.CreateBytextBox.TabIndex = 22;
+            this.CreateBytextBox.WordWrap = false;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Location = new System.Drawing.Point(4, 130);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(86, 19);
+            this.label8.TabIndex = 20;
+            this.label8.Text = "Description";
             // 
             // pictureBox4
             // 
@@ -612,8 +694,8 @@
             this.PatcheslistView.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F);
             this.PatcheslistView.HideSelection = false;
             this.PatcheslistView.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1,
-            listViewItem2});
+            listViewItem3,
+            listViewItem4});
             this.PatcheslistView.LargeImageList = imageList1;
             this.PatcheslistView.Location = new System.Drawing.Point(9, 505);
             this.PatcheslistView.Name = "PatcheslistView";
@@ -1052,86 +1134,54 @@
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click_1);
             // 
-            // panel6
+            // listView1
             // 
-            this.panel6.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.listView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(252)))), ((int)(((byte)(252)))));
-            this.panel6.Controls.Add(this.label9);
-            this.panel6.Controls.Add(this.textBox3);
-            this.panel6.Controls.Add(this.label10);
-            this.panel6.Controls.Add(this.textBox1);
-            this.panel6.Controls.Add(this.label8);
-            this.panel6.Controls.Add(this.DescriptionTextBox);
-            this.panel6.Location = new System.Drawing.Point(9, 36);
-            this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(471, 463);
-            this.panel6.TabIndex = 25;
+            this.listView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1,
+            this.columnHeader2,
+            this.columnHeader3});
+            this.listView1.FullRowSelect = true;
+            this.listView1.HideSelection = false;
+            this.listView1.LabelWrap = false;
+            this.listView1.Location = new System.Drawing.Point(3, 300);
+            this.listView1.MultiSelect = false;
+            this.listView1.Name = "listView1";
+            this.listView1.ShowGroups = false;
+            this.listView1.Size = new System.Drawing.Size(480, 160);
+            this.listView1.TabIndex = 26;
+            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.listView1.View = System.Windows.Forms.View.Details;
             // 
-            // label8
+            // columnHeader1
             // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(4, 130);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(86, 19);
-            this.label8.TabIndex = 20;
-            this.label8.Text = "Description";
+            this.columnHeader1.Text = "Uploaded By";
+            this.columnHeader1.Width = 228;
             // 
-            // textBox1
+            // columnHeader2
             // 
-            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.columnHeader2.DisplayIndex = 2;
+            this.columnHeader2.Text = "Unit";
+            this.columnHeader2.Width = 74;
+            // 
+            // columnHeader3
+            // 
+            this.columnHeader3.DisplayIndex = 1;
+            this.columnHeader3.Text = "Date/Time";
+            this.columnHeader3.Width = 157;
+            // 
+            // panel7
+            // 
+            this.panel7.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox1.Enabled = false;
-            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(22, 34);
-            this.textBox1.MaxLength = 8;
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(446, 22);
-            this.textBox1.TabIndex = 22;
-            this.textBox1.WordWrap = false;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(3, 12);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(87, 19);
-            this.label10.TabIndex = 23;
-            this.label10.Text = "Created By:";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(3, 68);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(102, 19);
-            this.label9.TabIndex = 25;
-            this.label9.Text = "Date Created:";
-            // 
-            // textBox3
-            // 
-            this.textBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox3.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox3.Enabled = false;
-            this.textBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox3.Location = new System.Drawing.Point(22, 90);
-            this.textBox3.MaxLength = 8;
-            this.textBox3.Multiline = true;
-            this.textBox3.Name = "textBox3";
-            this.textBox3.ReadOnly = true;
-            this.textBox3.Size = new System.Drawing.Size(446, 22);
-            this.textBox3.TabIndex = 24;
-            this.textBox3.WordWrap = false;
+            this.panel7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(85)))), ((int)(((byte)(96)))));
+            this.panel7.Location = new System.Drawing.Point(0, 460);
+            this.panel7.Name = "panel7";
+            this.panel7.Size = new System.Drawing.Size(486, 2);
+            this.panel7.TabIndex = 27;
             // 
             // Form1
             // 
@@ -1159,6 +1209,8 @@
             this.splitContainer1.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
+            this.panel6.ResumeLayout(false);
+            this.panel6.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             this.contextMenuStrip2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
@@ -1178,8 +1230,6 @@
             this.groupBox1.ResumeLayout(false);
             this.PasswordPanel.ResumeLayout(false);
             this.PasswordPanel.PerformLayout();
-            this.panel6.ResumeLayout(false);
-            this.panel6.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1261,9 +1311,14 @@
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox DatetextBox;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox CreateBytextBox;
+        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ColumnHeader columnHeader1;
+        private System.Windows.Forms.ColumnHeader columnHeader2;
+        private System.Windows.Forms.ColumnHeader columnHeader3;
+        private System.Windows.Forms.Panel panel7;
     }
 }
 

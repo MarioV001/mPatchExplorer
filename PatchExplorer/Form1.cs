@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Windows.Forms;
 
 namespace PatchExplorer
@@ -19,12 +20,12 @@ namespace PatchExplorer
         {
             InitializeComponent();
         }
-        private void StartPatchUpload(string TypeUPL,string ExeToUpload)
+        private void StartPatchUpload(string TypeUPL, string ExeToUpload)
         {
             Process process = new Process();
             if (Convert.ToInt32(UnitTextBox.Text) > 100 && Convert.ToInt32(UnitTextBox.Text) < 30000) process.StartInfo.FileName = @"C:\path\putUser.exe";
             else if (Convert.ToInt32(UnitTextBox.Text) >= 30000) process.StartInfo.FileName = @"K:\Tools\NewPutUser\putuser.exe";
-            if (TypeUPL == "ADV") process.StartInfo.Arguments = Convert.ToInt32(UnitTextBox.Text) + $" /pname{ConvertBrandToFixes(GetCurrentBrand(),2)}-pt /pversionv" + GetVersionFromEXE(ExeToUpload) + " " + ExeToUpload + ".exe";
+            if (TypeUPL == "ADV") process.StartInfo.Arguments = Convert.ToInt32(UnitTextBox.Text) + $" /pname{ConvertBrandToFixes(GetCurrentBrand(), 2)}-pt /pversionv" + GetVersionFromEXE(ExeToUpload) + " " + ExeToUpload + ".exe";
             else if (TypeUPL == "PRO") process.StartInfo.Arguments = Convert.ToInt32(UnitTextBox.Text) + $" /pname{ConvertBrandToFixes(GetCurrentBrand(), 2)} /pversionv" + GetVersionFromEXE(ExeToUpload) + " " + ExeToUpload + ".exe";
             else if (TypeUPL == "DP") process.StartInfo.Arguments = Convert.ToInt32(UnitTextBox.Text) + " " + ExeToUpload + ".exe";
             MessageBox.Show(process.StartInfo.Arguments);//Debug
@@ -33,7 +34,7 @@ namespace PatchExplorer
             process.WaitForExit();
             //if closed then assume successful
             DateTime DateNow = DateTime.Now;
-            string writeString = $"Send By:{Environment.UserName} | Send Time:{DateNow.ToString(@"yyyy-MM-dd-h\:mm")} | Patch Name:{ExeToUpload} | Location:{PubPathName}"+ Environment.NewLine;
+            string writeString = $"Send By:{Environment.UserName} | Send Time:{DateNow.ToString(@"yyyy-MM-dd-h\:mm")} | Patch Name:{ExeToUpload} | Location:{PubPathName}" + Environment.NewLine;
             using (StreamWriter file = new StreamWriter(@"W:\Technical_Services\CaseTimes\PatchExplorer.txt", true))
             {
                 file.Write(writeString);
@@ -97,13 +98,17 @@ namespace PatchExplorer
                 {
 
                 }
-                
-                
+
+
             }
         }
         private void GetPatchInfo()
         {
             PatcheslistView.Items.Clear();
+            listView1.Items.Clear();
+            CreateBytextBox.Text = "";
+            DatetextBox.Text = "";
+            DescriptionTextBox.Text = "";
             List<string> logListContent = new List<string>();
             PubPathName = @"K:\Autologic\OneOffFixes\" + ConvertBrandToFixes(GetCurrentBrand()) + @"\" + MainlistView1.SelectedItems[0].Text;//set the current patch folder
             logListContent = Directory.GetFiles(PubPathName, "*.exe").ToList();
@@ -117,8 +122,31 @@ namespace PatchExplorer
             CheckExeCompatibility();//check Patch exe compatebility with unit
             if (File.Exists(PubPathName + @"\Readme.txt"))
             {
-                string lines = System.IO.File.ReadAllText(PubPathName + @"\Readme.txt");
-                DescriptionTextBox.Text = lines;
+                StreamReader file = new StreamReader(PubPathName + @"\Readme.txt");
+                string[] Linestr = file.ReadToEnd().Split(new string[] { Environment.NewLine }, StringSplitOptions.None);
+                file.Close();
+                for (int i = 0; i < Linestr.Length; i++)
+                {
+                    if (Linestr[i].ToLower().Contains("createdby")) CreateBytextBox.Text = Linestr[i].Split(':')[1];
+                    else if (Linestr[i].ToLower().Contains("date") & DatetextBox.Text=="") DatetextBox.Text = Linestr[i].Split(':')[1];
+                    else if (Linestr[i].ToLower().Contains("description")| Linestr[i].ToLower().Contains("desc") & Linestr[i].Length >30) DescriptionTextBox.Text = Linestr[i].Split(new char[] { ':' }, 2)[1];
+                    else if (Linestr[i].ToLower().Contains("note") & i<=6) DescriptionTextBox.Text += Environment.NewLine + Environment.NewLine + Linestr[i].Split(new char[] { ':' }, 2)[1];
+                    else if (Linestr[i].ToLower().Contains("uploadedby"))///using PatchExplorerFormat
+                    {
+                        ListViewItem item1 = new ListViewItem(Linestr[i].Split(':')[1].Replace("."," "), 0);//Brand
+                        item1.SubItems.Add(Linestr[i + 1].Split(':')[1]);//Version
+                        item1.SubItems.Add(Linestr[i + 2].Split(':')[1]);//Version-PT
+                        listView1.Items.Add(item1);
+                    }
+                    else if (Linestr[i].ToLower().Contains("unitno"))///using old format
+                    {
+                        ListViewItem item1 = new ListViewItem("", 0);//Brand
+                        item1.SubItems.Add(Linestr[i].Split(':')[1]);//Version
+                        item1.SubItems.Add(Linestr[i + 1].Split(':')[1]);//Version-PT
+                        listView1.Items.Add(item1);
+                    }
+                }
+                
             }
             else DescriptionTextBox.Text = "No Readme file foud!";
             //show controls
@@ -126,21 +154,21 @@ namespace PatchExplorer
         }
         private void RefreshChanges()
         {
-            
+
             if (tabControl1.SelectedTab.Name == tabPage1.Name) LoadFixes(MainSearchTextBox.Text);//called when a Radiao button check is changed
             if (tabControl1.SelectedTab.Name == tabPage2.Name) LoadBuilds();
             if (tabControl1.SelectedTab.Name == tabPage3.Name)//Open Eazy patch
             {
-                if(Properties.Settings.Default.EazyPatchUNLC == true)
+                if (Properties.Settings.Default.EazyPatchUNLC == true)
                 {
                     panel5.Enabled = true;
                 }
                 else { PasswordPanel.Visible = true; }
-                
+
                 tabControl1.Height = 260;
                 splitContainer1.Enabled = false;
             }
-            else{
+            else {
                 if (PasswordPanel.Visible == true) PasswordPanel.Visible = false;
                 tabControl1.Height = 20;
                 splitContainer1.Enabled = true;
@@ -160,25 +188,25 @@ namespace PatchExplorer
 
         private void pictureBox3_Click(object sender, EventArgs e)//Upload Buttons
         {
-            if (UnitTypeLabel.Visible == false | UnitTypeLabel.Text =="..") { MessageBox.Show("A Valid Unit ID is required!", "Invalid Unit ID"); return; }
+            if (UnitTypeLabel.Visible == false | UnitTypeLabel.Text == "..") { MessageBox.Show("A Valid Unit ID is required!", "Invalid Unit ID"); return; }
             if (PatcheslistView.SelectedItems.Count > 0)
             {
                 for (int items = 0; items < PatcheslistView.SelectedItems.Count; items++)
                 {
                     if (PatcheslistView.SelectedItems[items].ImageIndex == 1) {
-                        DialogResult result = MessageBox.Show("Patch: '" + PatcheslistView.SelectedItems[items].Text.Replace(".exe", "") + "' Is Not Valid For This Unit!" + Environment.NewLine + 
-                            Environment.NewLine + "Do you still wish to proceed? ","Invalid patch for unit",MessageBoxButtons.YesNo,MessageBoxIcon.Warning);
-                        if(result==DialogResult.No) return;//if presses then abort
+                        DialogResult result = MessageBox.Show("Patch: '" + PatcheslistView.SelectedItems[items].Text.Replace(".exe", "") + "' Is Not Valid For This Unit!" + Environment.NewLine +
+                            Environment.NewLine + "Do you still wish to proceed? ", "Invalid patch for unit", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                        if (result == DialogResult.No) return;//if presses then abort
                     }
                     StartPatchUpload(GetPatchState(PatcheslistView.SelectedItems[items].Text), PatcheslistView.SelectedItems[items].Text.Replace(".exe", ""));
                 }
-            }else MessageBox.Show("No patches have been selected!","Select a patch");
+            } else MessageBox.Show("No patches have been selected!", "Select a patch");
         }
         private string GetVersionFromEXE(string Exe)
         {
             string[] doubleArray = System.Text.RegularExpressions.Regex.Split(Exe, @"[^0-9\.]+");
             if (doubleArray.Length < 3) { MessageBox.Show("No Version!"); return ""; }//Need to get version from Legion
-            if (doubleArray[0]=="" | doubleArray[0] == "-1") doubleArray[0] = "3";
+            if (doubleArray[0] == "" | doubleArray[0] == "-1") doubleArray[0] = "3";
 
             return doubleArray[0] + "." + doubleArray[1] + "." + doubleArray[2].Replace(".", ""); ;
         }
@@ -186,15 +214,15 @@ namespace PatchExplorer
         private string GetCurrentBrand()
         {
             if (radioButton1.Checked == true) return "landrover";
-            if (radioButton2.Checked == true) return "jaguar";   
-            if (radioButton3.Checked == true) return "mercedes"; 
-            if (radioButton4.Checked == true) return "bmw";      
-            if (radioButton5.Checked == true) return "vag";      
-            if (radioButton6.Checked == true) return "psa";      
-            if (radioButton7.Checked == true) return "ford";     
-            if (radioButton8.Checked == true) return "volvo";    
-            if (radioButton9.Checked == true)  return "porsche"; 
-            if (radioButton10.Checked == true) return "renault"; 
+            if (radioButton2.Checked == true) return "jaguar";
+            if (radioButton3.Checked == true) return "mercedes";
+            if (radioButton4.Checked == true) return "bmw";
+            if (radioButton5.Checked == true) return "vag";
+            if (radioButton6.Checked == true) return "psa";
+            if (radioButton7.Checked == true) return "ford";
+            if (radioButton8.Checked == true) return "volvo";
+            if (radioButton9.Checked == true) return "porsche";
+            if (radioButton10.Checked == true) return "renault";
             return "";
         }
 
@@ -224,9 +252,9 @@ namespace PatchExplorer
         private string GetPatchState(string PatchName)
         {
             if (new string[] { "_PRO_DP_", "_GT_DP_", "_DP_ADV_", "_DP_PRO_", "DRIVEPRO_ADV" }.Any(s => PatchName.Contains(s))) return "DP";
-            if (new string[] { "_A+_ADV","BLUEBOX_ADV", "ASSISTPLUS_ADV","_GT_","_GT."}.Any(s => PatchName.Contains(s))) return "ADV";
-            if (new string[] { "_BB_PRO_" ,"A+_PRO" ,"_PLUS_" ,"_ProPlus_" ,"_PRO_","_PRO."}.Any(s => PatchName.Contains(s))) return "PRO";
-            
+            if (new string[] { "_A+_ADV", "BLUEBOX_ADV", "ASSISTPLUS_ADV", "_GT_", "_GT." }.Any(s => PatchName.Contains(s))) return "ADV";
+            if (new string[] { "_BB_PRO_", "A+_PRO", "_PLUS_", "_ProPlus_", "_PRO_", "_PRO." }.Any(s => PatchName.Contains(s))) return "PRO";
+
             return "";
         }
         private void pictureBox1_Click(object sender, EventArgs e)
@@ -238,7 +266,7 @@ namespace PatchExplorer
         {
             if (UnitTextBox.Text != "")//makesure theres something in the Txtbox
             {
-                if(Convert.ToInt32(UnitTextBox.Text) >= 100)
+                if (Convert.ToInt32(UnitTextBox.Text) >= 100)
                 {
                     for (int items = 0; items < PatcheslistView.Items.Count; items++)
                     {
@@ -285,7 +313,7 @@ namespace PatchExplorer
             MainlistView1.View = View.List;
         }
 
-        
+
         private void button1_Click(object sender, EventArgs e)
         {
             LoadFixes(MainSearchTextBox.Text);
@@ -304,61 +332,16 @@ namespace PatchExplorer
         {
 
         }
-        
+
         private void listView2_SelectedIndexChanged(object sender, EventArgs e)
         {
             //CheckExeCompatibility();
         }
 
-        private void button1_Click_1(object sender, EventArgs e)
+       
+        public static string GetLiveVersionsForBrand(string Brand, bool UpdateDB = false)//Get Single Brand Version From List
         {
-            
-            var authMethod = new PrivateKeyAuthenticationMethod("autologic", new PrivateKeyFile("id_rsa_be"));
-            var info = new ConnectionInfo("legion.autologic.com", "autologic", authMethod);
-            //using (var client = new SshClient(info))
-            //{
-            //    client.Connect();
-            //    
-            //    textBox1.Text = client.IsConnected.ToString() + Environment.NewLine;
-            //
-            //    client.RunCommand("");
-            //    client.Disconnect();
-            //}
-            using (var client = new Renci.SshNet.SftpClient(info))//SFTP
-            {
-                client.Connect();
-                //textBox1.Text = client.IsConnected.ToString();
-                var files = client.ListDirectory("/home/parsly/packages");//get all units with patches
-                List<string> UnitPatches = new List<string>();
-                foreach (var file in files)
-                {
-                    UnitPatches.Add(file.Name);
-                }
-                //GetLiveVersion
-                files = client.ListDirectory("/home/parsly/packages/diag");//get Brand Patches
-                List<string> LatestBrands = new List<string>();
-                foreach (var file in files)
-                {
-                    LatestBrands.Add(file.Name);
-                }
-                client.Disconnect();
-
-                //textBox1.Text = string.Join(Environment.NewLine, UnitPatches);
-                //textBox3.Text = string.Join(Environment.NewLine, LatestBrands);
-                //sort it
-                foreach (string s in UnitPatches)
-                {
-                    
-                }
-                foreach (string s in LatestBrands)
-                {
-                    
-                }
-            }
-        }
-        public static string GetLiveVersionsForBrand(string Brand,bool UpdateDB=false)//Get Single Brand Version From List
-        {
-            if(UpdateDB==true) GetLiveVersions();
+            if (UpdateDB == true) GetLiveVersions();
             foreach (string Name in Form1.LiveBrandVersions)
             {
                 string[] SplitID = Name.Split('|');
@@ -376,14 +359,14 @@ namespace PatchExplorer
                 {
                     client.Connect();
                     var files = client.ListDirectory("/home/parsly/packages/diag");//get Brand Patches
-                    decimal BMWDecimal = 0.0m,BMWDecimalPT = 0.0m, CIR = 0.0m;
-                    decimal CIRpt = 0.0m , CIP =0.0m , FORDpt=0.0m, JAG = 0.0m, JAGpt = 0.0m;
-                    decimal LR = 0.0m, LRpt = 0.0m, MERC=0.0m, MERCpt=0.0m, PORCH = 0.0m, PORCHpt = 0.0m;
-                    decimal REN = 0.0m, RENpt = 0.0m,VAG=0.0m,VAGpt=0.0m, VOLVO = 0.0m, VOLVOpt = 0.0m ,PSA=0.0m , PSApt=0.0m;
-                    decimal current =0.0m;
+                    decimal BMWDecimal = 0.0m, BMWDecimalPT = 0.0m, CIR = 0.0m;
+                    decimal CIRpt = 0.0m, CIP = 0.0m, FORDpt = 0.0m, JAG = 0.0m, JAGpt = 0.0m;
+                    decimal LR = 0.0m, LRpt = 0.0m, MERC = 0.0m, MERCpt = 0.0m, PORCH = 0.0m, PORCHpt = 0.0m;
+                    decimal REN = 0.0m, RENpt = 0.0m, VAG = 0.0m, VAGpt = 0.0m, VOLVO = 0.0m, VOLVOpt = 0.0m, PSA = 0.0m, PSApt = 0.0m;
+                    decimal current = 0.0m;
                     foreach (var file in files)
                     {
-                        if (ExtractNumber(file.Name) == "" ) continue;
+                        if (ExtractNumber(file.Name) == "") continue;
                         current = decimal.Parse(ExtractNumber(file.Name), NumberStyles.AllowThousands | NumberStyles.AllowDecimalPoint);
                         //MessageBox.Show(file.Name);//For Debugging
                         if (file.Name.Contains("bmw-v") & current > BMWDecimal) BMWDecimal = current;
@@ -408,15 +391,15 @@ namespace PatchExplorer
                         if (file.Name.Contains("volvo2-v") & current > VOLVO) VOLVO = current;
                         if (file.Name.Contains("psa-pt-") & current > PSApt) PSApt = current;
                         if (file.Name.Contains("psa-v") & current > PSA) PSA = current;
-                        
+
                     }
                     client.Disconnect();
                     LiveBrandVersions.Clear();
                     LiveBrandVersions.Add("BMW |3." + BMWDecimal + "|3." + BMWDecimalPT.ToString());
                     LiveBrandVersions.Add("CIR |3." + CIR.ToString() + "|3." + CIRpt.ToString());
-                    LiveBrandVersions.Add("CIP |3." + CIP.ToString() +"|");
+                    LiveBrandVersions.Add("CIP |3." + CIP.ToString() + "|");
                     LiveBrandVersions.Add("FORD ||3." + FORDpt.ToString());
-                    LiveBrandVersions.Add("JAG |3." + JAG.ToString() +"|3."+ JAGpt.ToString());
+                    LiveBrandVersions.Add("JAG |3." + JAG.ToString() + "|3." + JAGpt.ToString());
                     LiveBrandVersions.Add("LAND ROVER |3." + LR.ToString() + "|3." + LRpt.ToString());
                     LiveBrandVersions.Add("MERCEDES |3." + MERC.ToString() + "|3." + MERCpt.ToString());
                     LiveBrandVersions.Add("PORSCHE |3." + PORCH.ToString() + "|3." + PORCHpt.ToString());
@@ -427,11 +410,11 @@ namespace PatchExplorer
                     //BMWL = BMWL.OrderByDescending(i => i).ToList();
                     //VAGL = VAGL.OrderBy(x => x.Split('3')[0]).ThenBy(x => ExtractNumber(x.Split('3')[1])).ToList();
                     //list.OrderBy(x => x.Split('_')[0]).ThenBy(x => int.Parse(x.Split('_')[1]))
-                    
+
                 }
                 client.Dispose();//to make sure...
             }
-            return ;
+            return;
         }
         public static string ExtractNumber(string original)
         {
@@ -439,35 +422,35 @@ namespace PatchExplorer
             string result = System.Text.RegularExpressions.Regex.Match(original, @"[0-9]+(\.[0-9]+)+(\.[0-9]+)?").Value;
             if (result == "") return "";
             string[] SplitDec = result.Substring(2).Split('.');
-            if (SplitDec.Length < 2) return"";
+            if (SplitDec.Length < 2) return "";
             decimal DecString = decimal.Parse(SplitDec[1], NumberStyles.AllowThousands | NumberStyles.AllowDecimalPoint);
-            return SplitDec[0] + "."  + DecString.ToString("000");//formatting for last decimal as it cant be calculated correctly otherwise
+            return SplitDec[0] + "." + DecString.ToString("000");//formatting for last decimal as it cant be calculated correctly otherwise
         }
 
         public static List<string> GetAPPtchesOnUnit(string UnitNum)
         {
-                var authMethod = new PrivateKeyAuthenticationMethod("autologic", new PrivateKeyFile("id_rsa_be"));
-                var info = new ConnectionInfo("legion.autologic.com", "autologic", authMethod);
-                List<string> addresses = new List<string>();
-                using (var client = new Renci.SshNet.SftpClient(info))//SFTP
+            var authMethod = new PrivateKeyAuthenticationMethod("autologic", new PrivateKeyFile("id_rsa_be"));
+            var info = new ConnectionInfo("legion.autologic.com", "autologic", authMethod);
+            List<string> addresses = new List<string>();
+            using (var client = new Renci.SshNet.SftpClient(info))//SFTP
+            {
+                if (client.IsConnected == false)
                 {
-                    if (client.IsConnected == false)
+                    client.Connect();
+                    if (client.Exists("/home/parsly/packages/A0" + UnitNum) == true)
                     {
-                        client.Connect();
-                        if(client.Exists("/home/parsly/packages/A0" + UnitNum) == true)
+                        var files = client.ListDirectory("/home/parsly/packages/A0" + UnitNum);//get Brand Patches
+                        foreach (var file in files)
                         {
-                            var files = client.ListDirectory("/home/parsly/packages/A0" + UnitNum);//get Brand Patches
-                            foreach (var file in files)
-                            {
-                                if (file.Name.Contains(".db") | file.Name == ".." | file.Name == ".") continue;
-                                addresses.Add(file.Name.Replace(".tar.gz",""));//add all patches to dataset
-                            }
+                            if (file.Name.Contains(".db") | file.Name == ".." | file.Name == ".") continue;
+                            addresses.Add(file.Name.Replace(".tar.gz", ""));//add all patches to dataset
                         }
-                        else addresses.Add("No Patches Found For Unit");
-                        client.Disconnect();
-                   
                     }
+                    else addresses.Add("No Patches Found For Unit");
+                    client.Disconnect();
+
                 }
+            }
             return addresses;
         }
         private void button2_Click(object sender, EventArgs e)
@@ -476,7 +459,7 @@ namespace PatchExplorer
             OpenForm.Left = this.Bounds.Left + 877;
             OpenForm.Top = this.Bounds.Top + 106;
             OpenForm.Show();
-            
+
         }
 
         private void pictureBox4_Click(object sender, EventArgs e)
@@ -492,7 +475,7 @@ namespace PatchExplorer
         private void Form1_Load(object sender, EventArgs e)
         {
             //BackroundLoadVersion.RunWorkerAsync();//Load Live Versions
-            
+
             PatcheslistView.Items.Clear();
             if (Properties.Settings.Default.EazyPatchUNLC == false) tabPage3.ImageIndex = 0;
             if (Properties.Settings.Default.EazyPatchUNLC == true) tabPage3.ImageIndex = 1;
@@ -509,6 +492,19 @@ namespace PatchExplorer
             OpenForm.Left = this.Bounds.Left + 460;
             OpenForm.Top = this.Bounds.Top + 106;
             OpenForm.Show();
+        }
+        /////BLUE BOX DATA FETCH FROM WEBSITE
+        private void button1_Click_1(object sender, EventArgs e)//blue box
+        {
+            GetBBVersionsAsync();
+        }
+        public async void GetBBVersionsAsync()
+        {
+            //"W:\Brand\Tools\software_versions"
+        }
+        void SaveVersions(string input)
+        {
+
         }
         /// <summary>
         /// /// //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
