@@ -32,8 +32,8 @@
             System.Windows.Forms.ImageList imageList1;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             System.Windows.Forms.ImageList imageList2;
-            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem("BMW_GT_3_187_1046.exe", 0);
-            System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem("BMW_PRO_DP_3_187_1050.exe", 0);
+            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("BMW_GT_3_187_1046.exe", 0);
+            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("BMW_PRO_DP_3_187_1050.exe", 0);
             this.panel1 = new System.Windows.Forms.Panel();
             this.radioButton10 = new System.Windows.Forms.RadioButton();
             this.UnitTypeLabel = new System.Windows.Forms.Label();
@@ -51,9 +51,8 @@
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.label1 = new System.Windows.Forms.Label();
-            this.button3 = new System.Windows.Forms.Button();
-            this.pictureBox7 = new System.Windows.Forms.PictureBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.button3 = new System.Windows.Forms.Button();
             this.MainlistView1 = new System.Windows.Forms.ListView();
             this.MainSearchTextBox = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -64,20 +63,19 @@
             this.listToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.DescriptionTextBox = new System.Windows.Forms.TextBox();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.panel6 = new System.Windows.Forms.Panel();
+            this.listView1 = new System.Windows.Forms.ListView();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.label9 = new System.Windows.Forms.Label();
             this.DatetextBox = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.CreateBytextBox = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
-            this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.PatcheslistView = new System.Windows.Forms.ListView();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
@@ -90,8 +88,6 @@
             this.label6 = new System.Windows.Forms.Label();
             this.EazyPatchCheckBx1 = new System.Windows.Forms.CheckBox();
             this.UploadStat = new System.Windows.Forms.Label();
-            this.pictureBox5 = new System.Windows.Forms.PictureBox();
-            this.pictureBox6 = new System.Windows.Forms.PictureBox();
             this.panel4 = new System.Windows.Forms.Panel();
             this.DPCheck = new System.Windows.Forms.CheckBox();
             this.PROCheck = new System.Windows.Forms.CheckBox();
@@ -111,36 +107,47 @@
             this.label7 = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.button4 = new System.Windows.Forms.Button();
-            this.listView1 = new System.Windows.Forms.ListView();
-            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.panel7 = new System.Windows.Forms.Panel();
+            this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+            this.panel6 = new System.Windows.Forms.Panel();
+            this.EazyPatchLoadign = new System.Windows.Forms.PictureBox();
+            this.pictureBox5 = new System.Windows.Forms.PictureBox();
+            this.pictureBox6 = new System.Windows.Forms.PictureBox();
+            this.pictureBox7 = new System.Windows.Forms.PictureBox();
+            this.pictureBox4 = new System.Windows.Forms.PictureBox();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.LoadingCFGS = new System.Windows.Forms.PictureBox();
             imageList1 = new System.Windows.Forms.ImageList(this.components);
             imageList2 = new System.Windows.Forms.ImageList(this.components);
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
-            this.panel6.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             this.contextMenuStrip2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.panel5.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
             this.panel4.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.PasswordPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
+            this.splitContainer2.Panel1.SuspendLayout();
+            this.splitContainer2.Panel2.SuspendLayout();
+            this.splitContainer2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.EazyPatchLoadign)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.LoadingCFGS)).BeginInit();
             this.SuspendLayout();
             // 
             // imageList1
@@ -415,29 +422,6 @@
             this.label1.TabIndex = 10;
             this.label1.Text = "Working On Brand:";
             // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(636, 54);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(154, 23);
-            this.button3.TabIndex = 26;
-            this.button3.Text = "DISPLAY DRIVE LIVE VERSIONS";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_ClickAsync);
-            // 
-            // pictureBox7
-            // 
-            this.pictureBox7.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBox7.Enabled = false;
-            this.pictureBox7.Image = global::PatchExplorer.Properties.Resources.compare_G;
-            this.pictureBox7.Location = new System.Drawing.Point(1246, 43);
-            this.pictureBox7.Name = "pictureBox7";
-            this.pictureBox7.Size = new System.Drawing.Size(32, 32);
-            this.pictureBox7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox7.TabIndex = 25;
-            this.pictureBox7.TabStop = false;
-            this.pictureBox7.Click += new System.EventHandler(this.pictureBox7_Click);
-            // 
             // label3
             // 
             this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -449,20 +433,30 @@
             this.label3.TabIndex = 14;
             this.label3.Text = "Unit";
             // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(636, 54);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(154, 23);
+            this.button3.TabIndex = 26;
+            this.button3.Text = "DISPLAY DRIVE LIVE VERSIONS";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_ClickAsync);
+            // 
             // MainlistView1
             // 
             this.MainlistView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.MainlistView1.BackColor = System.Drawing.SystemColors.Window;
             this.MainlistView1.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.MainlistView1.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.MainlistView1.HideSelection = false;
-            this.MainlistView1.Location = new System.Drawing.Point(0, 21);
+            this.MainlistView1.Location = new System.Drawing.Point(1, 21);
             this.MainlistView1.MultiSelect = false;
             this.MainlistView1.Name = "MainlistView1";
             this.MainlistView1.ShowItemToolTips = true;
-            this.MainlistView1.Size = new System.Drawing.Size(884, 635);
-            this.MainlistView1.Sorting = System.Windows.Forms.SortOrder.Ascending;
+            this.MainlistView1.Size = new System.Drawing.Size(883, 635);
             this.MainlistView1.TabIndex = 2;
             this.MainlistView1.UseCompatibleStateImageBehavior = false;
             this.MainlistView1.View = System.Windows.Forms.View.Tile;
@@ -540,12 +534,12 @@
             this.DescriptionTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.DescriptionTextBox.Enabled = false;
             this.DescriptionTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.DescriptionTextBox.Location = new System.Drawing.Point(4, 152);
+            this.DescriptionTextBox.Location = new System.Drawing.Point(2, 142);
             this.DescriptionTextBox.MaxLength = 8;
             this.DescriptionTextBox.Multiline = true;
             this.DescriptionTextBox.Name = "DescriptionTextBox";
             this.DescriptionTextBox.ReadOnly = true;
-            this.DescriptionTextBox.Size = new System.Drawing.Size(478, 146);
+            this.DescriptionTextBox.Size = new System.Drawing.Size(480, 146);
             this.DescriptionTextBox.TabIndex = 19;
             // 
             // splitContainer1
@@ -562,9 +556,8 @@
             // 
             // splitContainer1.Panel2
             // 
-            this.splitContainer1.Panel2.Controls.Add(this.panel6);
+            this.splitContainer1.Panel2.Controls.Add(this.splitContainer2);
             this.splitContainer1.Panel2.Controls.Add(this.pictureBox4);
-            this.splitContainer1.Panel2.Controls.Add(this.PatcheslistView);
             this.splitContainer1.Panel2.Controls.Add(this.panel3);
             this.splitContainer1.Panel2.Controls.Add(this.pictureBox3);
             this.splitContainer1.Panel2.Controls.Add(this.pictureBox2);
@@ -575,30 +568,50 @@
             this.splitContainer1.SplitterDistance = 886;
             this.splitContainer1.TabIndex = 20;
             // 
-            // panel6
+            // listView1
             // 
-            this.panel6.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.listView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(252)))), ((int)(((byte)(252)))));
-            this.panel6.Controls.Add(this.DescriptionTextBox);
-            this.panel6.Controls.Add(this.panel7);
-            this.panel6.Controls.Add(this.listView1);
-            this.panel6.Controls.Add(this.label9);
-            this.panel6.Controls.Add(this.DatetextBox);
-            this.panel6.Controls.Add(this.label10);
-            this.panel6.Controls.Add(this.CreateBytextBox);
-            this.panel6.Controls.Add(this.label8);
-            this.panel6.Location = new System.Drawing.Point(3, 36);
-            this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(485, 463);
-            this.panel6.TabIndex = 25;
+            this.listView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1,
+            this.columnHeader2,
+            this.columnHeader3});
+            this.listView1.FullRowSelect = true;
+            this.listView1.HideSelection = false;
+            this.listView1.LabelWrap = false;
+            this.listView1.Location = new System.Drawing.Point(1, 290);
+            this.listView1.MultiSelect = false;
+            this.listView1.Name = "listView1";
+            this.listView1.ShowGroups = false;
+            this.listView1.Size = new System.Drawing.Size(481, 135);
+            this.listView1.TabIndex = 26;
+            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.listView1.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "Uploaded By";
+            this.columnHeader1.Width = 228;
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.DisplayIndex = 2;
+            this.columnHeader2.Text = "Unit";
+            this.columnHeader2.Width = 74;
+            // 
+            // columnHeader3
+            // 
+            this.columnHeader3.DisplayIndex = 1;
+            this.columnHeader3.Text = "Date/Time";
+            this.columnHeader3.Width = 157;
             // 
             // label9
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(3, 68);
+            this.label9.Location = new System.Drawing.Point(1, 58);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(102, 19);
             this.label9.TabIndex = 25;
@@ -611,12 +624,12 @@
             this.DatetextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.DatetextBox.Enabled = false;
             this.DatetextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.DatetextBox.Location = new System.Drawing.Point(0, 90);
+            this.DatetextBox.Location = new System.Drawing.Point(-2, 80);
             this.DatetextBox.MaxLength = 8;
             this.DatetextBox.Multiline = true;
             this.DatetextBox.Name = "DatetextBox";
             this.DatetextBox.ReadOnly = true;
-            this.DatetextBox.Size = new System.Drawing.Size(482, 22);
+            this.DatetextBox.Size = new System.Drawing.Size(484, 22);
             this.DatetextBox.TabIndex = 24;
             this.DatetextBox.WordWrap = false;
             // 
@@ -624,7 +637,7 @@
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(3, 12);
+            this.label10.Location = new System.Drawing.Point(1, 2);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(87, 19);
             this.label10.TabIndex = 23;
@@ -637,12 +650,12 @@
             this.CreateBytextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.CreateBytextBox.Enabled = false;
             this.CreateBytextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CreateBytextBox.Location = new System.Drawing.Point(0, 34);
+            this.CreateBytextBox.Location = new System.Drawing.Point(-2, 24);
             this.CreateBytextBox.MaxLength = 8;
             this.CreateBytextBox.Multiline = true;
             this.CreateBytextBox.Name = "CreateBytextBox";
             this.CreateBytextBox.ReadOnly = true;
-            this.CreateBytextBox.Size = new System.Drawing.Size(482, 22);
+            this.CreateBytextBox.Size = new System.Drawing.Size(484, 22);
             this.CreateBytextBox.TabIndex = 22;
             this.CreateBytextBox.WordWrap = false;
             // 
@@ -650,26 +663,11 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(4, 130);
+            this.label8.Location = new System.Drawing.Point(2, 120);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(86, 19);
             this.label8.TabIndex = 20;
             this.label8.Text = "Description";
-            // 
-            // pictureBox4
-            // 
-            this.pictureBox4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.pictureBox4.ContextMenuStrip = this.contextMenuStrip2;
-            this.pictureBox4.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBox4.Image = global::PatchExplorer.Properties.Resources.iconfinder_8_2135932;
-            this.pictureBox4.Location = new System.Drawing.Point(50, 622);
-            this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(35, 30);
-            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox4.TabIndex = 24;
-            this.pictureBox4.TabStop = false;
-            this.pictureBox4.Visible = false;
-            this.pictureBox4.Click += new System.EventHandler(this.pictureBox4_Click);
             // 
             // contextMenuStrip2
             // 
@@ -687,21 +685,22 @@
             // 
             // PatcheslistView
             // 
-            this.PatcheslistView.Alignment = System.Windows.Forms.ListViewAlignment.Left;
-            this.PatcheslistView.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.PatcheslistView.Alignment = System.Windows.Forms.ListViewAlignment.Default;
+            this.PatcheslistView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.PatcheslistView.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.PatcheslistView.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F);
             this.PatcheslistView.HideSelection = false;
             this.PatcheslistView.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem3,
-            listViewItem4});
+            listViewItem1,
+            listViewItem2});
+            this.PatcheslistView.LabelWrap = false;
             this.PatcheslistView.LargeImageList = imageList1;
-            this.PatcheslistView.Location = new System.Drawing.Point(9, 505);
+            this.PatcheslistView.Location = new System.Drawing.Point(3, 3);
             this.PatcheslistView.Name = "PatcheslistView";
             this.PatcheslistView.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.PatcheslistView.ShowGroups = false;
-            this.PatcheslistView.Size = new System.Drawing.Size(473, 114);
+            this.PatcheslistView.Size = new System.Drawing.Size(479, 137);
             this.PatcheslistView.SmallImageList = imageList1;
             this.PatcheslistView.Sorting = System.Windows.Forms.SortOrder.Ascending;
             this.PatcheslistView.TabIndex = 23;
@@ -719,43 +718,6 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(3, 646);
             this.panel3.TabIndex = 21;
-            // 
-            // pictureBox3
-            // 
-            this.pictureBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox3.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBox3.Image = global::PatchExplorer.Properties.Resources.iconfinder_122_CloudUpload_183248;
-            this.pictureBox3.Location = new System.Drawing.Point(443, 618);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(40, 37);
-            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox3.TabIndex = 21;
-            this.pictureBox3.TabStop = false;
-            this.pictureBox3.Click += new System.EventHandler(this.pictureBox3_Click);
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.pictureBox2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBox2.Image = global::PatchExplorer.Properties.Resources.DevOPS_2_;
-            this.pictureBox2.Location = new System.Drawing.Point(6, 620);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(40, 30);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox2.TabIndex = 20;
-            this.pictureBox2.TabStop = false;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBox1.Image = global::PatchExplorer.Properties.Resources.iconfinder_ic_view_list_48px_352204;
-            this.pictureBox1.Location = new System.Drawing.Point(0, 3);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(28, 28);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 17;
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // panel2
             // 
@@ -784,30 +746,31 @@
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
+            this.tabControl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabControl1.ImageList = imageList2;
-            this.tabControl1.Location = new System.Drawing.Point(2, 107);
+            this.tabControl1.Location = new System.Drawing.Point(2, 103);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(832, 20);
+            this.tabControl1.Size = new System.Drawing.Size(832, 28);
             this.tabControl1.TabIndex = 3;
             this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
             // 
             // tabPage1
             // 
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Location = new System.Drawing.Point(4, 25);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(824, 0);
+            this.tabPage1.Size = new System.Drawing.Size(824, 249);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "One Off Fixes";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // tabPage2
             // 
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Location = new System.Drawing.Point(4, 25);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(824, 0);
+            this.tabPage2.Size = new System.Drawing.Size(824, 249);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Build Archive";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -815,7 +778,7 @@
             // tabPage3
             // 
             this.tabPage3.Controls.Add(this.panel5);
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Location = new System.Drawing.Point(4, 25);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage3.Size = new System.Drawing.Size(824, 0);
@@ -866,7 +829,7 @@
             this.EazyPatchCheckBx2.AutoSize = true;
             this.EazyPatchCheckBx2.Location = new System.Drawing.Point(199, 4);
             this.EazyPatchCheckBx2.Name = "EazyPatchCheckBx2";
-            this.EazyPatchCheckBx2.Size = new System.Drawing.Size(49, 17);
+            this.EazyPatchCheckBx2.Size = new System.Drawing.Size(54, 20);
             this.EazyPatchCheckBx2.TabIndex = 34;
             this.EazyPatchCheckBx2.Text = ".DLL";
             this.EazyPatchCheckBx2.UseVisualStyleBackColor = true;
@@ -887,7 +850,7 @@
             this.EazyPatchCheckBx1.AutoSize = true;
             this.EazyPatchCheckBx1.Location = new System.Drawing.Point(137, 4);
             this.EazyPatchCheckBx1.Name = "EazyPatchCheckBx1";
-            this.EazyPatchCheckBx1.Size = new System.Drawing.Size(50, 17);
+            this.EazyPatchCheckBx1.Size = new System.Drawing.Size(57, 20);
             this.EazyPatchCheckBx1.TabIndex = 32;
             this.EazyPatchCheckBx1.Text = ".CFG";
             this.EazyPatchCheckBx1.UseVisualStyleBackColor = true;
@@ -904,30 +867,6 @@
             this.UploadStat.TabIndex = 31;
             this.UploadStat.Text = "Patch Uploaded";
             this.UploadStat.Visible = false;
-            // 
-            // pictureBox5
-            // 
-            this.pictureBox5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox5.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBox5.Image = global::PatchExplorer.Properties.Resources.OPenFold;
-            this.pictureBox5.Location = new System.Drawing.Point(780, 134);
-            this.pictureBox5.Name = "pictureBox5";
-            this.pictureBox5.Size = new System.Drawing.Size(25, 25);
-            this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox5.TabIndex = 30;
-            this.pictureBox5.TabStop = false;
-            // 
-            // pictureBox6
-            // 
-            this.pictureBox6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox6.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBox6.Image = global::PatchExplorer.Properties.Resources.down_arrow;
-            this.pictureBox6.Location = new System.Drawing.Point(785, 8);
-            this.pictureBox6.Name = "pictureBox6";
-            this.pictureBox6.Size = new System.Drawing.Size(24, 24);
-            this.pictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-            this.pictureBox6.TabIndex = 29;
-            this.pictureBox6.TabStop = false;
             // 
             // panel4
             // 
@@ -986,7 +925,7 @@
             this.EazyPatchName.Location = new System.Drawing.Point(600, 136);
             this.EazyPatchName.MaxLength = 40;
             this.EazyPatchName.Name = "EazyPatchName";
-            this.EazyPatchName.Size = new System.Drawing.Size(177, 20);
+            this.EazyPatchName.Size = new System.Drawing.Size(177, 22);
             this.EazyPatchName.TabIndex = 26;
             this.EazyPatchName.WordWrap = false;
             // 
@@ -1008,7 +947,7 @@
             this.EazyPatchRefresh.Name = "EazyPatchRefresh";
             this.EazyPatchRefresh.Size = new System.Drawing.Size(96, 23);
             this.EazyPatchRefresh.TabIndex = 25;
-            this.EazyPatchRefresh.Text = "Refresh";
+            this.EazyPatchRefresh.Text = "Reset";
             this.EazyPatchRefresh.UseVisualStyleBackColor = true;
             this.EazyPatchRefresh.Click += new System.EventHandler(this.button4_Click);
             // 
@@ -1044,6 +983,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.EazyPatchLoadign);
             this.groupBox2.Controls.Add(this.DLLListBox);
             this.groupBox2.Location = new System.Drawing.Point(262, 24);
             this.groupBox2.Name = "groupBox2";
@@ -1061,12 +1001,13 @@
             this.DLLListBox.FormattingEnabled = true;
             this.DLLListBox.Location = new System.Drawing.Point(0, 17);
             this.DLLListBox.Name = "DLLListBox";
-            this.DLLListBox.Size = new System.Drawing.Size(255, 184);
+            this.DLLListBox.Size = new System.Drawing.Size(255, 174);
             this.DLLListBox.TabIndex = 1;
             this.DLLListBox.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.CFGListBox_ItemCheck);
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.LoadingCFGS);
             this.groupBox1.Controls.Add(this.CFGListBox);
             this.groupBox1.Location = new System.Drawing.Point(4, 23);
             this.groupBox1.Name = "groupBox1";
@@ -1084,7 +1025,7 @@
             this.CFGListBox.FormattingEnabled = true;
             this.CFGListBox.Location = new System.Drawing.Point(0, 17);
             this.CFGListBox.Name = "CFGListBox";
-            this.CFGListBox.Size = new System.Drawing.Size(255, 184);
+            this.CFGListBox.Size = new System.Drawing.Size(255, 174);
             this.CFGListBox.TabIndex = 1;
             this.CFGListBox.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.CFGListBox_ItemCheck);
             // 
@@ -1098,7 +1039,7 @@
             this.PasswordPanel.Controls.Add(this.label7);
             this.PasswordPanel.Controls.Add(this.textBox2);
             this.PasswordPanel.Controls.Add(this.button4);
-            this.PasswordPanel.Location = new System.Drawing.Point(298, 103);
+            this.PasswordPanel.Location = new System.Drawing.Point(315, 103);
             this.PasswordPanel.Name = "PasswordPanel";
             this.PasswordPanel.Size = new System.Drawing.Size(409, 25);
             this.PasswordPanel.TabIndex = 36;
@@ -1134,54 +1075,155 @@
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click_1);
             // 
-            // listView1
+            // splitContainer2
             // 
-            this.listView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.splitContainer2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.listView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader1,
-            this.columnHeader2,
-            this.columnHeader3});
-            this.listView1.FullRowSelect = true;
-            this.listView1.HideSelection = false;
-            this.listView1.LabelWrap = false;
-            this.listView1.Location = new System.Drawing.Point(3, 300);
-            this.listView1.MultiSelect = false;
-            this.listView1.Name = "listView1";
-            this.listView1.ShowGroups = false;
-            this.listView1.Size = new System.Drawing.Size(480, 160);
-            this.listView1.TabIndex = 26;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.View = System.Windows.Forms.View.Details;
+            this.splitContainer2.Location = new System.Drawing.Point(3, 33);
+            this.splitContainer2.Name = "splitContainer2";
+            this.splitContainer2.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
-            // columnHeader1
+            // splitContainer2.Panel1
             // 
-            this.columnHeader1.Text = "Uploaded By";
-            this.columnHeader1.Width = 228;
+            this.splitContainer2.Panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(252)))), ((int)(((byte)(252)))));
+            this.splitContainer2.Panel1.Controls.Add(this.panel6);
+            this.splitContainer2.Panel1.Controls.Add(this.DescriptionTextBox);
+            this.splitContainer2.Panel1.Controls.Add(this.label10);
+            this.splitContainer2.Panel1.Controls.Add(this.label8);
+            this.splitContainer2.Panel1.Controls.Add(this.listView1);
+            this.splitContainer2.Panel1.Controls.Add(this.CreateBytextBox);
+            this.splitContainer2.Panel1.Controls.Add(this.label9);
+            this.splitContainer2.Panel1.Controls.Add(this.DatetextBox);
             // 
-            // columnHeader2
+            // splitContainer2.Panel2
             // 
-            this.columnHeader2.DisplayIndex = 2;
-            this.columnHeader2.Text = "Unit";
-            this.columnHeader2.Width = 74;
+            this.splitContainer2.Panel2.Controls.Add(this.PatcheslistView);
+            this.splitContainer2.Size = new System.Drawing.Size(485, 583);
+            this.splitContainer2.SplitterDistance = 436;
+            this.splitContainer2.TabIndex = 3;
             // 
-            // columnHeader3
+            // panel6
             // 
-            this.columnHeader3.DisplayIndex = 1;
-            this.columnHeader3.Text = "Date/Time";
-            this.columnHeader3.Width = 157;
-            // 
-            // panel7
-            // 
-            this.panel7.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.panel6.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(85)))), ((int)(((byte)(96)))));
-            this.panel7.Location = new System.Drawing.Point(0, 460);
-            this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(486, 2);
-            this.panel7.TabIndex = 27;
+            this.panel6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(72)))), ((int)(((byte)(53)))));
+            this.panel6.Location = new System.Drawing.Point(2, 433);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(480, 3);
+            this.panel6.TabIndex = 27;
+            // 
+            // EazyPatchLoadign
+            // 
+            this.EazyPatchLoadign.Image = global::PatchExplorer.Properties.Resources._739;
+            this.EazyPatchLoadign.Location = new System.Drawing.Point(95, 3);
+            this.EazyPatchLoadign.Name = "EazyPatchLoadign";
+            this.EazyPatchLoadign.Size = new System.Drawing.Size(154, 12);
+            this.EazyPatchLoadign.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.EazyPatchLoadign.TabIndex = 36;
+            this.EazyPatchLoadign.TabStop = false;
+            this.EazyPatchLoadign.Visible = false;
+            // 
+            // pictureBox5
+            // 
+            this.pictureBox5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox5.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBox5.Image = global::PatchExplorer.Properties.Resources.OPenFold;
+            this.pictureBox5.Location = new System.Drawing.Point(780, 134);
+            this.pictureBox5.Name = "pictureBox5";
+            this.pictureBox5.Size = new System.Drawing.Size(25, 25);
+            this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox5.TabIndex = 30;
+            this.pictureBox5.TabStop = false;
+            this.pictureBox5.Click += new System.EventHandler(this.pictureBox5_Click);
+            // 
+            // pictureBox6
+            // 
+            this.pictureBox6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox6.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBox6.Image = global::PatchExplorer.Properties.Resources.down_arrow;
+            this.pictureBox6.Location = new System.Drawing.Point(785, 8);
+            this.pictureBox6.Name = "pictureBox6";
+            this.pictureBox6.Size = new System.Drawing.Size(24, 24);
+            this.pictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pictureBox6.TabIndex = 29;
+            this.pictureBox6.TabStop = false;
+            // 
+            // pictureBox7
+            // 
+            this.pictureBox7.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBox7.Enabled = false;
+            this.pictureBox7.Image = global::PatchExplorer.Properties.Resources.compare_G;
+            this.pictureBox7.Location = new System.Drawing.Point(1246, 43);
+            this.pictureBox7.Name = "pictureBox7";
+            this.pictureBox7.Size = new System.Drawing.Size(32, 32);
+            this.pictureBox7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox7.TabIndex = 25;
+            this.pictureBox7.TabStop = false;
+            this.pictureBox7.Click += new System.EventHandler(this.pictureBox7_Click);
+            // 
+            // pictureBox4
+            // 
+            this.pictureBox4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.pictureBox4.ContextMenuStrip = this.contextMenuStrip2;
+            this.pictureBox4.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBox4.Image = global::PatchExplorer.Properties.Resources.iconfinder_8_2135932;
+            this.pictureBox4.Location = new System.Drawing.Point(50, 622);
+            this.pictureBox4.Name = "pictureBox4";
+            this.pictureBox4.Size = new System.Drawing.Size(35, 30);
+            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox4.TabIndex = 24;
+            this.pictureBox4.TabStop = false;
+            this.pictureBox4.Visible = false;
+            this.pictureBox4.Click += new System.EventHandler(this.pictureBox4_Click);
+            // 
+            // pictureBox3
+            // 
+            this.pictureBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox3.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBox3.Image = global::PatchExplorer.Properties.Resources.iconfinder_122_CloudUpload_183248;
+            this.pictureBox3.Location = new System.Drawing.Point(443, 618);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(40, 37);
+            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox3.TabIndex = 21;
+            this.pictureBox3.TabStop = false;
+            this.pictureBox3.Click += new System.EventHandler(this.pictureBox3_Click);
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.pictureBox2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBox2.Image = global::PatchExplorer.Properties.Resources.DevOPS_2_;
+            this.pictureBox2.Location = new System.Drawing.Point(6, 620);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(40, 30);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox2.TabIndex = 20;
+            this.pictureBox2.TabStop = false;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBox1.Image = global::PatchExplorer.Properties.Resources.iconfinder_ic_view_list_48px_352204;
+            this.pictureBox1.Location = new System.Drawing.Point(0, 3);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(28, 28);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 17;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
+            // 
+            // LoadingCFGS
+            // 
+            this.LoadingCFGS.Image = global::PatchExplorer.Properties.Resources._739;
+            this.LoadingCFGS.Location = new System.Drawing.Point(101, 4);
+            this.LoadingCFGS.Name = "LoadingCFGS";
+            this.LoadingCFGS.Size = new System.Drawing.Size(147, 12);
+            this.LoadingCFGS.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.LoadingCFGS.TabIndex = 37;
+            this.LoadingCFGS.TabStop = false;
+            this.LoadingCFGS.Visible = false;
             // 
             // Form1
             // 
@@ -1202,34 +1244,39 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             this.splitContainer1.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
-            this.panel6.ResumeLayout(false);
-            this.panel6.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             this.contextMenuStrip2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.tabControl1.ResumeLayout(false);
             this.tabPage3.ResumeLayout(false);
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.PasswordPanel.ResumeLayout(false);
             this.PasswordPanel.PerformLayout();
+            this.splitContainer2.Panel1.ResumeLayout(false);
+            this.splitContainer2.Panel1.PerformLayout();
+            this.splitContainer2.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
+            this.splitContainer2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.EazyPatchLoadign)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.LoadingCFGS)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1308,7 +1355,6 @@
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.RadioButton radioButton10;
         private System.Windows.Forms.PictureBox pictureBox7;
-        private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox DatetextBox;
@@ -1318,7 +1364,10 @@
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.ColumnHeader columnHeader3;
-        private System.Windows.Forms.Panel panel7;
+        private System.Windows.Forms.SplitContainer splitContainer2;
+        private System.Windows.Forms.Panel panel6;
+        private System.Windows.Forms.PictureBox EazyPatchLoadign;
+        private System.Windows.Forms.PictureBox LoadingCFGS;
     }
 }
 
