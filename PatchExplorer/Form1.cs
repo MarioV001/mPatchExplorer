@@ -240,10 +240,13 @@ namespace PatchExplorer
         private string GetVersionFromEXE(string Exe)
         {
             string[] doubleArray = System.Text.RegularExpressions.Regex.Split(Exe, @"[^0-9\.]+");
-            if (doubleArray.Length < 3) { MessageBox.Show("No Version!"); return ""; }//Need to get version from Legion
+            //MessageBox.Show(doubleArray.Length.ToString());//debug
+            if (doubleArray.Length < 3) { MessageBox.Show("No Version in Patch!"); return ""; }//Need to get version from Legion
             if (doubleArray[0] == "" | doubleArray[0] == "-1") doubleArray[0] = "3";
-
-            return doubleArray[0] + "." + doubleArray[1] + "." + doubleArray[2].Replace(".", ""); ;
+            if (doubleArray.Length == 3) return doubleArray[0] + "." + doubleArray[1] + "." + doubleArray[2].Replace(".", "");
+            else if (doubleArray.Length == 4) return doubleArray[0] + "." + doubleArray[2] + "." + doubleArray[3].Replace(".", "");
+            return "";
+            
         }
 
         private string GetCurrentBrand()
@@ -747,7 +750,7 @@ namespace PatchExplorer
         {
             if (UnitTextBox.Text.Length == 0) { UnitTypeLabel.Visible = false; return; }
             else UnitTypeLabel.Visible = true;
-            if (Convert.ToInt32(UnitTextBox.Text) >= 5000 & Convert.ToInt32(UnitTextBox.Text) < 20000) UnitTypeLabel.Text = "BB";
+            if (Convert.ToInt32(UnitTextBox.Text) >= 2000 & Convert.ToInt32(UnitTextBox.Text) < 20000) UnitTypeLabel.Text = "BB";
             else if (Convert.ToInt32(UnitTextBox.Text) >= 20000 & Convert.ToInt32(UnitTextBox.Text) < 30000) UnitTypeLabel.Text = "A+";
             else if (Convert.ToInt32(UnitTextBox.Text) >= 30000 & Convert.ToInt32(UnitTextBox.Text) < 40000) UnitTypeLabel.Text = "DP";
             else UnitTypeLabel.Text = "..";
