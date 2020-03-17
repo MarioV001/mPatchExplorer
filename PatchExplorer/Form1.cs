@@ -1,9 +1,11 @@
-﻿using Renci.SshNet;
+﻿using MySql.Data.MySqlClient;
+using Renci.SshNet;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
+using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -20,34 +22,57 @@ namespace PatchExplorer
         {
             InitializeComponent();
         }
-        private void StartPatchUpload(string TypeUPL, string ExeToUpload, string SubDir = "")
+        private void BackroundRunPutUser(string TypeUPL, string ExeToUpload, string SubDir)
         {
             Process process = new Process();
-            if (Convert.ToInt32(UnitTextBox.Text) > 100 && Convert.ToInt32(UnitTextBox.Text) < 30000) process.StartInfo.FileName = @"C:\path\putUser.exe";
-            else if (Convert.ToInt32(UnitTextBox.Text) >= 30000)
-            {
-                process.StartInfo.FileName = @"K:\Tools\NewPutUser\putuser.exe";
-                TypeUPL = "DP";//overide Type For DriveProUnit's (doesnt matter)
-            }
+            process.StartInfo.FileName = @"K:\Tools\NewPutUser\putuser.exe";
+            if (Convert.ToInt32(UnitTextBox.Text) >= 30000) TypeUPL = "DP";//overide Type For DriveProUnit's (doesnt matter)
             if (TypeUPL == "ADV") process.StartInfo.Arguments = Convert.ToInt32(UnitTextBox.Text) + $" /pname{ConvertBrandToFixes(GetCurrentBrand(), 2)}-pt /pversionv" + GetVersionFromEXE(ExeToUpload) + " " + ExeToUpload + ".exe";
             else if (TypeUPL == "PRO") process.StartInfo.Arguments = Convert.ToInt32(UnitTextBox.Text) + $" /pname{ConvertBrandToFixes(GetCurrentBrand(), 2)} /pversionv" + GetVersionFromEXE(ExeToUpload) + " " + ExeToUpload + ".exe";
             else if (TypeUPL == "DP") process.StartInfo.Arguments = Convert.ToInt32(UnitTextBox.Text) + " " + ExeToUpload + ".exe";
-            MessageBox.Show("ARGS: " + Environment.NewLine + process.StartInfo.Arguments);//Debug
+            ShowNoteWindows("ARGS: " + process.StartInfo.Arguments,2);
             process.StartInfo.WorkingDirectory = PubPathName + SubDir;
             process.Start();
             process.WaitForExit();
-            //if closed then assume successful
+        }
+        private void RunWorkerCompleted(string ExeToUpload)
+        {
             DateTime DateNow = DateTime.Now;
-            string writeString = $"Send By:{Environment.UserName} | Send Time:{DateNow.ToString(@"yyyy-MM-dd-h\:mm")} | Patch Name:{ExeToUpload} | Location:{PubPathName}" + Environment.NewLine;
-            using (StreamWriter file = new StreamWriter(@"W:\Technical_Services\CaseTimes\PatchExplorer.txt", true))
-            {
-                file.Write(writeString);
-            }
+            LogPatchtoSQL(Environment.UserName, ExeToUpload, PubPathName.Replace("\\", "\\\\"), UnitTextBox.Text, DateNow.ToString(@"yyyy-MM-dd-h\:mm"));
+            //string writeString = $"Send By:{Environment.UserName} | Send Time:{DateNow.ToString(@"yyyy-MM-dd-h\:mm")} | Patch Name:{ExeToUpload} | Location:{PubPathName}" + Environment.NewLine;
+            //using (StreamWriter file = new StreamWriter(@"W:\Technical_Services\CaseTimes\PatchExplorer.txt", true))
+            //{
+            //    file.Write(writeString);
+            //}
             string patchText = $"{Environment.NewLine}\tUploadedBy\t: {Environment.UserName}{Environment.NewLine}\tUnit\t\t:{UnitTextBox.Text}{Environment.NewLine}\tDate\t\t: {DateNow.ToString(@"yyyy-MM-dd-h\:mm")}";
             using (StreamWriter file = new StreamWriter(PubPathName + @"\Readme.txt", true))
             {
                 file.Write(patchText);
             }
+            //reset stats
+            UploadImage.Visible = false;
+            UploadTxt.Visible = false;
+            pictureBox3.Enabled = true;
+            panel2.Enabled = true;
+            //
+            DoneImage.Visible = true;
+            DoneTimer.Start();
+            NoteTextBox.Visible = false;
+        }
+        private void StartPatchUpload(string TypeUPL, string ExeToUpload, string SubDir = "")
+        {
+            UploadImage.Visible = true;
+            UploadTxt.Visible = true;
+            pictureBox3.Enabled = false;
+            panel2.Enabled = false;
+            DoneImage.Visible = false;
+            //
+            BackgroundWorker worker = new BackgroundWorker();
+            worker.DoWork += (obj, e) => BackroundRunPutUser(TypeUPL, ExeToUpload, SubDir);
+            worker.RunWorkerCompleted += (obj, e) => RunWorkerCompleted(ExeToUpload);
+            worker.RunWorkerAsync();
+            //if closed then assume successful
+           
         }
 
         private void LoadFixes(string SearchSTR = "")
@@ -71,6 +96,11 @@ namespace PatchExplorer
         }
         private void LoadBuilds(string SearchSTR = "")
         {
+            if (!Directory.Exists("W:"))
+            {
+                ShowNoteWindows("W: Drive Is Unallocated!", 0, 3500);
+                return;
+            }
             List<string> logListContent = new List<string>();
             logListContent = Directory.GetDirectories(@"W:\Build_Archive\Latest\" + ConvertBrandToFixes(GetCurrentBrand(), 1)).OrderByDescending(i => Directory.GetLastWriteTime(i)).ToList();
             MainlistView1.Items.Clear();
@@ -512,7 +542,7 @@ namespace PatchExplorer
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            //BackroundLoadVersion.RunWorkerAsync();//Load Live Versions
+            //BackroundLoadVersion.RunWorkerAsync();//Load Live Versions(disabled when testing)
 
             PatcheslistView.Items.Clear();
             if (Properties.Settings.Default.EazyPatchUNLC == false) tabPage3.ImageIndex = 0;
@@ -820,6 +850,67 @@ namespace PatchExplorer
                 Process.Start("explorer.exe", Path);
             }
             else MessageBox.Show("Directory Not Found!" + Environment.NewLine + Environment.NewLine + "Patch Not Created yet ?");
+        }
+
+        private void copyPatchNameOnlyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (Directory.Exists(PubPathName) == true)
+            {
+                string[]  pName = PubPathName.Split('\\');
+                Clipboard.SetText(pName[pName.Length-1]);
+            }
+        }
+
+        private void toolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            Clipboard.SetText(PatcheslistView.SelectedItems[0].Text);
+        }
+
+        private void DoneTimer_Tick(object sender, EventArgs e)
+        {
+            DoneImage.Visible = false;
+            DoneTimer.Stop();
+        }
+        public void ShowNoteWindows(string Message, int ConditionColor = 0, int timeToShowMS = 0)
+        {
+            NoteTextBox.Text = Message;
+            
+            if (ConditionColor == 0) NoteTextBox.BackColor = Color.Firebrick;//RED
+            if (ConditionColor == 1) NoteTextBox.BackColor = Color.LightGreen;//Green
+            if (ConditionColor == 2) NoteTextBox.BackColor = Color.FromArgb(213, 219, 223);//UpdateState
+            NoteTextBox.Invoke(new Action(() => NoteTextBox.Visible =true));
+            if (timeToShowMS > 0)
+            {
+                NoteResetTimer.Start();
+                NoteResetTimer.Interval = timeToShowMS;
+            }
+        }
+        internal static void LogPatchtoSQL(string UploadBy,string PatchName,string PatchPath,string UnitNum,string SendTime)
+        {
+            try
+            {
+                string myConnectionString = "datasource=data03.lan.autologic.com;port=3306;username=patchuser;password=rig4Grug;database=patchexplorer;SslMode=none";
+                string query = "INSERT INTO patches_deployed(username,exetoupload,pubpathname,unitnumber,datenow) VALUES('" + UploadBy + "', '" + PatchName + "','" + PatchPath + "','" + UnitNum + "','" + SendTime + "');";
+                MySqlConnection connection = new MySqlConnection(myConnectionString);
+                MySqlCommand command = new MySqlCommand(query, connection);
+                connection.Open();
+                command.ExecuteNonQuery();
+            }
+            catch
+            {
+
+            }
+        }
+
+        private void NoteResetTimer_Tick(object sender, EventArgs e)
+        {
+
+        }
+
+        private void NoteResetTimer_Tick_1(object sender, EventArgs e)
+        {
+            NoteTextBox.Visible = false;
+            NoteResetTimer.Stop();
         }
     }
 }

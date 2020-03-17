@@ -32,8 +32,8 @@
             System.Windows.Forms.ImageList imageList1;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             System.Windows.Forms.ImageList imageList2;
-            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("BMW_GT_3_187_1046.exe", 0);
-            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("BMW_PRO_DP_3_187_1050.exe", 0);
+            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem("BMW_GT_3_187_1046.exe", 0);
+            System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem("BMW_PRO_DP_3_187_1050.exe", 0);
             this.panel1 = new System.Windows.Forms.Panel();
             this.radioButton10 = new System.Windows.Forms.RadioButton();
             this.UnitTypeLabel = new System.Windows.Forms.Label();
@@ -51,7 +51,6 @@
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.label1 = new System.Windows.Forms.Label();
-            this.pictureBox7 = new System.Windows.Forms.PictureBox();
             this.label3 = new System.Windows.Forms.Label();
             this.button3 = new System.Windows.Forms.Button();
             this.MainlistView1 = new System.Windows.Forms.ListView();
@@ -76,13 +75,12 @@
             this.label9 = new System.Windows.Forms.Label();
             this.DatetextBox = new System.Windows.Forms.TextBox();
             this.PatcheslistView = new System.Windows.Forms.ListView();
-            this.pictureBox4 = new System.Windows.Forms.PictureBox();
+            this.contextMenuStrip3 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.copyPatchNameOnlyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
@@ -95,8 +93,6 @@
             this.label6 = new System.Windows.Forms.Label();
             this.EazyPatchCheckBx1 = new System.Windows.Forms.CheckBox();
             this.UploadStat = new System.Windows.Forms.Label();
-            this.pictureBox5 = new System.Windows.Forms.PictureBox();
-            this.pictureBox6 = new System.Windows.Forms.PictureBox();
             this.panel4 = new System.Windows.Forms.Panel();
             this.DPCheck = new System.Windows.Forms.CheckBox();
             this.PROCheck = new System.Windows.Forms.CheckBox();
@@ -108,20 +104,32 @@
             this.EazyProgBar = new System.Windows.Forms.ProgressBar();
             this.ProgressText = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.EazyPatchLoadign = new System.Windows.Forms.PictureBox();
             this.DLLListBox = new System.Windows.Forms.CheckedListBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.LoadingCFGS = new System.Windows.Forms.PictureBox();
             this.CFGListBox = new System.Windows.Forms.CheckedListBox();
             this.BackroundLoadVersion = new System.ComponentModel.BackgroundWorker();
             this.PasswordPanel = new System.Windows.Forms.Panel();
             this.label7 = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.button4 = new System.Windows.Forms.Button();
+            this.UploadTxt = new System.Windows.Forms.Label();
+            this.pictureBox5 = new System.Windows.Forms.PictureBox();
+            this.pictureBox6 = new System.Windows.Forms.PictureBox();
+            this.EazyPatchLoadign = new System.Windows.Forms.PictureBox();
+            this.LoadingCFGS = new System.Windows.Forms.PictureBox();
+            this.pictureBox7 = new System.Windows.Forms.PictureBox();
+            this.DoneImage = new System.Windows.Forms.PictureBox();
+            this.UploadImage = new System.Windows.Forms.PictureBox();
+            this.pictureBox4 = new System.Windows.Forms.PictureBox();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.DoneTimer = new System.Windows.Forms.Timer(this.components);
+            this.NoteTextBox = new System.Windows.Forms.TextBox();
+            this.NoteResetTimer = new System.Windows.Forms.Timer(this.components);
             imageList1 = new System.Windows.Forms.ImageList(this.components);
             imageList2 = new System.Windows.Forms.ImageList(this.components);
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -131,23 +139,27 @@
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
+            this.contextMenuStrip3.SuspendLayout();
             this.contextMenuStrip2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.panel5.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
             this.panel4.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.EazyPatchLoadign)).BeginInit();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.LoadingCFGS)).BeginInit();
             this.PasswordPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.EazyPatchLoadign)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.LoadingCFGS)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DoneImage)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.UploadImage)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // imageList1
@@ -415,26 +427,13 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Font = new System.Drawing.Font("Calibri", 12.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.Black;
             this.label1.Location = new System.Drawing.Point(5, 7);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(124, 18);
+            this.label1.Size = new System.Drawing.Size(144, 21);
             this.label1.TabIndex = 10;
             this.label1.Text = "Working On Brand:";
-            // 
-            // pictureBox7
-            // 
-            this.pictureBox7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox7.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBox7.Enabled = false;
-            this.pictureBox7.Image = global::PatchExplorer.Properties.Resources.compare_G;
-            this.pictureBox7.Location = new System.Drawing.Point(1246, 43);
-            this.pictureBox7.Name = "pictureBox7";
-            this.pictureBox7.Size = new System.Drawing.Size(32, 32);
-            this.pictureBox7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox7.TabIndex = 25;
-            this.pictureBox7.TabStop = false;
-            this.pictureBox7.Click += new System.EventHandler(this.pictureBox7_Click);
             // 
             // label3
             // 
@@ -566,10 +565,13 @@
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.NoteTextBox);
             this.splitContainer1.Panel1.Controls.Add(this.MainlistView1);
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.Controls.Add(this.DoneImage);
+            this.splitContainer1.Panel2.Controls.Add(this.UploadImage);
             this.splitContainer1.Panel2.Controls.Add(this.splitContainer2);
             this.splitContainer1.Panel2.Controls.Add(this.pictureBox4);
             this.splitContainer1.Panel2.Controls.Add(this.panel3);
@@ -578,6 +580,7 @@
             this.splitContainer1.Panel2.Controls.Add(this.pictureBox1);
             this.splitContainer1.Panel2.Controls.Add(this.label4);
             this.splitContainer1.Panel2.Controls.Add(this.panel2);
+            this.splitContainer1.Panel2.Controls.Add(this.UploadTxt);
             this.splitContainer1.Size = new System.Drawing.Size(1378, 652);
             this.splitContainer1.SplitterDistance = 886;
             this.splitContainer1.TabIndex = 20;
@@ -728,11 +731,12 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.PatcheslistView.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.PatcheslistView.ContextMenuStrip = this.contextMenuStrip3;
             this.PatcheslistView.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F);
             this.PatcheslistView.HideSelection = false;
             this.PatcheslistView.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1,
-            listViewItem2});
+            listViewItem3,
+            listViewItem4});
             this.PatcheslistView.LabelWrap = false;
             this.PatcheslistView.LargeImageList = imageList1;
             this.PatcheslistView.Location = new System.Drawing.Point(3, 3);
@@ -747,34 +751,41 @@
             this.PatcheslistView.SelectedIndexChanged += new System.EventHandler(this.listView2_SelectedIndexChanged);
             this.PatcheslistView.Click += new System.EventHandler(this.listView2_Click);
             // 
-            // pictureBox4
+            // contextMenuStrip3
             // 
-            this.pictureBox4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.pictureBox4.ContextMenuStrip = this.contextMenuStrip2;
-            this.pictureBox4.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBox4.Image = global::PatchExplorer.Properties.Resources.iconfinder_8_2135932;
-            this.pictureBox4.Location = new System.Drawing.Point(50, 622);
-            this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(35, 30);
-            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox4.TabIndex = 24;
-            this.pictureBox4.TabStop = false;
-            this.pictureBox4.Visible = false;
-            this.pictureBox4.Click += new System.EventHandler(this.pictureBox4_Click);
+            this.contextMenuStrip3.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem2});
+            this.contextMenuStrip3.Name = "contextMenuStrip1";
+            this.contextMenuStrip3.Size = new System.Drawing.Size(160, 26);
+            // 
+            // toolStripMenuItem2
+            // 
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(159, 22);
+            this.toolStripMenuItem2.Text = "Copy EXE Name";
+            this.toolStripMenuItem2.Click += new System.EventHandler(this.toolStripMenuItem2_Click);
             // 
             // contextMenuStrip2
             // 
             this.contextMenuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem1});
+            this.toolStripMenuItem1,
+            this.copyPatchNameOnlyToolStripMenuItem});
             this.contextMenuStrip2.Name = "contextMenuStrip1";
-            this.contextMenuStrip2.Size = new System.Drawing.Size(185, 26);
+            this.contextMenuStrip2.Size = new System.Drawing.Size(199, 48);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(184, 22);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(198, 22);
             this.toolStripMenuItem1.Text = "Copy Full Patch Path";
             this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
+            // 
+            // copyPatchNameOnlyToolStripMenuItem
+            // 
+            this.copyPatchNameOnlyToolStripMenuItem.Name = "copyPatchNameOnlyToolStripMenuItem";
+            this.copyPatchNameOnlyToolStripMenuItem.Size = new System.Drawing.Size(198, 22);
+            this.copyPatchNameOnlyToolStripMenuItem.Text = "Copy Patch Name Only";
+            this.copyPatchNameOnlyToolStripMenuItem.Click += new System.EventHandler(this.copyPatchNameOnlyToolStripMenuItem_Click);
             // 
             // panel3
             // 
@@ -786,46 +797,10 @@
             this.panel3.Size = new System.Drawing.Size(3, 646);
             this.panel3.TabIndex = 21;
             // 
-            // pictureBox3
-            // 
-            this.pictureBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox3.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBox3.Image = global::PatchExplorer.Properties.Resources.iconfinder_122_CloudUpload_183248;
-            this.pictureBox3.Location = new System.Drawing.Point(443, 618);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(40, 37);
-            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox3.TabIndex = 21;
-            this.pictureBox3.TabStop = false;
-            this.pictureBox3.Click += new System.EventHandler(this.pictureBox3_Click);
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.pictureBox2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBox2.Image = global::PatchExplorer.Properties.Resources.DevOPS_2_;
-            this.pictureBox2.Location = new System.Drawing.Point(6, 620);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(40, 30);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox2.TabIndex = 20;
-            this.pictureBox2.TabStop = false;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBox1.Image = global::PatchExplorer.Properties.Resources.iconfinder_ic_view_list_48px_352204;
-            this.pictureBox1.Location = new System.Drawing.Point(0, 3);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(28, 28);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 17;
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
-            // 
             // panel2
             // 
             this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel2.BackColor = System.Drawing.Color.Transparent;
             this.panel2.Controls.Add(this.label2);
             this.panel2.Cursor = System.Windows.Forms.Cursors.Hand;
             this.panel2.Location = new System.Drawing.Point(378, 625);
@@ -837,6 +812,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
+            this.label2.BackColor = System.Drawing.Color.Transparent;
             this.label2.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(10, 3);
             this.label2.Name = "label2";
@@ -855,7 +831,7 @@
             this.tabControl1.Location = new System.Drawing.Point(2, 103);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(832, 28);
+            this.tabControl1.Size = new System.Drawing.Size(329, 28);
             this.tabControl1.TabIndex = 3;
             this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
             // 
@@ -864,7 +840,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 25);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(824, 0);
+            this.tabPage1.Size = new System.Drawing.Size(321, 0);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "One Off Fixes";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -874,7 +850,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 25);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(824, 0);
+            this.tabPage2.Size = new System.Drawing.Size(321, 0);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Build Archive";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -971,31 +947,6 @@
             this.UploadStat.TabIndex = 31;
             this.UploadStat.Text = "Patch Uploaded";
             this.UploadStat.Visible = false;
-            // 
-            // pictureBox5
-            // 
-            this.pictureBox5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox5.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBox5.Image = global::PatchExplorer.Properties.Resources.OPenFold;
-            this.pictureBox5.Location = new System.Drawing.Point(780, 134);
-            this.pictureBox5.Name = "pictureBox5";
-            this.pictureBox5.Size = new System.Drawing.Size(25, 25);
-            this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox5.TabIndex = 30;
-            this.pictureBox5.TabStop = false;
-            this.pictureBox5.Click += new System.EventHandler(this.pictureBox5_Click);
-            // 
-            // pictureBox6
-            // 
-            this.pictureBox6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox6.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBox6.Image = global::PatchExplorer.Properties.Resources.down_arrow;
-            this.pictureBox6.Location = new System.Drawing.Point(785, 8);
-            this.pictureBox6.Name = "pictureBox6";
-            this.pictureBox6.Size = new System.Drawing.Size(24, 24);
-            this.pictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-            this.pictureBox6.TabIndex = 29;
-            this.pictureBox6.TabStop = false;
             // 
             // panel4
             // 
@@ -1121,17 +1072,6 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Last DLL Files";
             // 
-            // EazyPatchLoadign
-            // 
-            this.EazyPatchLoadign.Image = global::PatchExplorer.Properties.Resources._739;
-            this.EazyPatchLoadign.Location = new System.Drawing.Point(95, 3);
-            this.EazyPatchLoadign.Name = "EazyPatchLoadign";
-            this.EazyPatchLoadign.Size = new System.Drawing.Size(154, 12);
-            this.EazyPatchLoadign.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.EazyPatchLoadign.TabIndex = 36;
-            this.EazyPatchLoadign.TabStop = false;
-            this.EazyPatchLoadign.Visible = false;
-            // 
             // DLLListBox
             // 
             this.DLLListBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -1155,17 +1095,6 @@
             this.groupBox1.TabIndex = 20;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Last CFG Files";
-            // 
-            // LoadingCFGS
-            // 
-            this.LoadingCFGS.Image = global::PatchExplorer.Properties.Resources._739;
-            this.LoadingCFGS.Location = new System.Drawing.Point(101, 4);
-            this.LoadingCFGS.Name = "LoadingCFGS";
-            this.LoadingCFGS.Size = new System.Drawing.Size(147, 12);
-            this.LoadingCFGS.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.LoadingCFGS.TabIndex = 37;
-            this.LoadingCFGS.TabStop = false;
-            this.LoadingCFGS.Visible = false;
             // 
             // CFGListBox
             // 
@@ -1231,6 +1160,181 @@
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click_1);
             // 
+            // UploadTxt
+            // 
+            this.UploadTxt.AutoSize = true;
+            this.UploadTxt.Font = new System.Drawing.Font("Calibri", 9F);
+            this.UploadTxt.Location = new System.Drawing.Point(272, 633);
+            this.UploadTxt.Name = "UploadTxt";
+            this.UploadTxt.Size = new System.Drawing.Size(73, 14);
+            this.UploadTxt.TabIndex = 26;
+            this.UploadTxt.Text = "Uploading...";
+            this.UploadTxt.Visible = false;
+            // 
+            // pictureBox5
+            // 
+            this.pictureBox5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox5.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBox5.Image = global::PatchExplorer.Properties.Resources.OPenFold;
+            this.pictureBox5.Location = new System.Drawing.Point(780, 134);
+            this.pictureBox5.Name = "pictureBox5";
+            this.pictureBox5.Size = new System.Drawing.Size(25, 25);
+            this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox5.TabIndex = 30;
+            this.pictureBox5.TabStop = false;
+            this.pictureBox5.Click += new System.EventHandler(this.pictureBox5_Click);
+            // 
+            // pictureBox6
+            // 
+            this.pictureBox6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox6.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBox6.Image = global::PatchExplorer.Properties.Resources.down_arrow;
+            this.pictureBox6.Location = new System.Drawing.Point(785, 8);
+            this.pictureBox6.Name = "pictureBox6";
+            this.pictureBox6.Size = new System.Drawing.Size(24, 24);
+            this.pictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pictureBox6.TabIndex = 29;
+            this.pictureBox6.TabStop = false;
+            // 
+            // EazyPatchLoadign
+            // 
+            this.EazyPatchLoadign.Image = global::PatchExplorer.Properties.Resources._739;
+            this.EazyPatchLoadign.Location = new System.Drawing.Point(95, 3);
+            this.EazyPatchLoadign.Name = "EazyPatchLoadign";
+            this.EazyPatchLoadign.Size = new System.Drawing.Size(154, 12);
+            this.EazyPatchLoadign.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.EazyPatchLoadign.TabIndex = 36;
+            this.EazyPatchLoadign.TabStop = false;
+            this.EazyPatchLoadign.Visible = false;
+            // 
+            // LoadingCFGS
+            // 
+            this.LoadingCFGS.Image = global::PatchExplorer.Properties.Resources._739;
+            this.LoadingCFGS.Location = new System.Drawing.Point(101, 4);
+            this.LoadingCFGS.Name = "LoadingCFGS";
+            this.LoadingCFGS.Size = new System.Drawing.Size(147, 12);
+            this.LoadingCFGS.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.LoadingCFGS.TabIndex = 37;
+            this.LoadingCFGS.TabStop = false;
+            this.LoadingCFGS.Visible = false;
+            // 
+            // pictureBox7
+            // 
+            this.pictureBox7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox7.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBox7.Enabled = false;
+            this.pictureBox7.Image = global::PatchExplorer.Properties.Resources.compare_G;
+            this.pictureBox7.Location = new System.Drawing.Point(1246, 43);
+            this.pictureBox7.Name = "pictureBox7";
+            this.pictureBox7.Size = new System.Drawing.Size(32, 32);
+            this.pictureBox7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox7.TabIndex = 25;
+            this.pictureBox7.TabStop = false;
+            this.pictureBox7.Click += new System.EventHandler(this.pictureBox7_Click);
+            // 
+            // DoneImage
+            // 
+            this.DoneImage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.DoneImage.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.DoneImage.Image = global::PatchExplorer.Properties.Resources.checkbox_1_;
+            this.DoneImage.Location = new System.Drawing.Point(361, 622);
+            this.DoneImage.Name = "DoneImage";
+            this.DoneImage.Size = new System.Drawing.Size(28, 28);
+            this.DoneImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.DoneImage.TabIndex = 27;
+            this.DoneImage.TabStop = false;
+            this.DoneImage.Visible = false;
+            // 
+            // UploadImage
+            // 
+            this.UploadImage.Image = global::PatchExplorer.Properties.Resources._739;
+            this.UploadImage.Location = new System.Drawing.Point(343, 630);
+            this.UploadImage.Name = "UploadImage";
+            this.UploadImage.Size = new System.Drawing.Size(100, 16);
+            this.UploadImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.UploadImage.TabIndex = 25;
+            this.UploadImage.TabStop = false;
+            this.UploadImage.Visible = false;
+            // 
+            // pictureBox4
+            // 
+            this.pictureBox4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.pictureBox4.ContextMenuStrip = this.contextMenuStrip2;
+            this.pictureBox4.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBox4.Image = global::PatchExplorer.Properties.Resources.iconfinder_8_2135932;
+            this.pictureBox4.Location = new System.Drawing.Point(50, 622);
+            this.pictureBox4.Name = "pictureBox4";
+            this.pictureBox4.Size = new System.Drawing.Size(35, 30);
+            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox4.TabIndex = 24;
+            this.pictureBox4.TabStop = false;
+            this.pictureBox4.Visible = false;
+            this.pictureBox4.Click += new System.EventHandler(this.pictureBox4_Click);
+            // 
+            // pictureBox3
+            // 
+            this.pictureBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox3.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBox3.Image = global::PatchExplorer.Properties.Resources.iconfinder_122_CloudUpload_183248;
+            this.pictureBox3.Location = new System.Drawing.Point(443, 618);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(40, 37);
+            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox3.TabIndex = 21;
+            this.pictureBox3.TabStop = false;
+            this.pictureBox3.Click += new System.EventHandler(this.pictureBox3_Click);
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.pictureBox2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBox2.Image = global::PatchExplorer.Properties.Resources.DevOPS_2_;
+            this.pictureBox2.Location = new System.Drawing.Point(6, 620);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(40, 30);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox2.TabIndex = 20;
+            this.pictureBox2.TabStop = false;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBox1.Image = global::PatchExplorer.Properties.Resources.iconfinder_ic_view_list_48px_352204;
+            this.pictureBox1.Location = new System.Drawing.Point(0, 3);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(28, 28);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 17;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
+            // 
+            // DoneTimer
+            // 
+            this.DoneTimer.Interval = 2500;
+            this.DoneTimer.Tick += new System.EventHandler(this.DoneTimer_Tick);
+            // 
+            // NoteTextBox
+            // 
+            this.NoteTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.NoteTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(231)))), ((int)(((byte)(231)))));
+            this.NoteTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.NoteTextBox.Font = new System.Drawing.Font("Calibri", 10F);
+            this.NoteTextBox.Location = new System.Drawing.Point(334, -2);
+            this.NoteTextBox.MaxLength = 50;
+            this.NoteTextBox.Name = "NoteTextBox";
+            this.NoteTextBox.ReadOnly = true;
+            this.NoteTextBox.Size = new System.Drawing.Size(445, 24);
+            this.NoteTextBox.TabIndex = 37;
+            this.NoteTextBox.Text = "NOTE:";
+            this.NoteTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.NoteTextBox.Visible = false;
+            this.NoteTextBox.WordWrap = false;
+            // 
+            // NoteResetTimer
+            // 
+            this.NoteResetTimer.Tick += new System.EventHandler(this.NoteResetTimer_Tick_1);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1250,9 +1354,9 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
             this.splitContainer1.Panel1.ResumeLayout(false);
+            this.splitContainer1.Panel1.PerformLayout();
             this.splitContainer1.Panel2.ResumeLayout(false);
             this.splitContainer1.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
@@ -1262,27 +1366,31 @@
             this.splitContainer2.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
+            this.contextMenuStrip3.ResumeLayout(false);
             this.contextMenuStrip2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.tabControl1.ResumeLayout(false);
             this.tabPage3.ResumeLayout(false);
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
             this.groupBox2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.EazyPatchLoadign)).EndInit();
             this.groupBox1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.LoadingCFGS)).EndInit();
             this.PasswordPanel.ResumeLayout(false);
             this.PasswordPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.EazyPatchLoadign)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.LoadingCFGS)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DoneImage)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.UploadImage)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1374,6 +1482,15 @@
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.PictureBox EazyPatchLoadign;
         private System.Windows.Forms.PictureBox LoadingCFGS;
+        private System.Windows.Forms.ToolStripMenuItem copyPatchNameOnlyToolStripMenuItem;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip3;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
+        private System.Windows.Forms.PictureBox UploadImage;
+        private System.Windows.Forms.Label UploadTxt;
+        private System.Windows.Forms.PictureBox DoneImage;
+        private System.Windows.Forms.Timer DoneTimer;
+        private System.Windows.Forms.TextBox NoteTextBox;
+        private System.Windows.Forms.Timer NoteResetTimer;
     }
 }
 
