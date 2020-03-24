@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -17,7 +18,8 @@ namespace PatchExplorer
     {
         public static List<string> LiveBrandVersions = new List<string>();//Global so it can be used across the app...
         string PubPathName = "";
-        int ToTalFileToUploadCount = 0;
+        int ToTalCFGsToUploadCount = 0;
+        int ToTalDLLsToUploadCount = 0;
         public Form1()
         {
             InitializeComponent();
@@ -30,7 +32,7 @@ namespace PatchExplorer
             if (TypeUPL == "ADV") process.StartInfo.Arguments = Convert.ToInt32(UnitTextBox.Text) + $" /pname{ConvertBrandToFixes(GetCurrentBrand(), 2)}-pt /pversionv" + GetVersionFromEXE(ExeToUpload) + " " + ExeToUpload + ".exe";
             else if (TypeUPL == "PRO") process.StartInfo.Arguments = Convert.ToInt32(UnitTextBox.Text) + $" /pname{ConvertBrandToFixes(GetCurrentBrand(), 2)} /pversionv" + GetVersionFromEXE(ExeToUpload) + " " + ExeToUpload + ".exe";
             else if (TypeUPL == "DP") process.StartInfo.Arguments = Convert.ToInt32(UnitTextBox.Text) + " " + ExeToUpload + ".exe";
-            ShowNoteWindows("ARGS: " + process.StartInfo.Arguments,2);
+            if(Properties.Settings.Default.ShowParamsDebug==true) ShowNoteWindows("ARGS: " + process.StartInfo.Arguments,2);
             process.StartInfo.WorkingDirectory = PubPathName + SubDir;
             process.Start();
             process.WaitForExit();
@@ -75,8 +77,20 @@ namespace PatchExplorer
            
         }
 
-        private void LoadFixes(string SearchSTR = "")
+        private void LoadFixes(string SearchSTR = "",bool ADVsearch = false)
         {
+            if (ADVsearch == true & SearchSTR == "")
+            {
+                MainlistView1.Items.Clear();
+                return;
+            }
+            //setup
+            label10.Text = "Created By:";
+            label9.Text = "Date Created:";
+            DescriptionTextBox.WordWrap = true;
+            DescriptionTextBox.ScrollBars = ScrollBars.None;
+            DescriptionTextBox.Enabled = false;
+            //srach
             List<string> logListContent = new List<string>();
             logListContent = Directory.GetDirectories(@"K:\Autologic\OneOffFixes\" + ConvertBrandToFixes(GetCurrentBrand())).OrderByDescending(i => Directory.GetLastWriteTime(i)).ToList();
 
@@ -90,17 +104,46 @@ namespace PatchExplorer
                 {
                     MainlistView1.Items.Add(words[words.Count() - 1]);
                     counter++;
+                }else if(ADVsearch == true){//if not matching look witihng patch(Advance Search)
+                    if (File.Exists(logListContent[count] + @"\Readme.txt"))
+                    {
+                        StreamReader file = new StreamReader(logListContent[count] + @"\Readme.txt");
+                        string[] Linestr = file.ReadToEnd().Split(new string[] { Environment.NewLine }, StringSplitOptions.None);
+                        file.Close();
+                        for (int i = 0; i < Linestr.Length; i++)
+                        {
+                            if (Linestr[i].ToLower().Contains(SearchSTR.ToLower()))//if match insdie readme Add it
+                            {
+                                MainlistView1.Items.Add(words[words.Count() - 1]);
+                                counter++;
+                                break;//we dont want multiple results
+                            }
+                        }
+                    }
+                    else continue;
                 }
             }
             DisplayText.Text = "(" + counter + ")" + " Fixes Found";
         }
-        private void LoadBuilds(string SearchSTR = "")
+        private void LoadBuilds(string SearchSTR = "",bool ADVSearch =false)
         {
             if (!Directory.Exists("W:"))
             {
                 ShowNoteWindows("W: Drive Is Unallocated!", 0, 3500);
                 return;
             }
+            if (ADVSearch == true & SearchSTR == "")
+            {
+                MainlistView1.Items.Clear();
+                return;
+            }
+            //setup
+            label10.Text = "Build requested by:";
+            label9.Text = "Build started:";
+            DescriptionTextBox.WordWrap = false;
+            DescriptionTextBox.ScrollBars = ScrollBars.Vertical;
+            DescriptionTextBox.Enabled = true;
+            //srach
             List<string> logListContent = new List<string>();
             logListContent = Directory.GetDirectories(@"W:\Build_Archive\Latest\" + ConvertBrandToFixes(GetCurrentBrand(), 1)).OrderByDescending(i => Directory.GetLastWriteTime(i)).ToList();
             MainlistView1.Items.Clear();
@@ -113,6 +156,25 @@ namespace PatchExplorer
                 {
                     MainlistView1.Items.Add(words[words.Count() - 1]);
                     counter++;
+                }
+                else if (ADVSearch == true)
+                {//if not matching look witihng patch(Advance Search)
+                    if (File.Exists(logListContent[count] + @"\releasenotes.md"))
+                    {
+                        StreamReader file = new StreamReader(logListContent[count] + @"\releasenotes.md");
+                        string[] Linestr = file.ReadToEnd().Split(new string[] { Environment.NewLine }, StringSplitOptions.None);
+                        file.Close();
+                        for (int i = 0; i < Linestr.Length; i++)
+                        {
+                            if (Linestr[i].ToLower().Contains(SearchSTR.ToLower()))//if match insdie readme Add it
+                            {
+                                MainlistView1.Items.Add(words[words.Count() - 1]);
+                                counter++;
+                                break;//we dont want multiple results
+                            }
+                        }
+                    }
+                    else continue;
                 }
             }
             DisplayText.Text = "(" + counter + ")" + " Fixes Found";
@@ -160,6 +222,40 @@ namespace PatchExplorer
                 }
             }
             CheckExeCompatibility();//check Patch exe compatebility with unit
+            if (File.Exists(PubPathName + @"\Readme.txt"))
+            {
+                StreamReader file = new StreamReader(PubPathName + @"\Readme.txt");
+                string[] Linestr = file.ReadToEnd().Split(new string[] { Environment.NewLine }, StringSplitOptions.None);
+                file.Close();
+                for (int i = 0; i < Linestr.Length; i++)
+                {
+                    if (Linestr[i].ToLower().Contains("uploadedby"))///using PatchExplorerFormat
+                    {
+                        ListViewItem item1 = new ListViewItem(Linestr[i].Split(':')[1].Replace(".", " "), 0);//
+                        if (i + 1 > Linestr.Length - 1) continue;//error in Readme Setup(stop reading)
+                        item1.SubItems.Add(Linestr[i + 1].Split(':')[1]);//
+                        item1.SubItems.Add(Linestr[i + 2].Split(':')[1]);//
+                        listView1.Items.Add(item1);
+                    }
+                }
+            }
+            if (File.Exists(PubPathName + @"\releasenotes.md"))
+            {
+                string line;
+                StreamReader file =new StreamReader(PubPathName + @"\releasenotes.md");
+                while ((line = file.ReadLine()) != null)
+                {
+                    if (line.ToLower().Contains("<!---")) continue;//make sure we dont display PR Details
+                    if (line.ToLower().Contains("Build requested by".ToLower())) CreateBytextBox.Text = line.Split(':')[1];
+                    if (line.ToLower().Contains("Build started".ToLower())) DatetextBox.Text = line.Split(':')[1]; 
+                    if (line.ToLower().Contains("[Improvement]".ToLower())) DescriptionTextBox.AppendText(line + Environment.NewLine);
+                    if (line.ToLower().Contains("[Internal]".ToLower())) DescriptionTextBox.AppendText(line + Environment.NewLine);
+                    if (line.ToLower().Contains("[Fix]".ToLower())) DescriptionTextBox.AppendText(line + Environment.NewLine);
+                    if (line.ToLower().Contains("[Ops]".ToLower())) DescriptionTextBox.AppendText(line + Environment.NewLine);
+                    if (line.ToLower().Contains("[Feature]".ToLower())) DescriptionTextBox.AppendText(line + Environment.NewLine);
+                }
+                file.Close();
+            }
         }
 
         private void GetPatchInfo()
@@ -190,16 +286,17 @@ namespace PatchExplorer
                     else if (Linestr[i].ToLower().Contains("note") & i <= 6) DescriptionTextBox.Text += Environment.NewLine + Environment.NewLine + Linestr[i].Split(new char[] { ':' }, 2)[1];
                     else if (Linestr[i].ToLower().Contains("uploadedby"))///using PatchExplorerFormat
                     {
-                        ListViewItem item1 = new ListViewItem(Linestr[i].Split(':')[1].Replace(".", " "), 0);//Brand
-                        item1.SubItems.Add(Linestr[i + 1].Split(':')[1]);//Version
-                        item1.SubItems.Add(Linestr[i + 2].Split(':')[1]);//Version-PT
+                        ListViewItem item1 = new ListViewItem(Linestr[i].Split(':')[1].Replace(".", " "), 0);//
+                        if (i + 1 > Linestr.Length-1) continue;//error in Readme Setup(stop reading)
+                        item1.SubItems.Add(Linestr[i + 1].Split(':')[1]);//
+                        item1.SubItems.Add(Linestr[i + 2].Split(':')[1]);//
                         listView1.Items.Add(item1);
                     }
                     else if (Linestr[i].ToLower().Contains("unitno"))///using old format
                     {
-                        ListViewItem item1 = new ListViewItem("", 0);//Brand
-                        item1.SubItems.Add(Linestr[i].Split(':')[1]);//Version
-                        item1.SubItems.Add(Linestr[i + 1].Split(':')[1]);//Version-PT
+                        ListViewItem item1 = new ListViewItem("", 0);//
+                        item1.SubItems.Add(Linestr[i].Split(':')[1]);//
+                        item1.SubItems.Add(Linestr[i + 1].Split(':')[1]);//
                         listView1.Items.Add(item1);
                     }
                 }
@@ -222,13 +319,19 @@ namespace PatchExplorer
                 }
                 else { PasswordPanel.Visible = true; }
 
-                tabControl1.Height = 260;
+                tabControl1.Height = 270;
                 splitContainer1.Enabled = false;
             }
             else {
                 if (PasswordPanel.Visible == true) PasswordPanel.Visible = false;
                 tabControl1.Height = 25;
                 splitContainer1.Enabled = true;
+                //clear Files if not in EazyPatch
+                DescriptionTextBox.Text = "";
+                CreateBytextBox.Text = "";
+                DatetextBox.Text = "";
+                listView1.Items.Clear();
+                PatcheslistView.Items.Clear();
             }
             //image Update
             if (Properties.Settings.Default.EazyPatchUNLC == false) tabPage3.ImageIndex = 0;
@@ -240,6 +343,8 @@ namespace PatchExplorer
         }
         private void radioButton9_CheckedChanged(object sender, EventArgs e)
         {
+            string chbxName = ((RadioButton)sender).Name;
+            Properties.Settings.Default.LastBrandBrowse = Convert.ToInt32(chbxName.Replace("Brand",""));
             RefreshChanges();
         }
 
@@ -281,16 +386,16 @@ namespace PatchExplorer
 
         private string GetCurrentBrand()
         {
-            if (radioButton1.Checked == true) return "landrover";
-            if (radioButton2.Checked == true) return "jaguar";
-            if (radioButton3.Checked == true) return "mercedes";
-            if (radioButton4.Checked == true) return "bmw";
-            if (radioButton5.Checked == true) return "vag";
-            if (radioButton6.Checked == true) return "psa";
-            if (radioButton7.Checked == true) return "ford";
-            if (radioButton8.Checked == true) return "volvo";
-            if (radioButton9.Checked == true) return "porsche";
-            if (radioButton10.Checked == true) return "renault";
+            if (Brand1.Checked == true) return "landrover";
+            if (Brand2.Checked == true) return "jaguar";
+            if (Brand3.Checked == true) return "mercedes";
+            if (Brand4.Checked == true) return "bmw";
+            if (Brand5.Checked == true) return "vag";
+            if (Brand6.Checked == true) return "psa";
+            if (Brand7.Checked == true) return "ford";
+            if (Brand8.Checked == true) return "volvo";
+            if (Brand9.Checked == true) return "porsche";
+            if (Brand10.Checked == true) return "renault";
             return "";
         }
 
@@ -319,9 +424,9 @@ namespace PatchExplorer
         }
         private string GetPatchState(string PatchName)
         {
-            if (new string[] { "_PRO_DP_", "_GT_DP_", "_DP_ADV_", "_DP_PRO_", "DRIVEPRO_ADV", "DRIVEPRO_PRO" }.Any(s => PatchName.Contains(s))) return "DP";
-            if (new string[] { "_A+_ADV", "BLUEBOX_ADV", "ASSISTPLUS_ADV", "_GT_", "_GT.", "BLUEBOX_ADV" }.Any(s => PatchName.Contains(s))) return "ADV";
-            if (new string[] { "_BB_PRO_", "A+_PRO", "_PLUS_", "_ProPlus_", "_PRO_", "_PRO.", "BLUEBOX_PRO" }.Any(s => PatchName.Contains(s))) return "PRO";
+            if (new string[] { "_PRO_DP_", "_GT_DP_", "_DP_ADV_", "_DP_PRO_", "DRIVEPRO_ADV", "DRIVEPRO_PRO" ,"_DP_PRO."}.Any(s => PatchName.Contains(s))) return "DP";
+            if (new string[] { "_A+_ADV", "BLUEBOX_ADV", "ASSISTPLUS_ADV", "_GT_", "_GT.", "BLUEBOX_ADV" , }.Any(s => PatchName.Contains(s))) return "ADV";
+            if (new string[] { "_BB_PRO_", "A+_PRO", "_PLUS_", "_ProPlus_", "_PRO_", "_PRO.", "BLUEBOX_PRO" , "_BB_PRO" }.Any(s => PatchName.Contains(s))) return "PRO";
 
             return "";
         }
@@ -384,7 +489,9 @@ namespace PatchExplorer
 
         private void button1_Click(object sender, EventArgs e)
         {
-            LoadFixes(MainSearchTextBox.Text);
+            if (tabControl1.SelectedTab.Name == tabPage1.Name) LoadFixes(MainSearchTextBox.Text);
+            if (tabControl1.SelectedTab.Name == tabPage2.Name) LoadBuilds(MainSearchTextBox.Text);
+            
         }
 
         private void textBox2_KeyDown(object sender, KeyEventArgs e)
@@ -543,10 +650,26 @@ namespace PatchExplorer
         private void Form1_Load(object sender, EventArgs e)
         {
             //BackroundLoadVersion.RunWorkerAsync();//Load Live Versions(disabled when testing)
-
+            //load LastSelect
+            if(Properties.Settings.Default.LastBrandBrowse>0 & Properties.Settings.Default.LoadLast==true)//its saved{
+            {
+                RadioButton BrandCkeck = this.Controls.Find("Brand" + Properties.Settings.Default.LastBrandBrowse, true).FirstOrDefault() as RadioButton;
+                if (BrandCkeck != null)//Just make sure it exists
+                    BrandCkeck.Checked = true;
+            }
+            //
             PatcheslistView.Items.Clear();
             if (Properties.Settings.Default.EazyPatchUNLC == false) tabPage3.ImageIndex = 0;
             if (Properties.Settings.Default.EazyPatchUNLC == true) tabPage3.ImageIndex = 1;
+            try
+            {
+                this.Text = "Patch Explorer " + System.Deployment.Application.ApplicationDeployment.CurrentDeployment.CurrentVersion.ToString(4);
+            }
+            catch
+            {
+                this.Text = "Patch Explorer " + System.Reflection.Assembly.GetEntryAssembly().GetName().Version.ToString(4);
+            }
+            
         }
 
         private void BackroundLoadVersion_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
@@ -579,25 +702,41 @@ namespace PatchExplorer
         /// ////////////////////////////////////////////////////////////EAZYY-PATCH///////////////////////////////////////////////////////////
         /// /// /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         /// </summary>
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+
+        private void EazyPatchCheckBx1_CheckedChanged(object sender, EventArgs e)
         {
             CFGListBox.Enabled = EazyPatchCheckBx1.Checked;
-            DLLListBox.Enabled = EazyPatchCheckBx2.Checked;
-            EazyPatchRefresh.PerformClick();
+            CheckBox chk = (CheckBox)sender;
+            if (chk.Checked) GetCFGModifiedFiles();
+            RefreshEazyPatchStatus();
         }
 
-        private void button4_Click(object sender, EventArgs e)//Eazypatch-Reset
+        private void EazyPatchCheckBx2_CheckedChanged(object sender, EventArgs e)
         {
-            if (EazyPatchCheckBx1.Checked == true) GetCFGModifiedFiles();
-            if (EazyPatchCheckBx2.Checked == true) GetDLLModifiedFiles();
-            ToTalFileToUploadCount = 0;
-            ProgressText.Text = "Total Files Selected For Uploading:" + ToTalFileToUploadCount;
+            DLLListBox.Enabled = EazyPatchCheckBx2.Checked;
+            CheckBox chk = (CheckBox)sender;
+            if (chk.Checked) GetDLLModifiedFiles();
+            RefreshEazyPatchStatus();
+        }
+        void RefreshEazyPatchStatus()
+        {
+            int TotalCount = ToTalCFGsToUploadCount + ToTalDLLsToUploadCount;
+            ProgressText.Text = "Total Files Selected For Uploading:" + TotalCount;
             UploadStat.Visible = false;
             PubPathName = "";
             EazyPatchBtn1.Text = "Create Patch For Selected Items";
             EazyProgBar.Value = 0;
             EazyDescription.Enabled = true;
             EazyPatchName.Enabled = true;
+        }
+    private void button4_Click(object sender, EventArgs e)//Eazypatch-Reset
+        {
+            if (EazyPatchCheckBx1.Checked == true) GetCFGModifiedFiles();
+            if (EazyPatchCheckBx2.Checked == true) GetDLLModifiedFiles();
+            ToTalCFGsToUploadCount = 0;
+            ToTalDLLsToUploadCount = 0;
+            RefreshEazyPatchStatus();
+            
         }
         private void BackroundCFGWorker(object sender, DoWorkEventArgs e)
         {
@@ -614,6 +753,7 @@ namespace PatchExplorer
             LoadingCFGS.Visible = true;
             EazyPatchCheckBx1.Enabled = false;
             CFGListBox.Items.Clear();
+            ToTalCFGsToUploadCount = 0;
             BackgroundWorker worker = new BackgroundWorker();
             worker.DoWork += new DoWorkEventHandler(BackroundCFGWorker);
             worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(work_RunCFGWorkerCompleted);
@@ -632,6 +772,7 @@ namespace PatchExplorer
             EazyPatchLoadign.Visible = true;
             EazyPatchCheckBx2.Enabled = false;
             DLLListBox.Items.Clear();
+            ToTalDLLsToUploadCount = 0;
             BackgroundWorker worker = new BackgroundWorker();
             worker.DoWork += new DoWorkEventHandler(BackroundDLLWorker);
             worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(work_RunDLLWorkerCompleted);
@@ -641,6 +782,24 @@ namespace PatchExplorer
         {
             EazyPatchLoadign.Visible = false;
             EazyPatchCheckBx2.Enabled = true;
+        }
+        private void CFGListBox_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            if (e.NewValue == CheckState.Checked) ToTalCFGsToUploadCount++;
+            else if (e.NewValue == CheckState.Unchecked) ToTalCFGsToUploadCount--;
+            int TotalCount = ToTalCFGsToUploadCount + ToTalDLLsToUploadCount;
+            ProgressText.Text = "Total Files Selected For Uploading: " + TotalCount;
+        }
+
+        private void DLLListBox_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            if (e.NewValue == CheckState.Checked) ToTalDLLsToUploadCount++;
+            else if (e.NewValue == CheckState.Unchecked) ToTalDLLsToUploadCount--;
+            int TotalCount = ToTalCFGsToUploadCount + ToTalDLLsToUploadCount;
+            ProgressText.Text = "Total Files Selected For Uploading: " + TotalCount;
+            if (e.NewValue == CheckState.Checked && DLLListBox.Items[e.Index].ToString().Substring(DLLListBox.Items[e.Index].ToString().Length - 5).Contains(".bas") == true)
+                MessageBox.Show("Selecting Bas File! will automatically compile the DLL and build it!" + Environment.NewLine +
+                Environment.NewLine + "If you do not want to re-compile the DLL then select the .dll to be uploaded");
         }
         private void button5_Click(object sender, EventArgs e)//Creat Patch Button
         {
@@ -683,10 +842,17 @@ namespace PatchExplorer
                     //EDIT UP3 files to match
                     string[] files = Directory.GetFiles(Path + @"\", "*.UP3", SearchOption.TopDirectoryOnly);
                     EazyProgBar.Maximum = files.Length+1;
-                    foreach (string FullFilePath in files)//loop All .UP3 Files
+                    int BuildProg = 0;
+                    if (ADVCheck.Checked == true) BuildProg++;
+                    if (PROCheck.Checked == true) BuildProg++;
+                    if (DPCheck.Checked == true) BuildProg++;
+                    EazyProgBar.Maximum = EazyProgBar.Maximum + BuildProg;
+                    foreach (string UP3FullPath in files)//loop All .UP3 Files
                     {
-                        string text = File.ReadAllText(FullFilePath);
+                        string text = File.ReadAllText(UP3FullPath);
                         string FInalString = "", CfgsToAdd = "", DLLsToAdd = "";
+                        string[] UP3FileName = UP3FullPath.Split('\\');
+                        ProgressText.Text = "Configuring: " + UP3FileName[UP3FileName.Length-1];
                         if (EazyPatchCheckBx1.Checked == true)//adding/updating CFG's
                         {
                             for (int i = 0; i < CFGListBox.Items.Count; i++)
@@ -717,7 +883,7 @@ namespace PatchExplorer
                             //text = text.Replace(@"'0," + ConvertBrandToFixes(GetCurrentBrand(), 1).ToLower() + @".dll,C:\diagnos\" + ConvertBrandToFixes(GetCurrentBrand(), 1).ToLower() + @"\", DLLsToAdd);
                         }
                         string line;
-                        System.IO.StreamReader file = new System.IO.StreamReader(FullFilePath);
+                        System.IO.StreamReader file = new System.IO.StreamReader(UP3FullPath);
                         while ((line = file.ReadLine()) != null)
                         {
                             if (line.Contains("72,") == true) { FInalString += line.Replace(line, CfgsToAdd); }
@@ -725,27 +891,32 @@ namespace PatchExplorer
                             else FInalString += line + Environment.NewLine;
                         }
                         file.Close();
-                        File.WriteAllText(FullFilePath, FInalString);//Write/Update UP3 File
+                        File.WriteAllText(UP3FullPath, FInalString);//Write/Update UP3 File
+                        EazyProgBar.Increment(1);
                         //Start BUILD
-                        if (ADVCheck.Checked == false & FullFilePath.Contains("A+_ADV") == true) continue;//skip this UP3 for BUILD
-                        if (PROCheck.Checked == false & FullFilePath.Contains("BB_PRO") == true) continue;//skip this UP3 for BUILD
-                        if (DPCheck.Checked == false & FullFilePath.Contains("DP_PRO") == true) continue;//skip this UP3 for BUILD
+                        if (ADVCheck.Checked == false & GetPatchState(UP3FileName[UP3FileName.Length - 1]) == "ADV") continue;//skip this UP3 for BUILD
+                        if (PROCheck.Checked == false & GetPatchState(UP3FileName[UP3FileName.Length - 1]) == "PRO") continue;//skip this UP3 for BUILD
+                        if (DPCheck.Checked == false & GetPatchState(UP3FileName[UP3FileName.Length - 1]) == "DP") continue;//skip this UP3 for BUILD
+                        //set up new job maximum
+                        ProgressText.Text = "Building: " + UP3FileName[UP3FileName.Length - 1];
                         //RUN ALL BUILDS
                         Process process = new Process();
                         process.StartInfo.FileName = "mkupd3";
-                        process.StartInfo.Arguments = FullFilePath;
+                        process.StartInfo.Arguments = UP3FullPath;
                         process.StartInfo.WorkingDirectory = Path + @"\";
+                        process.StartInfo.UseShellExecute = false;
+                        process.StartInfo.CreateNoWindow=true;
                         process.Start();
                         process.WaitForExit();//
-                        EazyProgBar.Value++;
+                        EazyProgBar.Increment(1);
                     }
                     //check if exe was created
                     string[] ExeFiles = Directory.GetFiles(Path + @"\", "*.exe", SearchOption.TopDirectoryOnly);
                     int ADVCreated = 0, PROCreated = 0, DPCreated = 0;
                     foreach (string s in ExeFiles)
                     {
-                        if (GetPatchState(s) == "PRO") PROCreated++;
                         if (GetPatchState(s) == "ADV") ADVCreated++;
+                        if (GetPatchState(s) == "PRO") PROCreated++;
                         if (GetPatchState(s) == "DP") DPCreated++;
                     }
                     ProgressText.Text = "Advanced: " + ADVCreated + " || PRO: "+ PROCreated + " || DP: "+ DPCreated;
@@ -806,18 +977,7 @@ namespace PatchExplorer
             }
         }
 
-        private void CFGListBox_ItemCheck(object sender, ItemCheckEventArgs e)
-        {
-            if (e.NewValue == CheckState.Checked) ToTalFileToUploadCount++;
-            else if (e.NewValue == CheckState.Unchecked) ToTalFileToUploadCount--;
-            ProgressText.Text = "Total Files Selected For Uploading: " + ToTalFileToUploadCount;
-            EazyProgBar.Maximum = ToTalFileToUploadCount + 1;
-            //more checks
-            if (e.NewValue == CheckState.Checked & DLLListBox.Items.Count > 0)
-                if (DLLListBox.Items[e.Index].ToString().Substring(DLLListBox.Items[e.Index].ToString().Length - 5).Contains(".bas") == true)
-                    MessageBox.Show("Selecting Bas File! will automatically compile the DLL and build it!" + Environment.NewLine +
-                    Environment.NewLine + "If you do not want to re-compile the DLL then select the .dll to be uploaded");
-        }
+
 
         private void pictureBox7_Click(object sender, EventArgs e)
         {
@@ -829,16 +989,6 @@ namespace PatchExplorer
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (radioButton1.Checked == true) Properties.Settings.Default.LastBrandBrowse = radioButton1.Name;
-            if (radioButton2.Checked == true) Properties.Settings.Default.LastBrandBrowse = radioButton2.Name;
-            if (radioButton3.Checked == true) Properties.Settings.Default.LastBrandBrowse = radioButton3.Name;
-            if (radioButton4.Checked == true) Properties.Settings.Default.LastBrandBrowse = radioButton4.Name;
-            if (radioButton5.Checked == true) Properties.Settings.Default.LastBrandBrowse = radioButton5.Name;
-            if (radioButton6.Checked == true) Properties.Settings.Default.LastBrandBrowse = radioButton6.Name;
-            if (radioButton7.Checked == true) Properties.Settings.Default.LastBrandBrowse = radioButton7.Name;
-            if (radioButton8.Checked == true) Properties.Settings.Default.LastBrandBrowse = radioButton8.Name;
-            if (radioButton9.Checked == true) Properties.Settings.Default.LastBrandBrowse = radioButton9.Name;
-            if (radioButton10.Checked == true) Properties.Settings.Default.LastBrandBrowse = radioButton10.Name;
             Properties.Settings.Default.Save();
         }
 
@@ -877,7 +1027,7 @@ namespace PatchExplorer
             
             if (ConditionColor == 0) NoteTextBox.BackColor = Color.Firebrick;//RED
             if (ConditionColor == 1) NoteTextBox.BackColor = Color.LightGreen;//Green
-            if (ConditionColor == 2) NoteTextBox.BackColor = Color.FromArgb(213, 219, 223);//UpdateState
+            if (ConditionColor == 2) NoteTextBox.BackColor = Color.White;//UpdateState
             NoteTextBox.Invoke(new Action(() => NoteTextBox.Visible =true));
             if (timeToShowMS > 0)
             {
@@ -898,7 +1048,7 @@ namespace PatchExplorer
             }
             catch
             {
-
+                MessageBox.Show("MySql Connection Failed!");
             }
         }
 
@@ -911,6 +1061,94 @@ namespace PatchExplorer
         {
             NoteTextBox.Visible = false;
             NoteResetTimer.Stop();
+        }
+
+        private void UnitTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void panel2_MouseEnter(object sender, EventArgs e)
+        {
+            pictureBox3.Image = Properties.Resources.Cloud_Hover;
+        }
+        private void panel2_MouseLeave(object sender, EventArgs e)
+        {
+            pictureBox3.Image = Properties.Resources.iconfinder_122_CloudUpload_183248;
+        }
+
+        private void panel7_Paint(object sender, PaintEventArgs e)
+        {
+            Graphics g = e.Graphics;
+            Color NewColorFill = Color.FromArgb(77, 130, 200);
+            Panel SizeP = ((Panel)sender);
+            g.SmoothingMode = SmoothingMode.AntiAlias;
+            g.FillRoundedRectangle(new SolidBrush(NewColorFill), 10, 10, SizeP.Width - 20, SizeP.Height , 10);
+            //g.FillRoundedRectangle(new SolidBrush(NewColorFill), 12, 12 + ((this.Height - 64) / 2), this.Width - 44, (this.Height - 64) / 2, 10,RectangleEdgeFilter.TopLeft | RectangleEdgeFilter.TopRight);
+        }
+
+        private void Form1_Resize(object sender, EventArgs e)
+        {
+            //this.Invalidate();
+        }
+
+        private void button5_Click_1(object sender, EventArgs e)
+        {
+            this.Invalidate();
+        }
+
+        private void pictureBox8_Click(object sender, EventArgs e)
+        {
+            SettingsMenu.Show(Cursor.Position);
+        }
+
+        private void SettingsMenu_Opening(object sender, CancelEventArgs e)
+        {
+            loadLastBrandBrowsingToolStripMenuItem.Checked = Properties.Settings.Default.LoadLast;
+            ShowDebugCheck.Checked = Properties.Settings.Default.ShowParamsDebug;
+        }
+
+        private void SettingsMenu_Closing(object sender, ToolStripDropDownClosingEventArgs e)
+        {
+            if (e.CloseReason == ToolStripDropDownCloseReason.ItemClicked)
+            {
+                e.Cancel = true;
+            }
+        }
+
+        private void closeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.ShowParamsDebug = ShowDebugCheck.Checked;
+            Properties.Settings.Default.LoadLast = loadLastBrandBrowsingToolStripMenuItem.Checked;
+            //save
+            Properties.Settings.Default.Save();
+            //exit
+            SettingsMenu.Close();
+        }
+
+        private void loadLastBrandBrowsingToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void button5_MouseEnter(object sender, EventArgs e)
+        {
+            pictureBox9.BackColor = Color.FromArgb(10, 80, 140);
+        }
+
+        private void button5_MouseLeave(object sender, EventArgs e)
+        {
+            pictureBox9.BackColor = Color.FromArgb(40, 60, 85);
+        }
+
+
+        private void button5_Click_3(object sender, EventArgs e)
+        {
+            if (tabControl1.SelectedTab.Name == tabPage1.Name) LoadFixes(MainSearchTextBox.Text,true);
+            if (tabControl1.SelectedTab.Name == tabPage2.Name) LoadBuilds(MainSearchTextBox.Text,true);
         }
     }
 }
